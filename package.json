@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "apidoc": "apidoc -i controllers/ -o apidocs/",
-    "start": "nodemon ./node_modules/babel-cli/bin/babel-node app.js",
+    "apidocs": "apidoc -i controllers/ -o apidocs/",
+    "development": "nodemon ./node_modules/babel-cli/bin/babel-node app.js",
     "build": "babel controllers/ -d build"
   },
   "dependencies": {
