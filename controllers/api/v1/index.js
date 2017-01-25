@@ -1,6 +1,5 @@
-
-var mw = require('../../../libs/middleware');
-var apis = require('./apis');
+import mw from '../../../libs/middleware';
+import apis from './apis';
 
 module.exports = (router)=>{
 

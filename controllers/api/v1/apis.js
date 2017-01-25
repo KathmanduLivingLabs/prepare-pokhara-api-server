@@ -1,9 +1,10 @@
-var overPassQueryBuilder = require('../../../libs/overpass-query-builder');
-var request = require('request');
-var overpassConfig = require('../../../config').overpass;
+import config from '../../../config'; 
+import request from 'request';
+import queryBuilder from '../../../libs/overpass-query-builder';
 
+var overpassConfig = config.overpass;
 
-module.exports = {
+export default {
 
 	fetch :  (req,res,next)=> {
 
@@ -20,7 +21,9 @@ module.exports = {
 
 		}
 
-		var query = overPassQueryBuilder.build({json :json});
+		var overPassQueryBuilder = new queryBuilder({json :json});
+		
+		var query = overPassQueryBuilder.build();
 
 		request(overpassConfig.baseUrl+query,(err,response)=>{
 			if(err) return next(err);
@@ -38,3 +41,4 @@ module.exports = {
 
 	}
 }
+

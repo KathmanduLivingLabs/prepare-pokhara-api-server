@@ -1,62 +1,55 @@
 
-var amenities = {
+import config from "../config";
 
-	'hospital' : 'hospital|clinic|nursing_home|dentist|health|health_post',
-	'school' : 'kindergarten|school',
-	
+const amenities = config.amenities;
 
-}
+const boundingCoordinates = config.boundingCoordinates;
 
+export default class queryBuilder {
 
-module.exports = {
+	constructor(options){
 
-	build: (options)=> {
+		this.json = options.json;
+		this.query = "";
 
-
-		var json = options.json;
-
-		var boundingCoordinates = "(28.15504264831543, 83.93202209472656,28.275711059570426, 84.03964233398443)";
-
-
-
-		var query = "";
-
-		function headGenerator(query) {
-			return query + "[out:" + json.requestConfig.dataType + "][timeout:" + json.requestConfig.timeout + "]; ";
-
+		this.headGenerator = (query)=>{
+			return query + "[out:" + this.json.requestConfig.dataType + "][timeout:" + this.json.requestConfig.timeout + "]; ";
 		}
 
-		function bodyGenerator(query) {
+		this.bodyGenerator = (query)=>{
+			
 			var filters = "";
+			var tags = this.json.tags;
 
-			for (var tag in json.tags) {
-				filters = filters + '["' + tag + '"~"' + amenities[json.tags[tag]] + '"]';
+			for (var tag in tags) {
+				filters = filters + '["' + tag + '"~"' + amenities[this.json.tags[tag]] + '"]';
 			}
 
 			query = query + "(";
-			json.featureTypes.forEach(function(featureType) {
+			this.json.featureTypes.forEach(function(featureType) {
 				query = query + featureType + filters + boundingCoordinates + ";"
 			})
 			query = query + "); ";
 
 			return query;
-
-
 		}
 
-		function tailGenerator(query) {
+		this.tailGenerator = (query)=>{
 			return query + "out body;" +
 				">; " +
 				"out skel qt;"
 		}
-
-		query = headGenerator(query);
-		query = bodyGenerator(query);
-		query = tailGenerator(query);
-
-
-		return query;
-
 	}
 
+	build() {
+
+
+		this.query = this.headGenerator(this.query);
+		this.query = this.bodyGenerator(this.query);
+		this.query = this.tailGenerator(this.query);
+
+
+		return this.query;
+
+	}
 }
