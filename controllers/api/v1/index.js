@@ -5,7 +5,7 @@ var apis = require('./apis');
 module.exports = (router)=>{
 
 	   /**
-	    * @api {get} /api/v1/:type/fetch Fetch Features 
+	    * @api {get} /api/v1/:featuretype/fetch Fetch Features 
 	    * @apiName Features
 	    * @apiGroup Features
 	    *
