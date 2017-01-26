@@ -22,12 +22,14 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+
 var router = express.Router();
 app.use('/',router);
 
 require('./controllers')(router);
 
 var versions = config.versions;
+
 
 for(var version in versions){
     require('./controllers'+ versions[version])(router);    
@@ -40,6 +42,13 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+});
+
+
 
 // error handlers
 
@@ -55,6 +64,7 @@ if (app.get('env') === 'development') {
   });
 }
 
+
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
@@ -66,6 +76,7 @@ app.use(function(err, req, res, next) {
 });
 
 var port = 4040;
+
 
 app.listen(port,function(){
     console.log('API server running at port ' + port)

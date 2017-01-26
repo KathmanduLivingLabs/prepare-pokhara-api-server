@@ -52,4 +52,6 @@ module.exports = (router)=>{
 
 	router.get('/api/v1/:featuretype/fetch',apis.fetch,mw.respond,mw.error);
 
+	router.get('/api/v1/test',apis.test,mw.respond,mw.error);
+
 }
