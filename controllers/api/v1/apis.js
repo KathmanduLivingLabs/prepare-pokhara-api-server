@@ -3,58 +3,72 @@ import request from 'request';
 import queryBuilder from '../../../libs/overpass-query-builder';
 import xmljsonParser from '../../../libs/xmljson';
 
+import googleCaja from 'google-caja';
+
+var sanitize = googleCaja.sanitize;
+
 var overpassConfig = config.overpass;
 
 export default {
 
+	collect : (req,res,next)=>{
+
+		var fields = ['type','filters'];
+		req.collects = {};
+		fields.forEach((field)=>{
+			req.collects[field] = (req.body[field] || req.query[field]);
+		})
+
+		next();
+	},
+
 	fetch :  (req,res,next)=> {
 
-	
 
-		request(
-		    {
-		        url : "https://www.openstreetmap.org/api/0.6/user/details",
-		        headers : {
-		        	authorization:  req.headers.authorization
-		        }
-		    },
-		    function (error, response, body) {
-		        // Do more stuff with 'body' here
-		        console.log("HELLO",response.body)
-		        console.log(error)
-		    }
-		);
+		// request(
+		//     {
+		//         url : "https://www.openstreetmap.org/api/0.6/user/details",
+		//         headers : {
+		//         	authorization:  req.headers.authorization
+		//         }
+		//     },
+		//     function (error, response, body) {
+		//         // Do more stuff with 'body' here
+		//         console.log("HELLO",response.body)
+		//         console.log(error)
+		//     }
+		// );
 
-		// var json = {
-			
-		// 	requestConfig: {
-		// 		dataType: overpassConfig.dataType,
-		// 		timeout: overpassConfig.timeout
-		// 	},
-		// 	tags: {
-		// 		amenity: req.params.featuretype
-		// 	},
-		// 	featureTypes: ['node']
+		var json = {
+			requestConfig: {
+				dataType: overpassConfig.dataType,
+				timeout: overpassConfig.timeout
+			},
+			tags: {
+				'amenity': req.collects.type
+			},
+			featureTypes: ['node']
+		}
 
-		// }
+		if(req.collects.filters) json.tags = Object.assign(json.tags,req.collects.filters)
 
-		// var overPassQueryBuilder = new queryBuilder({json :json});
+		var overPassQueryBuilder = new queryBuilder({json :json});
 		
-		// var query = overPassQueryBuilder.build();
+		var query = overPassQueryBuilder.build();
+		console.log(' EXECUTING QUERY >>>> ',query)
+		request(overpassConfig.baseUrl+query,(err,response)=>{
+			if(err) return next(err);
 
-		// request(overpassConfig.baseUrl+query,(err,response)=>{
-		// 	if(err) return next(err);
+			req.cdata = {
+				success : 1,
+				features : JSON.parse(response.body),
+				message : 'Features fetched successfully !'
+			}
 
-		// 	req.cdata = {
-		// 		success : 1,
-		// 		features : JSON.parse(response.body),
-		// 		message : 'Features fetched successfully !'
-		// 	}
-
-		// 	next();
+			next();
 
 
-		// })
+		})
 
 	},
 

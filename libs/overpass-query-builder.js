@@ -20,17 +20,20 @@ export default class queryBuilder {
 			
 			var filters = "";
 			var tags = this.json.tags;
-
 			for (var tag in tags) {
-				filters = filters + '["' + tag + '"~"' + amenities[this.json.tags[tag]] + '"]';
+				console.log('****',tag,tags)
+				if(!Number.isInteger(tags[tag])){
+					filters = filters + '["' + tag + '"~"' + (tag === 'amenity' ? amenities[this.json.tags[tag]] : tags[tag]  ) + '"]';	
+				}else{
+					filters = filters + '["' + tag + '"]';	
+				}
+				
 			}
-
 			query = query + "(";
 			this.json.featureTypes.forEach(function(featureType) {
 				query = query + featureType + filters + boundingCoordinates + ";"
 			})
 			query = query + "); ";
-
 			return query;
 		}
 

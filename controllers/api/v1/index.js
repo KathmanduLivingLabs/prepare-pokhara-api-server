@@ -4,12 +4,13 @@ import apis from './apis';
 module.exports = (router)=>{
 
 	   /**
-	    * @api {get} /api/v1/:featuretype/fetch Fetch Features 
+	    * @api {get} /api/v1/feature/fetch Fetch Features 
 	    * @apiName Features
 	    * @apiGroup Features
 	    *
 	    *
 	    * @apiParam {Varchar} Type Type for feature to be fetched
+	    * @apiParam {Object} Filter Filter(s) to apply for the data
 
 		* @apiSuccess {Integer} success Success status
 		* @apiSuccess {String} message Success message
@@ -50,7 +51,7 @@ module.exports = (router)=>{
 	    */
 
 
-	router.get('/api/v1/:featuretype/fetch',apis.fetch,mw.respond,mw.error);
+	router.get('/api/v1/feature/fetch',apis.collect,apis.fetch,mw.respond,mw.error);
 
 	router.get('/api/v1/test',apis.test,mw.respond,mw.error);
 
