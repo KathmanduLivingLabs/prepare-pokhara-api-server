@@ -2,8 +2,8 @@ import config from '../../../config';
 import request from 'request';
 import queryBuilder from '../../../libs/overpass-query-builder';
 import xmljsonParser from '../../../libs/xmljson';
-
 import googleCaja from 'google-caja';
+import osmToGeojson from 'osmtogeojson' ;
 
 var sanitize = googleCaja.sanitize;
 
@@ -58,10 +58,10 @@ export default {
 		console.log(' EXECUTING QUERY >>>> ',query)
 		request(overpassConfig.baseUrl+query,(err,response)=>{
 			if(err) return next(err);
-
+			var geojsonResponse = osmToGeojson(JSON.parse(response.body));
 			req.cdata = {
 				success : 1,
-				features : JSON.parse(response.body),
+				features : geojsonResponse,
 				message : 'Features fetched successfully !'
 			}
 
