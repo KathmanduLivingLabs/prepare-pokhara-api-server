@@ -9,42 +9,48 @@ module.exports = (router)=>{
 	    * @apiGroup Features
 	    *
 	    *
-	    * @apiParam {Varchar} Type Type for feature to be fetched
-	    * @apiParam {Object} Filter Filter(s) to apply for the data
+	    * @apiParam {Varchar} type Type for feature to be fetched
+	    * @apiParam {Object} filters Filter(s) to apply for the data
 
 		* @apiSuccess {Integer} success Success status
 		* @apiSuccess {String} message Success message
-	    * @apiSuccess {Object[]} features Features 
+	    * @apiSuccess {Object[]} data GeoJSON formatted data 
 	    * @apiSuccessExample {json} Success-Response:
 	    *  {
 	    *       "success": 1,
 	    *       "message": "Features fetched successfully !",
-	    *       "features": {
-		*				"version": 0.6,
-		*		    	"generator": "Overpass API",
-		*			    "osm3s": {
-		*			      "timestamp_osm_base": "2017-01-25T06:18:02Z",
-		*			      "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
-		*			    },
-		*			    elements : [
-		*					{
-       	*				        "type": "node",
-    	*						"id": 1346572363,
-    	*						"lat": 28.2205371,
-    	*						"lon": 83.9868927,
-    	*						"tags": {
-    	*						         "amenity": "bank",
-    	*						         "atm": "yes",
-    	*						         "contact:phone": "523875, 523876, 536231, 536230",
-    	*						         "name": "Standard Chartered Bank LTD.",
-    	*						         "name:ne": "इस्टानडर्ड चाटार्ड बैंक",
-    	*						         "operator": "Standard Chartered Bank",
-    	*						         "website": "www.sc.com/np"
-    	*						 }
-		*					}
-		*			   ]
-	    *		}
-	    *  }
+	    * 		"data" : {
+		*			"type" : "FeatureCollection",
+		*			"features" : [
+		*				{
+		*				        "type": "Feature",
+		*				        "id": "node/1343868939",
+		*				        "properties": {
+		*				          "type": "node",
+		*				          "id": 1343868939,
+		*				          "tags": {
+		*				            "amenity": "school",
+		*				            "name": "Fewa Seconday Boarding School",
+		*				            "name:ne": "फेवा उच्च मा. वि.",
+		*				            "operator:type": "government",
+		*				            "personnel:count": "17",
+		*				            "source": "DEO, Kaski",
+		*				            "student:count": "263"
+		*				          },
+		*				          "relations": [],
+		*				          "meta": {}
+		*				        },
+		*				        "geometry": {
+		*				          "type": "Point",
+		*				          "coordinates": [
+		*				            83.9581541,
+		*				            28.2143012
+		*				          ]
+		*				        }
+		*				      }
+		*
+		*			]
+	   	* 		}
 	    *
 	    * @apiDescription API that fetch features
 	    * @apiVersion 1.0.0
