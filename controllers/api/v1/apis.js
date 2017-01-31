@@ -19,6 +19,8 @@ export default {
 			req.collects[field] = (req.body[field] || req.query[field]);
 		})
 
+		if(req.collects.filters &&  typeof req.collects.filters !== 'object') req.collects.filters = JSON.parse(req.collects.filters);
+		
 		next();
 	},
 
@@ -55,13 +57,13 @@ export default {
 		var overPassQueryBuilder = new queryBuilder({json :json});
 		
 		var query = overPassQueryBuilder.build();
-		console.log(' EXECUTING QUERY >>>> ',query)
+		console.log(' EXECUTING QUERY >>>> ',query);
 		request(overpassConfig.baseUrl+query,(err,response)=>{
 			if(err) return next(err);
 			var geojsonResponse = osmToGeojson(JSON.parse(response.body));
 			req.cdata = {
 				success : 1,
-				features : geojsonResponse,
+				data : geojsonResponse,
 				message : 'Features fetched successfully !'
 			}
 
