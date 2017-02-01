@@ -11,7 +11,14 @@ module.exports = (router)=>{
 	    *
 	    * @apiParam {Varchar} type Type for feature to be fetched
 	    * @apiParam {Object} filters Filter(s) to apply for the data
-
+	    *					 Format :
+	    *						{
+		*							"type":"hospital",
+		*							"ward" : "Pokhara Sub-Metropolitan Ward No. 1",
+		*							"filters" : {
+		*								"emergency":"yes"
+		*							}
+	   	*						}
 		* @apiSuccess {Integer} success Success status
 		* @apiSuccess {String} message Success message
 	    * @apiSuccess {Object[]} data GeoJSON formatted data 

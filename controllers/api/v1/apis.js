@@ -4,6 +4,7 @@ import queryBuilder from '../../../libs/overpass-query-builder';
 import xmljsonParser from '../../../libs/xmljson';
 import googleCaja from 'google-caja';
 import osmToGeojson from 'osmtogeojson';
+import turf from '@turf/turf';
 
 var sanitize = googleCaja.sanitize;
 
@@ -49,7 +50,7 @@ export default {
 			tags: {
 				'amenity': req.collects.type
 			},
-			featureTypes: ['node']
+			featureTypes: ['node','way']
 		}
 
 		if (req.collects.ward) json['ward'] = req.collects.ward;
@@ -81,9 +82,14 @@ export default {
 					return next();
 				}
 
+				geojsonResponse.features.forEach((feature)=>{
+					if(feature.geometry.type === "Polygon"){
+						feature.geometry = turf.centroid(feature).geometry;
+					}
+				})
 				req.cdata = {
 					success: 1,
-					data: geojsonResponse,
+					geojson: geojsonResponse,
 					message: 'Features fetched successfully !'
 				}
 

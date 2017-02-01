@@ -8,6 +8,7 @@
     "build": "babel controllers/ -d build"
   },
   "dependencies": {
+    "@turf/turf": "^3.9.0",
     "app-root-path": "^2.0.1",
     "body-parser": "~1.15.1",
     "cookie-parser": "~1.4.3",
