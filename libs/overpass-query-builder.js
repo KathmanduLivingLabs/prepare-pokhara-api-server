@@ -13,6 +13,7 @@ export default class queryBuilder {
 	constructor(options){
 
 		this.json = options.json;
+		
 		this.query = "";
 
 		this.headGenerator = (query)=>{
@@ -23,7 +24,7 @@ export default class queryBuilder {
 			
 			var filters = "";
 			var tags = this.json.tags;
-			
+
 			for (var tag in tags) {
 
 				if(!Number.isInteger(tags[tag])){
@@ -66,11 +67,9 @@ export default class queryBuilder {
 
 	build() {
 
-
 		this.query = this.headGenerator(this.query);
 		this.query = this.bodyGenerator(this.query);
 		this.query = this.tailGenerator(this.query);
-
 
 		return this.query;
 
