@@ -14,10 +14,10 @@ module.exports = (router)=>{
 	    * @apiParam {Object} filters Filter(s) to apply for the data
 	    * @apiSuccessExample {json} Parameters Format 
 	    *						{
-		*							"type":"hospital",
+		*							"type":"school",
 		*							"ward" : "relation/6270328",
 		*							"filters" : {
-		*								"operator":"private"
+		*								"operator:type":"government"
 		*							}
 	   	*						}
 		* @apiSuccess {Integer} success Success status
