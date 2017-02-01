@@ -4,26 +4,26 @@ import apis from './apis';
 module.exports = (router)=>{
 
 	   /**
-	    * @api {get} /api/v1/feature/fetch Fetch Features 
+	    * @api {get} /api/v1/features Fetch Features 
 	    * @apiName Features
 	    * @apiGroup Features
 	    *
 	    *
 	    * @apiParam {Varchar} type Type for feature to be fetched
-	    * @apiParam {Varchar} ward Specify ward to fetch the data for specific ward only
+	    * @apiParam {Varchar} ward Provide ward's relation id to fetch the data for specific ward only
 	    * @apiParam {Object} filters Filter(s) to apply for the data
-	    *					 Format :
+	    * @apiSuccessExample {json} Parameters Format 
 	    *						{
 		*							"type":"hospital",
-		*							"ward" : "Pokhara Sub-Metropolitan Ward No. 1",
+		*							"ward" : "relation/6270328",
 		*							"filters" : {
-		*								"emergency":"yes"
+		*								"operator":"private"
 		*							}
 	   	*						}
 		* @apiSuccess {Integer} success Success status
 		* @apiSuccess {String} message Success message
 	    * @apiSuccess {Object[]} data GeoJSON formatted data 
-	    * @apiSuccessExample {json} Success-Response:
+	    * @apiSuccessExample {json} Success-Response
 	    *  {
 	    *       "success": 1,
 	    *       "message": "Features fetched successfully !",
@@ -65,9 +65,46 @@ module.exports = (router)=>{
 	    */
 
 
-	router.get('/api/v1/feature/fetch',apis.collect,apis.fetch,mw.respond,mw.error);
+	router.get('/api/v1/features',apis.collect,apis.fetch,mw.respond,mw.error);
 
-	router.get('/api/v1/test',apis.test,mw.respond,mw.error);
+	// router.get('/api/v1/test',apis.test,mw.respond,mw.error);
+
+	   /**
+	    * @api {get} /api/v1/wards Fetch Wards list 
+	    * @apiName Wards
+	    * @apiGroup Wards
+	   
+		* @apiSuccess {Integer} success Success status
+		* @apiSuccess {String} message Success message
+	    * @apiSuccess {Object[]} wards Wards Object
+	    * @apiSuccessExample {json} Success-Response:
+	    *
+	    *	{
+	    *	  "success": 1,
+	    *	  "message": "Wards successfully fetched !",
+	    *	  "wards": [
+		*    	    {
+        *		      "name": "Bagar",
+		*    	      "number": "1",
+		*    	      "osmID": "relation/6273322"
+		*    	    },
+		*    	    {
+		*    	      "name": "Miruwa",
+		*    	      "number": "2",
+		*    	      "osmID": "relation/6273343"
+		*    	    },
+		*    	    {
+		*    	      "name": "Nadipur",
+		*    	      "number": "3",
+		*    	      "osmID": "relation/6273323"
+		*    	    }
+	    *	    ]
+	    * 	}
+		*	
+	    *
+	    * @apiDescription API that fetch wards list
+	    * @apiVersion 1.0.0
+	    */
 
 	router.get('/api/v1/wards',apis.wards,mw.respond,mw.error);
 
