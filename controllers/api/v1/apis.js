@@ -1,9 +1,9 @@
-import config from '../../../config'; 
+import config from '../../../config';
 import request from 'request';
 import queryBuilder from '../../../libs/overpass-query-builder';
 import xmljsonParser from '../../../libs/xmljson';
 import googleCaja from 'google-caja';
-import osmToGeojson from 'osmtogeojson' ;
+import osmToGeojson from 'osmtogeojson';
 
 var sanitize = googleCaja.sanitize;
 
@@ -11,20 +11,20 @@ var overpassConfig = config.overpass;
 
 export default {
 
-	collect : (req,res,next)=>{
+	collect: (req, res, next) => {
 
-		var fields = ['type','filters'];
+		var fields = ['type', 'filters', 'ward'];
 		req.collects = {};
-		fields.forEach((field)=>{
+		fields.forEach((field) => {
 			req.collects[field] = (req.body[field] || req.query[field]);
 		})
 
-		if(req.collects.filters &&  typeof req.collects.filters !== 'object') req.collects.filters = JSON.parse(req.collects.filters);
-		
+		if (req.collects.filters && typeof req.collects.filters !== 'object') req.collects.filters = JSON.parse(req.collects.filters);
+
 		next();
 	},
 
-	fetch :  (req,res,next)=> {
+	fetch: (req, res, next) => {
 
 
 		// request(
@@ -52,29 +52,56 @@ export default {
 			featureTypes: ['node']
 		}
 
-		if(req.collects.filters) json.tags = Object.assign(json.tags,req.collects.filters)
+		if (req.collects.ward) json['ward'] = req.collects.ward;
 
-		var overPassQueryBuilder = new queryBuilder({json :json});
-		
+		if (req.collects.filters) json.tags = Object.assign(json.tags, req.collects.filters)
+
+		var overPassQueryBuilder = new queryBuilder({
+			json: json
+		});
+
 		var query = overPassQueryBuilder.build();
-		console.log(' EXECUTING QUERY >>>> ',query);
-		request(overpassConfig.baseUrl+query,(err,response)=>{
-			if(err) return next(err);
-			var geojsonResponse = osmToGeojson(JSON.parse(response.body));
-			req.cdata = {
-				success : 1,
-				data : geojsonResponse,
-				message : 'Features fetched successfully !'
+
+		console.log(' EXECUTING QUERY >>>> ', query);
+
+		request(overpassConfig.baseUrl + query, (err, response) => {
+
+			if (err) return next(err);
+
+			if (response && response.statusCode) {
+
+				try {
+					var geojsonResponse = osmToGeojson(JSON.parse(response.body));
+				} catch (e) {
+
+					req.cdata = {
+						success: 0,
+						message: response.body
+					}
+					return next();
+				}
+
+				req.cdata = {
+					success: 1,
+					data: geojsonResponse,
+					message: 'Features fetched successfully !'
+				}
+
+			} else {
+				req.cdata = {
+					success: 0,
+					message: "Something went wrong !"
+				}
 			}
 
-			next();
+			return next();
 
 
 		})
 
 	},
 
-	test : (req,res,next)=>{
+	test: (req, res, next) => {
 
 
 		var xml = '<osm version="0.6" generator="OpenStreetMap server">\
@@ -111,10 +138,17 @@ export default {
 		// 		console.log('CAUGHT ERR',err);
 		// 	})
 
-		var parser = new xmljsonParser({user : { '$' : { name : "srvbh" , roll :123} , address : 'kathmandu'  }  });
+		var parser = new xmljsonParser({
+			user: {
+				'$': {
+					name: "srvbh",
+					roll: 123
+				},
+				address: 'kathmandu'
+			}
+		});
 
-		console.log('XML',parser.toXML())
+		console.log('XML', parser.toXML())
 
 	}
 }
-
