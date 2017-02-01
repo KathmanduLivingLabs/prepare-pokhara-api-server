@@ -7,7 +7,8 @@ export default {
 	overpass : {
 		baseUrl : 'http://www.overpass-api.de/api/interpreter?data=',
 		timeout : 25,
-		dataType : 'json'
+		dataType : 'json',
+		include : ['node','way']
 	},
 
 	amenities : {

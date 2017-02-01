@@ -2,6 +2,8 @@ import jsonFile from 'jsonfile';
 
 import appRootPath from 'app-root-path';
 
+import _ from 'underscore';
+
 // var pokharaGeoJson = appRootPath + '/geojson-data/pokhara-geojson.json';
 
 // const geoJsonFile = jsonFile.readFileSync(pokharaGeoJson);
@@ -83,18 +85,18 @@ export default class geoJSONParser {
 	parseWards(referenceWard) {
 		
 		const features = this.geoJsonFile.features;
-		var wardboundingBox;
-
-		for (var featurecount = 0; featurecount < features.length; featurecount++) {
-			var feature = features[featurecount];
-			if (referenceWard === feature['properties']['name']) {
-				wardboundingBox = this.bBoxCalculator(feature.geometry.coordinates[0]);
-				break;
+		
+		return this.bBoxCalculator(_.filter(features,(feature)=>{
+			if(feature['properties']['@id'] === referenceWard){
+				return feature
 			}
-		}
+		})[0].geometry.coordinates[0]);
 
-		return wardboundingBox;
+	}
 
-
+	getWards(){
+		
+		return this.geoJsonFile.wards;
+		
 	}
 }

@@ -5,6 +5,7 @@ import xmljsonParser from '../../../libs/xmljson';
 import googleCaja from 'google-caja';
 import osmToGeojson from 'osmtogeojson';
 import turf from '@turf/turf';
+import geoJSONParser from "../../../libs/geojson-parser";
 
 var sanitize = googleCaja.sanitize;
 
@@ -19,7 +20,6 @@ export default {
 		fields.forEach((field) => {
 			req.collects[field] = (req.body[field] || req.query[field]);
 		})
-
 		if (req.collects.filters && typeof req.collects.filters !== 'object') req.collects.filters = JSON.parse(req.collects.filters);
 
 		next();
@@ -50,7 +50,7 @@ export default {
 			tags: {
 				'amenity': req.collects.type
 			},
-			featureTypes: ['node','way']
+			featureTypes: overpassConfig.include
 		}
 
 		if (req.collects.ward) json['ward'] = req.collects.ward;
@@ -155,6 +155,21 @@ export default {
 		});
 
 		console.log('XML', parser.toXML())
+
+	},
+
+
+	wards : (req,res,next)=>{
+
+		var parser = new geoJSONParser('wards-name');
+
+		req.cdata= {
+			success : 1,
+			message : 'Wards successfully fetched !',
+			wards : parser.getWards()
+		}
+
+		next();
 
 	}
 }

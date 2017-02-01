@@ -21,6 +21,7 @@
     "osmtogeojson": "^2.2.12",
     "request": "^2.79.0",
     "serve-favicon": "~2.3.0",
+    "underscore": "^1.8.3",
     "xml2js": "^0.4.17"
   },
   "devDependencies": {

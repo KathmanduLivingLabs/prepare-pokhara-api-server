@@ -10,6 +10,7 @@ module.exports = (router)=>{
 	    *
 	    *
 	    * @apiParam {Varchar} type Type for feature to be fetched
+	    * @apiParam {Varchar} ward Specify ward to fetch the data for specific ward only
 	    * @apiParam {Object} filters Filter(s) to apply for the data
 	    *					 Format :
 	    *						{
@@ -67,5 +68,7 @@ module.exports = (router)=>{
 	router.get('/api/v1/feature/fetch',apis.collect,apis.fetch,mw.respond,mw.error);
 
 	router.get('/api/v1/test',apis.test,mw.respond,mw.error);
+
+	router.get('/api/v1/wards',apis.wards,mw.respond,mw.error);
 
 }
