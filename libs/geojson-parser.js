@@ -4,6 +4,8 @@ import appRootPath from 'app-root-path';
 
 import _ from 'underscore';
 
+import turf from '@turf/turf';
+
 // var pokharaGeoJson = appRootPath + '/geojson-data/pokhara-geojson.json';
 
 // const geoJsonFile = jsonFile.readFileSync(pokharaGeoJson);
@@ -98,5 +100,21 @@ export default class geoJSONParser {
 		
 		return this.geoJsonFile.wards;
 		
+	}
+
+	filterWards(features,wardID){
+		var polyFeatures = this.geoJsonFile.features;
+		var filtered= [];
+
+		var wardPoly = _.findWhere(polyFeatures,{id:wardID});
+
+		features.forEach((feature)=>{
+			if(turf.inside(feature,wardPoly)){
+				filtered.push(feature);
+			}
+		})
+
+		
+		return filtered;
 	}
 }

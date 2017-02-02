@@ -53,7 +53,7 @@ export default {
 			featureTypes: overpassConfig.include
 		}
 
-		if (req.collects.ward) json['ward'] = req.collects.ward;
+		// if (req.collects.ward) json['ward'] = req.collects.ward;
 
 		if (req.collects.filters) json.tags = Object.assign(json.tags, req.collects.filters)
 
@@ -170,6 +170,28 @@ export default {
 		}
 
 		next();
+
+	},
+
+	filterWard : (req,res,next)=>{
+		if (req.collects.ward){
+			var features = req.cdata.geojson.features;
+			var geojsonparser = new geoJSONParser('wards');
+			req.cdata.geojson = geojsonparser.filterWards(features,req.collects.ward);
+		}
+		return next();
+		
+	},
+
+
+	calculateTotalStat : (req,res,next)=>{
+
+		req.stats = {
+			total : {}
+		};
+
+		req.stats.total.features = req.cdata.geojson ? req.cdata.geojson.length : 0;
+		
 
 	}
 }
