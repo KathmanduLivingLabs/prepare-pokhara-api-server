@@ -6,6 +6,7 @@ import googleCaja from 'google-caja';
 import osmToGeojson from 'osmtogeojson';
 import turf from '@turf/turf';
 import geoJSONParser from "../../../libs/geojson-parser";
+import statsCalculator from "../../../libs/statscalculator";
 
 var sanitize = googleCaja.sanitize;
 
@@ -27,21 +28,6 @@ export default {
 
 	fetch: (req, res, next) => {
 
-
-		// request(
-		//     {
-		//         url : "https://www.openstreetmap.org/api/0.6/user/details",
-		//         headers : {
-		//         	authorization:  req.headers.authorization
-		//         }
-		//     },
-		//     function (error, response, body) {
-		//         // Do more stuff with 'body' here
-		//         console.log("HELLO",response.body)
-		//         console.log(error)
-		//     }
-		// );
-
 		var json = {
 			requestConfig: {
 				dataType: overpassConfig.dataType,
@@ -55,7 +41,7 @@ export default {
 
 		// if (req.collects.ward) json['ward'] = req.collects.ward;
 
-		if (req.collects.filters) json.tags = Object.assign(json.tags, req.collects.filters)
+		// if (req.collects.filters) json.tags = Object.assign(json.tags, req.collects.filters)
 
 		var overPassQueryBuilder = new queryBuilder({
 			json: json
@@ -82,11 +68,12 @@ export default {
 					return next();
 				}
 
-				geojsonResponse.features.forEach((feature)=>{
-					if(feature.geometry.type === "Polygon"){
+				geojsonResponse.features.forEach((feature) => {
+					if (feature.geometry.type === "Polygon") {
 						feature.geometry = turf.centroid(feature).geometry;
 					}
 				})
+
 				req.cdata = {
 					success: 1,
 					geojson: geojsonResponse,
@@ -107,91 +94,79 @@ export default {
 
 	},
 
-	test: (req, res, next) => {
-
-
-		var xml = '<osm version="0.6" generator="OpenStreetMap server">\
-		  <user id="5084910" display_name="srvbhattarai" account_created="2017-01-06T07:34:24Z">\
-		    <description></description>\
-		    <contributor-terms agreed="true" pd="false"/>\
-		    <roles>\
-		    </roles>\
-		    <changesets count="0"/>\
-		    <traces count="0"/>\
-		    <blocks>\
-		      <received count="0" active="0"/>\
-		    </blocks>\
-		    <languages>\
-		      <lang>en-US</lang>\
-		      <lang>en</lang>\
-		    </languages>\
-		    <messages>\
-		      <received count="0" unread="0"/>\
-		      <sent count="0"/>\
-		    </messages>\
-		  </user>\
-		</osm>'
-
-		// var parser = new xmljsonParser(xml);
-
-		// parser.toJSON()
-		// 	.then((result)=>{
-		// 		console.log('HUNCHA',result)
-		// 	},(err)=>{
-		// 		console.log('ERR',err);
-		// 	})
-		// 	.catch((err)=>{
-		// 		console.log('CAUGHT ERR',err);
-		// 	})
-
-		var parser = new xmljsonParser({
-			user: {
-				'$': {
-					name: "srvbh",
-					roll: 123
-				},
-				address: 'kathmandu'
-			}
-		});
-
-		console.log('XML', parser.toXML())
-
-	},
-
-
-	wards : (req,res,next)=>{
+	wards: (req, res, next) => {
 
 		var parser = new geoJSONParser('wards-name');
 
-		req.cdata= {
-			success : 1,
-			message : 'Wards successfully fetched !',
-			wards : parser.getWards()
+		req.cdata = {
+			success: 1,
+			message: 'Wards successfully fetched !',
+			wards: parser.getWards()
 		}
 
 		next();
 
 	},
 
-	filterWard : (req,res,next)=>{
-		if (req.collects.ward){
+	filterWard: (req, res, next) => {
+		
+		if (req.collects.ward) {
 			var features = req.cdata.geojson.features;
 			var geojsonparser = new geoJSONParser('wards');
-			req.cdata.geojson = geojsonparser.filterWards(features,req.collects.ward);
+			req.cdata.geojson.features = geojsonparser.filterWards(features, req.collects.ward);
 		}
 		return next();
-		
+
 	},
 
 
-	calculateTotalStat : (req,res,next)=>{
+	calculateTotalStat: (req, res, next) => {
 
-		req.stats = {
-			total : {}
-		};
+		req.stats = {};
 
-		req.stats.total.features = req.cdata.geojson ? req.cdata.geojson.length : 0;
+		req.stats.overall = new statsCalculator(req.cdata.geojson.features, req.collects.type, config.statsIndicator[req.collects.type])
+			.calculate('total');
+
+		next();
+
+	},
+
+	applyFilter: (req, res, next) => {
+
+		var filters = req.collects.filters;
+		var features = req.cdata.geojson.features;
+		var filtered = [];
+		var type = req.collects.type;
+		var insights = config.statsIndicator[type];
+
+		if (filters) {
+			filtered = new statsCalculator(features, type, insights, filters).applyFilter();
+			req.cdata.geojson.features = filtered;
+			next();
+
+		} else {
+			next();
+		}
+
+
+
+	},
+
+	statCompare: (req, res, next) => {
+
+		if (req.cdata.geojson.features && req.cdata.geojson.features.length) {
+			req.stats.insights = new statsCalculator(req.cdata.geojson.features, req.collects.type, config.statsIndicator[req.collects.type])
+				.calculate();
+		}
+
+		req.stats.relative = {};
+
+		for(var metric in req.stats.overall){
+			req.stats.relative[metric] = (req.stats.insights[metric]/req.stats.overall[metric])*100 + "%";
+		}
 		
+		console.log('la hera', req.stats);
 
+		next();
 	}
 }

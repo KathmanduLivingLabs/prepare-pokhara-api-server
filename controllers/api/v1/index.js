@@ -65,7 +65,7 @@ module.exports = (router)=>{
 	    */
 
 
-	router.get('/api/v1/features',apis.collect,apis.fetch, apis.filterWard , mw.respond,mw.error);
+	router.get('/api/v1/features',apis.collect,apis.fetch, apis.calculateTotalStat,apis.applyFilter, apis.filterWard , apis.statCompare , mw.respond,mw.error);
 
 	// router.get('/api/v1/test',apis.test,mw.respond,mw.error);
 

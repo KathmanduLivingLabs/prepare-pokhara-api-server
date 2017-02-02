@@ -1,5 +1,4 @@
-export default {
-
+module.exports = {
 	versions: {
 	    v1: '/api/v1'
 	},
@@ -16,7 +15,23 @@ export default {
 		'school': 'kindergarten|school',
 	},
 
-	boundingCoordinates : "(28.15504264831543, 83.93202209472656,28.275711059570426, 84.03964233398443)"
+	boundingCoordinates : "(28.15504264831543, 83.93202209472656,28.275711059570426, 84.03964233398443)",
 
 
+	statsIndicator : {
+
+		hospital : {
+			bedCapacity : ['capacity:beds','capacity:bed'],
+			icu : ['facility:icu'],
+			nicu : ['facility:nicu'],
+			ventilator : ['facility:ventilator'],
+			xray : ['facility:x-ray'],
+			emergency : ['emergency'],
+			operationTheatre : ['facility:operating_theatre']
+		},
+
+		school : {
+			students : ['student:count']
+		}
+	}
 }

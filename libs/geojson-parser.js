@@ -117,4 +117,19 @@ export default class geoJSONParser {
 		
 		return filtered;
 	}
+
+	hasProperty(obj, tags) {
+
+		var tagExists = false;
+
+		for (var tag = 0; tag < tags.length; tag++) {
+			if (obj.properties.tags[tags[tag]]) {
+				tagExists = tags[tag];
+				break;
+			}
+		}
+
+		return tagExists;
+
+	}
 }
