@@ -33,7 +33,7 @@ export default class statsCalculator {
 		this.features.forEach((feature) => {
 			for (var insight in this.insights) {
 
-				var tagPresent = this.hasProperty(feature, this.insights[insight]);
+				var tagPresent =  this.insights[insight] ? this.hasProperty(feature, this.insights[insight]) : false;
 				if (tagPresent) {
 					if (obj[insight]) {
 						var toNumber = Number(feature.properties.tags[tagPresent]);
@@ -61,7 +61,7 @@ export default class statsCalculator {
 		this.features.forEach((feature) => {
 			var passFilter = true;
 			for (var filter in this.filters) {
-				var tagPresent = this.hasProperty(feature, this.insights[filter]);
+				var tagPresent = this.insights[filter] ? this.hasProperty(feature, this.insights[filter]) : false;
 
 				if (tagPresent) {
 					var parseNum = Number(feature.properties.tags[tagPresent]);

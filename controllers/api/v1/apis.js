@@ -109,7 +109,7 @@ export default {
 	},
 
 	filterWard: (req, res, next) => {
-		
+
 		if (req.collects.ward) {
 			var features = req.cdata.geojson.features;
 			var geojsonparser = new geoJSONParser('wards');
@@ -154,18 +154,27 @@ export default {
 
 	statCompare: (req, res, next) => {
 
-		if (req.cdata.geojson.features && req.cdata.geojson.features.length) {
-			req.stats.insights = new statsCalculator(req.cdata.geojson.features, req.collects.type, config.statsIndicator[req.collects.type])
-				.calculate();
-		}
-
-		req.stats.relative = {};
+		req.stats.insights = {};
+		
+		req.stats.selection = (req.cdata.geojson.features && req.cdata.geojson.features.length) ? new statsCalculator(req.cdata.geojson.features, req.collects.type, config.statsIndicator[req.collects.type])
+			.calculate() : {}
 
 		for(var metric in req.stats.overall){
-			req.stats.relative[metric] = (req.stats.insights[metric]/req.stats.overall[metric])*100 + "%";
+
+			if(!(req.stats.selection && req.stats.selection[metric])){
+
+				req.stats.selection[metric] = 0 ;
+			}
+
+			req.stats.insights[metric] = (req.stats.selection[metric]/req.stats.overall[metric])*100 + "%";	
+			
 		}
 		
-		console.log('la hera', req.stats);
+
+		req.cdata.stats = req.stats;
+
+		console.log('la hera', req.cdata);
+
 
 		next();
 	}
