@@ -14,10 +14,10 @@ module.exports = (router)=>{
 	    * @apiParam {Object} filters Filter(s) to apply for the data
 	    * @apiSuccessExample {json} Parameters Format 
 	    *						{
-		*							"type":"school",
+		*							"type":"hospital",
 		*							"ward" : "relation/6270328",
 		*							"filters" : {
-		*								"operator:type":"government"
+		*								"Emergency":"yes"
 		*							}
 	   	*						}
 		* @apiSuccess {Integer} success Success status
@@ -27,7 +27,7 @@ module.exports = (router)=>{
 	    *  {
 	    *       "success": 1,
 	    *       "message": "Features fetched successfully !",
-	    * 		"data" : {
+	    * 		"geojson" : {
 		*			"type" : "FeatureCollection",
 		*			"features" : [
 		*				{
@@ -58,7 +58,37 @@ module.exports = (router)=>{
 		*				      }
 		*
 		*			]
-	   	* 		}
+	   	* 		},
+	   	*		"stats": 
+	   	*		   { overall: 
+	   	*		      { total: 105,
+	   	*		        'Bed Capacity': 2641,
+	   	*		        ICU: 14,
+	   	*		        NICU: 6,
+	   	*		        Ventilator: 8,
+	   	*		        Xray: 10,
+	   	*		        Emergency: 20,
+	   	*		        'Operation Theatre': 10 },
+	   	*		     insights: 
+	   	*		      { total: '9.523809523809524%',
+	   	*		        'Bed Capacity': '76.63763725861416%',
+	   	*		        ICU: '71.42857142857143%',
+	   	*		        NICU: '66.66666666666666%',
+	   	*		        Ventilator: '75%',
+	   	*		        Xray: '70%',
+	   	*		        Emergency: '50%',
+	   	*		        'Operation Theatre': '100%' },
+	   	*		     selection: 
+	   	*		      { total: 10,
+	   	*		        'Bed Capacity': 2024,
+	   	*		        ICU: 10,
+	   	*		        NICU: 4,
+	   	*		        Ventilator: 6,
+	   	*		        Xray: 7,
+	   	*		        Emergency: 10,
+	   	*		        'Operation Theatre': 10 } } 
+	   	*		}
+		*
 	    *
 	    * @apiDescription API that fetch features
 	    * @apiVersion 1.0.0
@@ -70,44 +100,48 @@ module.exports = (router)=>{
 	// router.get('/api/v1/test',apis.test,mw.respond,mw.error);
 
 	   /**
-	    * @api {get} /api/v1/wards Fetch Wards list 
-	    * @apiName Wards
-	    * @apiGroup Wards
+	    * @api {get} /api/v1/metrics Fetch Metrics list 
+	    * @apiName Metrics
+	    * @apiGroup Metrics
 	   
 		* @apiSuccess {Integer} success Success status
 		* @apiSuccess {String} message Success message
-	    * @apiSuccess {Object[]} wards Wards Object
+	    * @apiSuccess {Object[]} metrics Metrics Object
 	    * @apiSuccessExample {json} Success-Response:
 	    *
 	    *	{
 	    *	  "success": 1,
-	    *	  "message": "Wards successfully fetched !",
-	    *	  "wards": [
-		*    	    {
-        *		      "name": "Bagar",
-		*    	      "number": "1",
-		*    	      "osmID": "relation/6273322"
-		*    	    },
-		*    	    {
-		*    	      "name": "Miruwa",
-		*    	      "number": "2",
-		*    	      "osmID": "relation/6273343"
-		*    	    },
-		*    	    {
-		*    	      "name": "Nadipur",
-		*    	      "number": "3",
-		*    	      "osmID": "relation/6273323"
-		*    	    }
-	    *	    ]
+	    *	  "message": "Metrics successfully fetched !",
+	   	*	  "metrics": {
+	   	*	    "wards": [
+		*   		      {
+		*   		        "name": "Bagar",
+		*   		        "number": "1",
+		*   		        "osmID": "relation/6273322"
+		*   		      }
+	   	*	     ],
+	   	*	     "indicators" :{
+		*			  "hospital": [
+		*			        "Bed Capacity",
+		*			        "ICU",
+		*			        "NICU",
+		*			        "Ventilator",
+		*			        "Xray",
+		*			        "Emergency",
+		*			        "Operation Theatre"
+		*			      ],
+		*		      "school": [
+		*		        "Students"
+		*		      ]
+	   	*	     }
 	    * 	}
 		*	
 	    *
-	    * @apiDescription API that fetch wards list
+	    * @apiDescription API that fetch static metrics 
 	    * @apiVersion 1.0.0
 	    */
 
-	router.get('/api/v1/wards',apis.wards,mw.respond,mw.error);
-
+	// router.get('/api/v1/wards',apis.wards,mw.respond,mw.error);
 
 	router.get('/api/v1/metrics',apis.metrics,mw.respond,mw.error);
 

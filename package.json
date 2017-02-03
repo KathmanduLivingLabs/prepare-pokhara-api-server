@@ -7,7 +7,7 @@
     "development": "nodemon ./node_modules/babel-cli/bin/babel-node app.js",
     "build": "babel controllers/ -d build",
     "start" : "./node_modules/babel-cli/bin/babel-node.js app.js",
-    "postinstall" : "npm install babel-cli && npm install babel-preset-es2015 && cp sample-config.js config.js "
+    "postinstall" : "npm install babel-cli && npm install babel-preset-es2015 && cp sample-config.js config.js && npm run apidocs"
   },
   "dependencies": {
     "@turf/turf": "^3.9.0",
