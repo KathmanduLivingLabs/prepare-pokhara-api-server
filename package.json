@@ -6,7 +6,8 @@
     "apidocs": "apidoc -i controllers/ -o apidocs/",
     "development": "nodemon ./node_modules/babel-cli/bin/babel-node app.js",
     "build": "babel controllers/ -d build",
-    "start" : "./node_modules/babel-cli/bin/babel-node app.js"
+    "start" : "./node_modules/babel-cli/bin/babel-node app.js",
+    "postinstall" : "npm install babel-cli && npm install babel-preset-es2015"
   },
   "dependencies": {
     "@turf/turf": "^3.9.0",
