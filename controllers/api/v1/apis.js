@@ -166,7 +166,7 @@ export default {
 				req.stats.selection[metric] = 0 ;
 			}
 
-			req.stats.insights[metric] = (req.stats.selection[metric]/req.stats.overall[metric])*100 + "%";	
+			req.stats.insights[metric] = (req.stats.selection[metric]/req.stats.overall[metric]) * 100 + "%";	
 			
 		}
 		
@@ -175,7 +175,33 @@ export default {
 
 		console.log('la hera', req.cdata);
 
+		next();
+	},
+
+	metrics : (req,res,next)=>{
+		
+		var statsIndicators = config.statsIndicator;
+		
+		var metrics = {
+			wards : new geoJSONParser('wards-name').getFile().wards
+		};
+
+		metrics.indicators = {};
+		for(var statIndicator in  statsIndicators){
+			metrics.indicators[statIndicator] = [];
+			for(var tag in statsIndicators[statIndicator]){
+				metrics.indicators[statIndicator].push(tag);
+			}
+		}
+		
+		req.cdata = {
+			success : 1,
+			message : 'Metrics successfully fetched.',
+			metrics : metrics
+		}
 
 		next();
+		
+
 	}
 }

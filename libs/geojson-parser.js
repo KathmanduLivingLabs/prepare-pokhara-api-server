@@ -132,4 +132,8 @@ export default class geoJSONParser {
 		return tagExists;
 
 	}
+
+	getFile(){
+		return  this.geoJsonFile;
+	}
 }

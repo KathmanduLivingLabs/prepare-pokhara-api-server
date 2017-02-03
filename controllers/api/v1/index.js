@@ -108,4 +108,7 @@ module.exports = (router)=>{
 
 	router.get('/api/v1/wards',apis.wards,mw.respond,mw.error);
 
+
+	router.get('/api/v1/metrics',apis.metrics,mw.respond,mw.error);
+
 }
