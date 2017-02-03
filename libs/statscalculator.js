@@ -25,7 +25,7 @@ export default class statsCalculator {
 
 	}
 
-	calculate(prop) {
+	calculate(prop,rangeMax) {
 
 		var obj = {};
 		obj.total = this.features.length;
@@ -33,11 +33,21 @@ export default class statsCalculator {
 		this.features.forEach((feature) => {
 			for (var insight in this.insights) {
 
-				var tagPresent =  this.insights[insight] ? this.hasProperty(feature, this.insights[insight]) : false;
+				var tagPresent =  this.insights[insight] ? this.hasProperty(feature, this.insights[insight]["osmtags"]) : false;
 				if (tagPresent) {
 					if (obj[insight]) {
 						var toNumber = Number(feature.properties.tags[tagPresent]);
 						obj[insight] = Number.isInteger(toNumber) ? (obj[insight] + toNumber) : obj[insight] + 1;
+						if(Number.isInteger(toNumber) && prop === 'total' && this.insights[insight].type ==="slider" ){
+							if(rangeMax[insight] !== undefined) {
+								if(toNumber > rangeMax[insight]){
+									rangeMax[insight] = toNumber;
+								}
+							}else{
+								rangeMax[insight] = toNumber;
+							}
+
+						} 
 					} else {
 						var toNumber = Number(feature.properties.tags[tagPresent]);
 
@@ -61,7 +71,7 @@ export default class statsCalculator {
 		this.features.forEach((feature) => {
 			var passFilter = true;
 			for (var filter in this.filters) {
-				var tagPresent = this.insights[filter] ? this.hasProperty(feature, this.insights[filter]) : false;
+				var tagPresent = this.insights[filter] ? this.hasProperty(feature, this.insights[filter]["osmtags"]) : false;
 
 				if (tagPresent) {
 					var parseNum = Number(feature.properties.tags[tagPresent]);

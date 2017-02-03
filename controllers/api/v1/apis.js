@@ -124,8 +124,12 @@ export default {
 
 		req.stats = {};
 
+		var rangeMax = {};
+
 		req.stats.overall = new statsCalculator(req.cdata.geojson.features, req.collects.type, config.statsIndicator[req.collects.type])
-			.calculate('total');
+			.calculate('total',rangeMax);
+
+		req.stats.sliderMaxValue = rangeMax; // notice that we are passing the rangeMax as an object to the statCalculator function and finding the max value within. Since the value is referenced, it will be updated here as well !
 
 		next();
 
@@ -155,9 +159,9 @@ export default {
 	statCompare: (req, res, next) => {
 
 		req.stats.insights = {};
-		
+
 		req.stats.selection = (req.cdata.geojson.features && req.cdata.geojson.features.length) ? new statsCalculator(req.cdata.geojson.features, req.collects.type, config.statsIndicator[req.collects.type])
-			.calculate() : {}
+			.calculate('selection') : {}
 
 		for(var metric in req.stats.overall){
 
@@ -166,7 +170,7 @@ export default {
 				req.stats.selection[metric] = 0 ;
 			}
 
-			req.stats.insights[metric] = (req.stats.selection[metric]/req.stats.overall[metric]) * 100 + "%";	
+			req.stats.insights[metric] = Math.round((req.stats.selection[metric]/req.stats.overall[metric]) * 100) + "%";	
 			
 		}
 		

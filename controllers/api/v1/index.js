@@ -68,7 +68,8 @@ module.exports = (router)=>{
 	   	*		        Ventilator: 8,
 	   	*		        Xray: 10,
 	   	*		        Emergency: 20,
-	   	*		        'Operation Theatre': 10 },
+	   	*		        'Operation Theatre': 10 
+	   	*			 },
 	   	*		     insights: 
 	   	*		      { total: '9.523809523809524%',
 	   	*		        'Bed Capacity': '76.63763725861416%',
@@ -77,7 +78,8 @@ module.exports = (router)=>{
 	   	*		        Ventilator: '75%',
 	   	*		        Xray: '70%',
 	   	*		        Emergency: '50%',
-	   	*		        'Operation Theatre': '100%' },
+	   	*		        'Operation Theatre': '100%' 
+	   	*			  },
 	   	*		     selection: 
 	   	*		      { total: 10,
 	   	*		        'Bed Capacity': 2024,
@@ -86,8 +88,13 @@ module.exports = (router)=>{
 	   	*		        Ventilator: 6,
 	   	*		        Xray: 7,
 	   	*		        Emergency: 10,
-	   	*		        'Operation Theatre': 10 } } 
-	   	*		}
+	   	*		        'Operation Theatre': 10 
+	   	*			  } 
+	   	*		},
+	    *		"sliderMaxValue": { 
+	    *			 'Bed Capacity': 750 
+	    *		}
+	   	*	} 
 		*
 	    *
 	    * @apiDescription API that fetch features
