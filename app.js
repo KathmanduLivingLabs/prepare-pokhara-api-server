@@ -79,8 +79,8 @@ app.use(function(err, req, res, next) {
 var port = 4040;
 
 
-app.listen(port,function(){
-    console.log('API server running at port ' + port)
+var listener =  app.listen(process.env.PORT || port,function(){
+    console.log('API server running at port ' +  listener.address().port)
 })
 
 
