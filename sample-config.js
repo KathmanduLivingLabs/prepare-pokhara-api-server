@@ -21,17 +21,17 @@ module.exports = {
 	statsIndicator : {
 
 		hospital : {
-			bedCapacity : ['capacity:beds','capacity:bed'],
-			icu : ['facility:icu'],
-			nicu : ['facility:nicu'],
-			ventilator : ['facility:ventilator'],
-			xray : ['facility:x-ray'],
-			emergency : ['emergency'],
-			operationTheatre : ['facility:operating_theatre']
+			"Bed Capacity" : ['capacity:beds','capacity:bed'],
+			"ICU" : ['facility:icu'],
+			"NICU" : ['facility:nicu'],
+			"Ventilator" : ['facility:ventilator'],
+			"Xray" : ['facility:x-ray'],
+			"Emergency" : ['emergency'],
+			"Operation Theatre" : ['facility:operating_theatre']
 		},
 
 		school : {
-			students : ['student:count']
+			"Students" : ['student:count']
 		}
 	}
 }
