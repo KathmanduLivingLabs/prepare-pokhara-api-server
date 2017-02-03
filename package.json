@@ -5,7 +5,8 @@
   "scripts": {
     "apidocs": "apidoc -i controllers/ -o apidocs/",
     "development": "nodemon ./node_modules/babel-cli/bin/babel-node app.js",
-    "build": "babel controllers/ -d build"
+    "build": "babel controllers/ -d build",
+    "start" : "./node_modules/babel-cli/bin/babel-node app.js"
   },
   "dependencies": {
     "@turf/turf": "^3.9.0",
