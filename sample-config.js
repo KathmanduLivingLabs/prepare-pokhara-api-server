@@ -21,17 +21,41 @@ module.exports = {
 	statsIndicator : {
 
 		hospital : {
-			"Bed Capacity" : ['capacity:beds','capacity:bed'],
-			"ICU" : ['facility:icu'],
-			"NICU" : ['facility:nicu'],
-			"Ventilator" : ['facility:ventilator'],
-			"Xray" : ['facility:x-ray'],
-			"Emergency" : ['emergency'],
-			"Operation Theatre" : ['facility:operating_theatre']
+			"Bed Capacity" : {
+				"type" : 'slider',
+				"osmtags" : ['capacity:beds','capacity:bed']
+			},
+			"ICU" : {
+				"type" : 'filter',
+				"osmtags" : ['facility:icu'],
+			}, 
+			"NICU" : {
+				"type" : 'filter',
+				"osmtags" : ['facility:nicu']
+			},
+			"Ventilator" : {
+				"type" : 'filter',
+				"osmtags" : ['facility:ventilator']
+			},
+			"Xray" :{
+				"type" : 'filter',
+				"osmtags" : ['facility:x-ray']
+			}, 
+			"Emergency" : {
+				"type" : 'filter',
+				"osmtags" : ['emergency']
+			}, 
+			"Operation Theatre" : {
+				"type" : 'filter',
+				"osmtags" : ['facility:operating_theatre']
+			}
 		},
 
 		school : {
-			"Students" : ['student:count']
+			"Students" : {
+				"type" : 'slider',
+				"osmtags" : ['student:count']
+			}
 		}
 	}
 }
