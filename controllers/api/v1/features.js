@@ -25,7 +25,16 @@ export default {
 
 		var variables = req.collects.variables ? (typeof req.collects.variables === 'object' ? req.collects.variables : JSON.parse(req.collects.variables)) : {};
 
-		if(req.collects.variables) Object.assign(req.collects.filters,  variables);
+		var validVariables = {};
+		
+		for(var variable in variables){
+			var value = variables[variable];
+			if(value !==0 ){
+				validVariables[variable] = value;
+			}
+		}
+		
+		Object.assign(req.collects.filters,  validVariables);
 
 		next();
 	},
