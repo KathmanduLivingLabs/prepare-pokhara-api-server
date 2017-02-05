@@ -15,12 +15,17 @@ export default {
 
 	collect: (req, res, next) => {
 
-		var fields = ['type', 'filters', 'ward'];
+		var fields = ['type', 'filters', 'ward','variables'];
 		req.collects = {};
 		fields.forEach((field) => {
 			req.collects[field] = (req.body[field] || req.query[field]);
 		})
-		if (req.collects.filters && typeof req.collects.filters !== 'object') req.collects.filters = JSON.parse(req.collects.filters);
+
+		req.collects.filters = req.collects.filters ? (typeof req.collects.filters === 'object' ? req.collects.filters  : JSON.parse(req.collects.filters)) : {};
+
+		var variables = req.collects.variables ? (typeof req.collects.variables === 'object' ? req.collects.variables : JSON.parse(req.collects.variables)) : {};
+
+		if(req.collects.variables) Object.assign(req.collects.filters,  variables);
 
 		next();
 	},

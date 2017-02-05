@@ -52,6 +52,11 @@ module.exports = {
 			"Personnel Count" : {
 				"type" : 'slider',
 				"osmtags" : ['personnel:count']
+			},
+			"Ambulance" : {
+				"type" : "value",
+				"on" : "ambulance",
+				"osmtags" : ["emergency:services","emergency_service"]
 			}
 		},
 
