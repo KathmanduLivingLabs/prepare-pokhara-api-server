@@ -29,7 +29,7 @@ export default {
 		
 		for(var variable in variables){
 			var value = variables[variable];
-			if(value !==0 ){
+			if(Number(value) !==0 ){
 				validVariables[variable] = value;
 			}
 		}
