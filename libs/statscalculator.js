@@ -37,7 +37,7 @@ export default class statsCalculator {
 				if (tagPresent) {
 					if (obj[insight]) {
 						var toNumber = Number(feature.properties.tags[tagPresent]);
-						obj[insight] = Number.isInteger(toNumber) ? (obj[insight] + toNumber) : obj[insight] + 1;
+						obj[insight] = Number.isInteger(toNumber) ? (obj[insight] + toNumber) : this.insights[insight].type ==="value" ? (this.insights[insight].on === feature.properties.tags[tagPresent] ? obj[insight] + 1 : obj[insight] + 0 ) :  obj[insight] + 1;
 						if(Number.isInteger(toNumber) && prop === 'total' && this.insights[insight].type ==="slider" ){
 							if(rangeMax[insight] !== undefined) {
 								if(toNumber > rangeMax[insight]){
@@ -50,8 +50,7 @@ export default class statsCalculator {
 						} 
 					} else {
 						var toNumber = Number(feature.properties.tags[tagPresent]);
-
-						obj[insight] = Number.isInteger(toNumber) ? toNumber : 1;
+						obj[insight] = Number.isInteger(toNumber) ? toNumber : this.insights[insight].type ==="value" ?  (this.insights[insight].on === feature.properties.tags[tagPresent] ? 1 : 0 ) :  1;
 					}
 				} else {
 					if (obj[insight] === undefined) {
