@@ -110,7 +110,7 @@ export default {
 
 	filterWard: (req, res, next) => {
 
-		if (req.collects.ward) {
+		if (req.collects.ward && req.collects.ward !== '*' ) {
 			var features = req.cdata.geojson.features;
 			var geojsonparser = new geoJSONParser('wards');
 			req.cdata.geojson.features = geojsonparser.filterWards(features, req.collects.ward);
