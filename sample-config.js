@@ -11,8 +11,8 @@ module.exports = {
 	},
 
 	amenities : {
-		'hospital': 'hospital|clinic|nursing_home|dentist|health|health_post',
-		'school': 'kindergarten|school',
+		'hospital': 'hospital',
+		'school': ' school ',
 	},
 
 	boundingCoordinates : "(28.15504264831543, 83.93202209472656,28.275711059570426, 84.03964233398443)",

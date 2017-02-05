@@ -129,7 +129,9 @@ export default {
 		req.stats.overall = new statsCalculator(req.cdata.geojson.features, req.collects.type, config.statsIndicator[req.collects.type])
 			.calculate('total',rangeMax);
 
-		req.stats.sliderMaxValue = rangeMax; // notice that we are passing the rangeMax as an object to the statCalculator function and finding the max value within. Since the value is referenced, it will be updated here as well !
+		req.cdata.initialMetrics =  {
+			silder : rangeMax
+		}  // notice that we are passing the rangeMax as an object to the statCalculator function and finding the max value within. Since the value is referenced, it will be updated here as well !
 
 		next();
 
@@ -176,8 +178,7 @@ export default {
 		
 
 		req.cdata.stats = req.stats;
-
-		console.log('la hera', req.cdata);
+		funsole.log(req.cdata,'white','blue');
 
 		next();
 	},
@@ -190,13 +191,13 @@ export default {
 			wards : new geoJSONParser('wards-name').getFile().wards
 		};
 
-		metrics.indicators = {};
-		for(var statIndicator in  statsIndicators){
-			metrics.indicators[statIndicator] = [];
-			for(var tag in statsIndicators[statIndicator]){
-				metrics.indicators[statIndicator].push(tag);
-			}
-		}
+		// metrics.indicators = {};
+		// for(var statIndicator in  statsIndicators){
+		// 	metrics.indicators[statIndicator] = [];
+		// 	for(var tag in statsIndicators[statIndicator]){
+		// 		metrics.indicators[statIndicator].push(tag);
+		// 	}
+		// }
 		
 		req.cdata = {
 			success : 1,

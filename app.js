@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+global['funsole'] = require('funsole');
+
 import config from './config';
 
 var app = express();

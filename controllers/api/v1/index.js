@@ -4,9 +4,9 @@ import apis from './apis';
 module.exports = (router) => {
 
 	/**
-	 * @api {get} /api/v1/features Fetch Features 
+	 * @api {get} /api/v1/features Features 
 	 * @apiName Features
-	 * @apiGroup Features
+	 * @apiGroup Fetch
 	 *
 	 *
 	 * @apiParam {Varchar} type Type for feature to be fetched
@@ -22,7 +22,7 @@ module.exports = (router) => {
 	 *						}
 	 * @apiSuccess {Integer} success Success status
 	 * @apiSuccess {String} message Success message
-	 * @apiSuccess {Object[]} data GeoJSON formatted data 
+	 * @apiSuccess {Object[]} geojson GeoJSON  data 
 	 * @apiSuccessExample {json} Success-Response
 	 *  {
 	 *       "success": 1,
@@ -91,8 +91,10 @@ module.exports = (router) => {
 	 *		        'Operation Theatre': 10 
 	 *			  } 
 	 *		},
-	 *		"sliderMaxValue": { 
-	 *			 'Bed Capacity': 750 
+	 *		"initialMetrics" : {
+	 *			"slider" : {
+	 *				'Bed Capacity' : 750
+ 	 *			}
 	 *		}
 	 *	} 
 	 *
@@ -107,49 +109,34 @@ module.exports = (router) => {
 	// router.get('/api/v1/test',apis.test,mw.respond,mw.error);
 
 	/**
-	    * @api {get} /api/v1/metrics Fetch Metrics list 
-	    * @apiName Metrics
-	    * @apiGroup Metrics
+	    * @api {get} /api/v1/wards  Wards  
+	    * @apiName Wards
+	    * @apiGroup Fetch
 	   
 		* @apiSuccess {Integer} success Success status
 		* @apiSuccess {String} message Success message
-	    * @apiSuccess {Object[]} metrics Metrics Object
+	    * @apiSuccess {Object[]} wards Wards Object
 	    * @apiSuccessExample {json} Success-Response:
 	    *
 	    *	{
 	    *	  "success": 1,
-	    *	  "message": "Metrics successfully fetched !",
-	   	*	  "metrics": {
-	   	*	    "wards": [
+	    *	  "message": "Wards successfully fetched !",
+	   	*	  "wards": [
 		*   		      {
 		*   		        "name": "Bagar",
 		*   		        "number": "1",
 		*   		        "osmID": "relation/6273322"
 		*   		      }
-	   	*	     ],
-	   	*	     "indicators" :{
-		*			  "hospital": [
-		*			        "Bed Capacity",
-		*			        "ICU",
-		*			        "NICU",
-		*			        "Ventilator",
-		*			        "Xray",
-		*			        "Emergency",
-		*			        "Operation Theatre"
-		*			      ],
-		*		      "school": [
-		*		        "Students"
-		*		      ]
-	   	*	     }
-	    * 	}
+	   	*	     ]
+	   	*	}
 		*	
 	    *
-	    * @apiDescription API that fetch static metrics 
+	    * @apiDescription API that fetch wards list
 	    * @apiVersion 1.0.0
 	    */
 
-	// router.get('/api/v1/wards',apis.wards,mw.respond,mw.error);
+	router.get('/api/v1/wards',apis.wards,mw.respond,mw.error);
 
-	router.get('/api/v1/metrics', apis.metrics, mw.respond, mw.error);
+	// router.get('/api/v1/metrics', apis.metrics, mw.respond, mw.error);
 
 }
