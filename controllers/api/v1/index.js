@@ -13,6 +13,7 @@ module.exports = (router) => {
 	 *
 	 * @apiParam {Varchar} type Type for feature to be fetched
 	 * @apiParam {Varchar} ward Provide ward's relation id to fetch the data for specific ward only
+	 * @apiParam {Object} variables Provide Variable values (like Bed Capacity) specific to type
 	 * @apiParam {Object} filters Filter(s) to apply for the data
 	 * @apiSuccessExample {json} Parameters Format 
 	 *						{
@@ -20,12 +21,15 @@ module.exports = (router) => {
 	 *							"ward" : "relation/6270328",
 	 *							"filters" : {
 	 *								"Emergency":"yes",
-	 								"Bed Capacity" : "10",
 	 								"ICU" : "yes",
 	 								"NICU" : "yes",
 	 								"Ventilator" : "yes",
 	 								"Xray" : "yes",
-	 								"Operation Theatre" : "yes"
+	 								"Operation Theatre" : "yes",
+	 								"Ambulance" : "yes"
+	 *							},
+	 *							"variables" : {
+	 *								"Bed Capacity" : 30						
 	 *							}
 	 *						}
 	 * @apiSuccess {Integer} success Success status
