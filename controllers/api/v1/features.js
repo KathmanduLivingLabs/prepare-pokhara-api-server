@@ -107,6 +107,16 @@ export default {
 
 	},
 
+	withinPokhara : (req,res,next)=>{
+
+		if (req.cdata.geojson && req.cdata.geojson ) {
+			var features = req.cdata.geojson.features;
+			var geojsonparser = new geoJSONParser('pokhara-geojson');
+			req.cdata.geojson.features = geojsonparser.isWithin(features);
+		}
+		return next();
+
+	},
 
 	totalStats: (req, res, next) => {
 

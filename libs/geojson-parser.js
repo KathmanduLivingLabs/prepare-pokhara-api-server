@@ -79,7 +79,7 @@ export default class geoJSONParser {
 
 	boundingBox() {
 
-		const coordinates = this.geoJsonFile.features[0].geometry.coordinates[0][0];
+		const coordinates = this.geoJsonFile.features[0].geometry.coordinates[0];
 
 		return this.bBoxCalculator(coordinates);
 	}
@@ -116,6 +116,19 @@ export default class geoJSONParser {
 
 		
 		return filtered;
+	}
+
+	isWithin(features){
+
+		var filtered = [];
+		features.forEach((feature)=>{
+			if(turf.inside(feature,this.geoJsonFile.features[0])){
+				filtered.push(feature);
+			}
+		})
+
+		return filtered;
+
 	}
 
 	hasProperty(obj, tags) {

@@ -116,7 +116,7 @@ module.exports = (router) => {
 	 */
 
 
-	router.get('/api/v1/features', apiFeatures.collect, apiFeatures.fetch, apiFeatures.totalStats, apiFeatures.fiter, apiWards.filter, apiFeatures.compareStats, mw.respond, mw.error);
+	router.get('/api/v1/features', apiFeatures.collect, apiFeatures.fetch, apiFeatures.withinPokhara , apiFeatures.totalStats, apiFeatures.fiter, apiWards.filter, apiFeatures.compareStats, mw.respond, mw.error);
 
 	// router.get('/api/v1/test',apis.test,mw.respond,mw.error);
 
