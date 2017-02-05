@@ -12,7 +12,7 @@ module.exports = {
 
 	amenities : {
 		'hospital': 'hospital',
-		'school': ' school ',
+		'school': 'school',
 	},
 
 	boundingCoordinates : "(28.15504264831543, 83.93202209472656,28.275711059570426, 84.03964233398443)",
@@ -48,6 +48,10 @@ module.exports = {
 			"Operation Theatre" : {
 				"type" : 'filter',
 				"osmtags" : ['facility:operating_theatre']
+			},
+			"Personnel Count" : {
+				"type" : 'slider',
+				"osmtags" : ['personnel:count']
 			}
 		},
 

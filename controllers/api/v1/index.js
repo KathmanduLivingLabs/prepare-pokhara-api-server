@@ -1,5 +1,7 @@
 import mw from '../../../libs/middleware';
-import apis from './apis';
+import apiFeatures from './features';
+import apiWards from './wards';
+import apiMetrics from './metrics';
 
 module.exports = (router) => {
 
@@ -104,7 +106,7 @@ module.exports = (router) => {
 	 */
 
 
-	router.get('/api/v1/features', apis.collect, apis.fetch, apis.calculateTotalStat, apis.applyFilter, apis.filterWard, apis.statCompare, mw.respond, mw.error);
+	router.get('/api/v1/features', apiFeatures.collect, apiFeatures.fetch, apiFeatures.totalStats, apiFeatures.fiter, apiWards.filter, apiFeatures.compareStats, mw.respond, mw.error);
 
 	// router.get('/api/v1/test',apis.test,mw.respond,mw.error);
 
@@ -135,7 +137,7 @@ module.exports = (router) => {
 	    * @apiVersion 1.0.0
 	    */
 
-	router.get('/api/v1/wards',apis.wards,mw.respond,mw.error);
+	router.get('/api/v1/wards',apiMetrics.wards,mw.respond,mw.error);
 
 	// router.get('/api/v1/metrics', apis.metrics, mw.respond, mw.error);
 

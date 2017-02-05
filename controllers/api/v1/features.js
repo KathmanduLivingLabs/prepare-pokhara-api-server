@@ -9,7 +9,6 @@ import geoJSONParser from "../../../libs/geojson-parser";
 import statsCalculator from "../../../libs/statscalculator";
 
 var sanitize = googleCaja.sanitize;
-
 var overpassConfig = config.overpass;
 
 export default {
@@ -94,50 +93,25 @@ export default {
 
 	},
 
-	wards: (req, res, next) => {
 
-		var parser = new geoJSONParser('wards-name');
-
-		req.cdata = {
-			success: 1,
-			message: 'Wards successfully fetched !',
-			wards: parser.getWards()
-		}
-
-		next();
-
-	},
-
-	filterWard: (req, res, next) => {
-
-		if (req.collects.ward && req.collects.ward !== '*' ) {
-			var features = req.cdata.geojson.features;
-			var geojsonparser = new geoJSONParser('wards');
-			req.cdata.geojson.features = geojsonparser.filterWards(features, req.collects.ward);
-		}
-		return next();
-
-	},
-
-
-	calculateTotalStat: (req, res, next) => {
+	totalStats: (req, res, next) => {
 
 		req.stats = {};
 
 		var rangeMax = {};
 
 		req.stats.overall = new statsCalculator(req.cdata.geojson.features, req.collects.type, config.statsIndicator[req.collects.type])
-			.calculate('total',rangeMax);
+			.calculate('total', rangeMax);
 
-		req.cdata.initialMetrics =  {
-			silder : rangeMax
-		}  // notice that we are passing the rangeMax as an object to the statCalculator function and finding the max value within. Since the value is referenced, it will be updated here as well !
+		req.cdata.initialMetrics = {
+				silder: rangeMax
+			} // notice that we are passing the rangeMax as an object to the statCalculator function and finding the max value within. Since the value is referenced, it will be updated here as well !
 
 		next();
 
 	},
 
-	applyFilter: (req, res, next) => {
+	fiter: (req, res, next) => {
 
 		var filters = req.collects.filters;
 		var features = req.cdata.geojson.features;
@@ -158,55 +132,25 @@ export default {
 
 	},
 
-	statCompare: (req, res, next) => {
+	compareStats: (req, res, next) => {
 
 		req.stats.insights = {};
 
 		req.stats.selection = (req.cdata.geojson.features && req.cdata.geojson.features.length) ? new statsCalculator(req.cdata.geojson.features, req.collects.type, config.statsIndicator[req.collects.type])
 			.calculate('selection') : {}
 
-		for(var metric in req.stats.overall){
+		for (var metric in req.stats.overall) {
+			if (!(req.stats.selection && req.stats.selection[metric])) {
 
-			if(!(req.stats.selection && req.stats.selection[metric])){
-
-				req.stats.selection[metric] = 0 ;
+				req.stats.selection[metric] = 0;
 			}
+			req.stats.insights[metric] = Math.round((req.stats.selection[metric] / req.stats.overall[metric]) * 100);
 
-			req.stats.insights[metric] = Math.round((req.stats.selection[metric]/req.stats.overall[metric]) * 100) + "%";	
-			
 		}
-		
 
 		req.cdata.stats = req.stats;
-		funsole.log(req.cdata,'white','blue');
+		funsole.log(req.cdata, 'white', 'blue');
 
 		next();
-	},
-
-	metrics : (req,res,next)=>{
-		
-		var statsIndicators = config.statsIndicator;
-		
-		var metrics = {
-			wards : new geoJSONParser('wards-name').getFile().wards
-		};
-
-		// metrics.indicators = {};
-		// for(var statIndicator in  statsIndicators){
-		// 	metrics.indicators[statIndicator] = [];
-		// 	for(var tag in statsIndicators[statIndicator]){
-		// 		metrics.indicators[statIndicator].push(tag);
-		// 	}
-		// }
-		
-		req.cdata = {
-			success : 1,
-			message : 'Metrics successfully fetched.',
-			metrics : metrics
-		}
-
-		next();
-		
-
 	}
 }
