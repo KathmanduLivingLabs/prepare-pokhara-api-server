@@ -1,3 +1,6 @@
+import config from '../../../config';
+import geoJSONParser from "../../../libs/geojson-parser";
+
 export default {
 
 	wards : (req,res,next)=>{
