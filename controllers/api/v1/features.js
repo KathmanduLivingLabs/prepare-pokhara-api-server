@@ -104,7 +104,7 @@ export default {
 			.calculate('total', rangeMax);
 
 		req.cdata.initialMetrics = {
-				silder: rangeMax
+				slider: rangeMax
 			} // notice that we are passing the rangeMax as an object to the statCalculator function and finding the max value within. Since the value is referenced, it will be updated here as well !
 
 		next();
