@@ -19,7 +19,13 @@ module.exports = (router) => {
 	 *							"type":"hospital",
 	 *							"ward" : "relation/6270328",
 	 *							"filters" : {
-	 *								"Emergency":"yes"
+	 *								"Emergency":"yes",
+	 								"Bed Capacity" : "10",
+	 								"ICU" : "yes",
+	 								"NICU" : "yes",
+	 								"Ventilator" : "yes",
+	 								"Xray" : "yes",
+	 								"Operation Theatre" : "yes"
 	 *							}
 	 *						}
 	 * @apiSuccess {Integer} success Success status
