@@ -108,11 +108,15 @@ export default class geoJSONParser {
 
 		var wardPoly = _.findWhere(polyFeatures,{id:wardID});
 
-		features.forEach((feature)=>{
-			if(turf.inside(feature,wardPoly)){
-				filtered.push(feature);
-			}
-		})
+		if(wardPoly){
+			features.forEach((feature)=>{
+				if(turf.inside(feature,wardPoly)){
+					filtered.push(feature);
+				}
+			})
+		}
+
+		
 
 		
 		return filtered;

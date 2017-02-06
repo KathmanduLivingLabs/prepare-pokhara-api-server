@@ -7,6 +7,8 @@ import osmToGeojson from 'osmtogeojson';
 import turf from '@turf/turf';
 import geoJSONParser from "../../../libs/geojson-parser";
 import statsCalculator from "../../../libs/statscalculator";
+import proc from 'proc-utils';
+import _ from 'underscore';
 
 var sanitize = googleCaja.sanitize;
 var overpassConfig = config.overpass;
@@ -15,28 +17,56 @@ export default {
 
 	collect: (req, res, next) => {
 
-		var fields = ['type', 'filters', 'ward','variables'];
 		req.collects = {};
+		var fields = ['type', 'filters', 'ward', 'variables'];
+
 		fields.forEach((field) => {
-			req.collects[field] = (req.body[field] || req.query[field]);
+			if (typeof req.body[field] !== 'undefined' || typeof req.query[field] !== 'undefined') {
+				req.collects[field] = JSON.parse(sanitize(JSON.stringify(req.body[field] || req.query[field])));
+			}
+
 		})
 
-		req.collects.filters = req.collects.filters ? (typeof req.collects.filters === 'object' ? req.collects.filters  : JSON.parse(req.collects.filters)) : {};
+		var err = proc.utils.required(req.collects, ['type']);
+		if (err) return next(err);
+
+		next();
+
+
+	},
+
+	validate: (req, res, next) => {
+
+		req.collects.filters = req.collects.filters ? (typeof req.collects.filters === 'object' ? req.collects.filters : JSON.parse(req.collects.filters)) : {};
 
 		var variables = req.collects.variables ? (typeof req.collects.variables === 'object' ? req.collects.variables : JSON.parse(req.collects.variables)) : {};
 
 		var validVariables = {};
-		
-		for(var variable in variables){
+
+		for (var variable in variables) {
 			var value = variables[variable];
-			if(Number(value) !==0 ){
+			if (Number(value) !== 0) {
 				validVariables[variable] = value;
 			}
 		}
-		
-		Object.assign(req.collects.filters,  validVariables);
+
+		Object.assign(req.collects.filters, validVariables);
+
+		if(req.collects.filters && Object.keys(req.collects.filters).length){
+
+			var applicableFilters = Object.keys(config.statsIndicator[req.collects.type]);
+			var providedFilters = Object.keys(req.collects.filters);
+
+			if(!(_.intersection(providedFilters,applicableFilters).length === providedFilters.length)){
+				return next(new Error('Make sure filter parameters are valid for this type'));
+			}
+
+
+		}
 
 		next();
+
+
 	},
 
 	fetch: (req, res, next) => {
@@ -107,13 +137,14 @@ export default {
 
 	},
 
-	withinPokhara : (req,res,next)=>{
+	withinPokhara: (req, res, next) => {
 
-		if (req.cdata.geojson && req.cdata.geojson ) {
+		if (req.cdata.geojson && req.cdata.geojson) {
 			var features = req.cdata.geojson.features;
 			var geojsonparser = new geoJSONParser('pokhara-geojson');
 			req.cdata.geojson.features = geojsonparser.isWithin(features);
 		}
+		
 		return next();
 
 	},
@@ -164,11 +195,14 @@ export default {
 			.calculate('selection') : {}
 
 		for (var metric in req.stats.overall) {
+			
 			if (!(req.stats.selection && req.stats.selection[metric])) {
 
 				req.stats.selection[metric] = 0;
 			}
-			req.stats.insights[metric] = Math.round((req.stats.selection[metric] / req.stats.overall[metric]) * 100);
+
+			var relative = (req.stats.selection[metric] / req.stats.overall[metric]) * 100;
+			req.stats.insights[metric] =   relative > 0.5 ? Math.round(relative) : Math.round(relative * 100) /100 ;
 
 		}
 

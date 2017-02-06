@@ -23,6 +23,7 @@
     "jsonfile": "^2.4.0",
     "morgan": "~1.7.0",
     "osmtogeojson": "^2.2.12",
+    "proc-utils": "^1.0.0",
     "request": "^2.79.0",
     "serve-favicon": "~2.3.0",
     "underscore": "^1.8.3",
