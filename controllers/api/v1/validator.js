@@ -18,10 +18,15 @@ export default {
 
 	filters: (req, res, next) => {
 
-		req.collects.filters = req.collects.filters ? (typeof req.collects.filters === 'object' ? req.collects.filters : JSON.parse(req.collects.filters)) : {};
+		try {
+			req.collects.filters = req.collects.filters ? (typeof req.collects.filters === 'object' ? req.collects.filters : JSON.parse(req.collects.filters)) : {};
+			var variables = req.collects.variables ? (typeof req.collects.variables === 'object' ? req.collects.variables : JSON.parse(req.collects.variables)) : {};
+		}
 
-		var variables = req.collects.variables ? (typeof req.collects.variables === 'object' ? req.collects.variables : JSON.parse(req.collects.variables)) : {};
-
+		catch(e){
+			return next(new Error('Error in parsing filters/variables param. It must be of type object'));
+		}
+		
 		var validVariables = {};
 
 		for (var variable in variables) {
