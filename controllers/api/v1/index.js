@@ -2,6 +2,8 @@ import mw from '../../../libs/middleware';
 import apiFeatures from './features';
 import apiWards from './wards';
 import apiMetrics from './metrics';
+import validate from './validator';
+import stats from './stats';
 
 module.exports = (router) => {
 
@@ -15,7 +17,7 @@ module.exports = (router) => {
 	 * @apiParam {Varchar} ward Provide ward's relation id to fetch the data for specific ward only
 	 * @apiParam {Object} variables Provide Variable values (like Bed Capacity) specific to type
 	 * @apiParam {Object} filters Filter(s) to apply for the data
-	 * @apiSuccessExample {json} Parameters Format 
+	 * @apiSuccessExample {json} Parameters Format - Hospital
 	 *						{
 	 *							"type":"hospital",
 	 *							"ward" : "relation/6270328",
@@ -30,6 +32,18 @@ module.exports = (router) => {
 	 *							},
 	 *							"variables" : {
 	 *								"Bed Capacity" : 30						
+	 *							}
+	 *						}
+	 * @apiSuccessExample {json} Parameters Format - School
+	 *						{
+	 *							"type":"school",
+	 *							"ward" : "relation/6270328",
+	 *							"filters" : {
+	 *								"Operator Type":"government",
+	 								
+	 *							},
+	 *							"variables" : {
+	 *								"Students" : 300				
 	 *							}
 	 *						}
 	 * @apiSuccess {Integer} success Success status
@@ -116,7 +130,18 @@ module.exports = (router) => {
 	 */
 
 
-	router.get('/api/v1/features', apiFeatures.collect, apiFeatures.validate, apiFeatures.fetch, apiFeatures.withinPokhara , apiFeatures.totalStats, apiFeatures.fiter, apiWards.filter, apiFeatures.compareStats, mw.respond, mw.error);
+	router.get('/api/v1/features',
+		apiFeatures.collect,
+		validate.type,
+		validate.filters,
+		apiFeatures.fetch,
+		apiFeatures.within,
+		stats.total,
+		apiFeatures.fiter,
+		apiWards.filter,
+		stats.compare,
+		apiFeatures.log,
+		mw.respond, mw.error);
 
 	// router.get('/api/v1/test',apis.test,mw.respond,mw.error);
 
@@ -147,7 +172,9 @@ module.exports = (router) => {
 	    * @apiVersion 1.0.0
 	    */
 
-	router.get('/api/v1/wards',apiMetrics.wards,mw.respond,mw.error);
+	router.get('/api/v1/wards',
+		apiMetrics.wards,
+		mw.respond, mw.error);
 
 	// router.get('/api/v1/metrics', apis.metrics, mw.respond, mw.error);
 

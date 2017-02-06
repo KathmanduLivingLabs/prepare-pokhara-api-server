@@ -85,48 +85,49 @@ export default class geoJSONParser {
 	}
 
 	parseWards(referenceWard) {
-		
+
 		const features = this.geoJsonFile.features;
-		
-		return this.bBoxCalculator(_.filter(features,(feature)=>{
-			if(feature['properties']['@id'] === referenceWard){
+
+		return this.bBoxCalculator(_.filter(features, (feature) => {
+			if (feature['properties']['@id'] === referenceWard) {
 				return feature
 			}
 		})[0].geometry.coordinates[0]);
 
 	}
 
-	getWards(){
-		
+	getWards() {
+
 		return this.geoJsonFile.wards;
-		
+
 	}
 
-	filterWards(features,wardID){
+	filterWards(features, wardID) {
 		var polyFeatures = this.geoJsonFile.features;
-		var filtered= [];
+		var filtered = [];
 
-		var wardPoly = _.findWhere(polyFeatures,{id:wardID});
+		var wardPoly = _.findWhere(polyFeatures, {
+			id: wardID
+		});
 
-		if(wardPoly){
-			features.forEach((feature)=>{
-				if(turf.inside(feature,wardPoly)){
+		if (wardPoly) {
+			features.forEach((feature) => {
+				if (turf.inside(feature, wardPoly)) {
 					filtered.push(feature);
 				}
 			})
 		}
 
-		
 
-		
+
 		return filtered;
 	}
 
-	isWithin(features){
+	isWithin(features) {
 
 		var filtered = [];
-		features.forEach((feature)=>{
-			if(turf.inside(feature,this.geoJsonFile.features[0])){
+		features.forEach((feature) => {
+			if (turf.inside(feature, this.geoJsonFile.features[0])) {
 				filtered.push(feature);
 			}
 		})
@@ -150,7 +151,7 @@ export default class geoJSONParser {
 
 	}
 
-	getFile(){
-		return  this.geoJsonFile;
+	getFile() {
+		return this.geoJsonFile;
 	}
 }

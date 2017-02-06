@@ -25,7 +25,7 @@ export default class statsCalculator {
 
 	}
 
-	calculate(prop,rangeMax) {
+	calculate(prop, rangeMax) {
 
 		var obj = {};
 		obj.total = this.features.length;
@@ -33,24 +33,24 @@ export default class statsCalculator {
 		this.features.forEach((feature) => {
 			for (var insight in this.insights) {
 
-				var tagPresent =  this.insights[insight] ? this.hasProperty(feature, this.insights[insight]["osmtags"]) : false;
+				var tagPresent = this.insights[insight] ? this.hasProperty(feature, this.insights[insight]["osmtags"]) : false;
 				if (tagPresent) {
 					if (obj[insight]) {
 						var toNumber = Number(feature.properties.tags[tagPresent]);
-						obj[insight] = Number.isInteger(toNumber) ? (obj[insight] + toNumber) : this.insights[insight].type ==="value" ? (this.insights[insight].on === feature.properties.tags[tagPresent] ? obj[insight] + 1 : obj[insight] + 0 ) :  obj[insight] + 1;
-						if(Number.isInteger(toNumber) && prop === 'total' && this.insights[insight].type ==="slider" ){
-							if(rangeMax[insight] !== undefined) {
-								if(toNumber > rangeMax[insight]){
+						obj[insight] = Number.isInteger(toNumber) ? (obj[insight] + toNumber) : this.insights[insight].type === "value" ? (this.insights[insight].on === feature.properties.tags[tagPresent] ? obj[insight] + 1 : obj[insight] + 0) : obj[insight] + 1;
+						if (Number.isInteger(toNumber) && prop === 'total' && this.insights[insight].type === "slider") {
+							if (rangeMax[insight] !== undefined) {
+								if (toNumber > rangeMax[insight]) {
 									rangeMax[insight] = toNumber;
 								}
-							}else{
+							} else {
 								rangeMax[insight] = toNumber;
 							}
 
-						} 
+						}
 					} else {
 						var toNumber = Number(feature.properties.tags[tagPresent]);
-						obj[insight] = Number.isInteger(toNumber) ? toNumber : this.insights[insight].type ==="value" ?  (this.insights[insight].on === feature.properties.tags[tagPresent] ? 1 : 0 ) :  1;
+						obj[insight] = Number.isInteger(toNumber) ? toNumber : this.insights[insight].type === "value" ? (this.insights[insight].on === feature.properties.tags[tagPresent] ? 1 : 0) : 1;
 					}
 				} else {
 					if (obj[insight] === undefined) {
