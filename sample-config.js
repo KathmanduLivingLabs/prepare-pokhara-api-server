@@ -13,6 +13,7 @@ module.exports = {
 	amenities: {
 		'hospital': 'hospital',
 		'school': 'school',
+		'bank' : 'bank'
 	},
 
 	boundingCoordinates: "(28.15504264831543, 83.93202209472656,28.275711059570426, 84.03964233398443)",
@@ -47,7 +48,7 @@ module.exports = {
 			},
 			"Operation Theatre": {
 				"type": 'filter',
-				"osmtags": ['facility:operating_theatre']
+				"osmtags": ['facility:operating_theatre','facility:operation_theatre']
 			},
 			"Personnel Count": {
 				"type": 'slider',
@@ -67,7 +68,34 @@ module.exports = {
 			},
 			"Operator Type": {
 				"type": "filter",
-				"osmtags": ["operator:type"]
+				"osmtags": ["operator:type","operator"],
+				"hidden" : true
+			},
+			"Private" : {
+				"type": "value",
+				"on": "private",
+				"osmtags": ["operator:type", "operator"]
+			},
+			"Government" : {
+				"type": "value",
+				"on": "government",
+				"osmtags": ["operator:type", "operator"]
+			},
+			"Community" : {
+				"type": "value",
+				"on": "community",
+				"osmtags": ["operator:type", "operator"]
+			},
+			"Personnel Count": {
+				"type": 'slider',
+				"osmtags": ['personnel:count']
+			},
+		},
+
+		bank : {
+			"ATM" : {
+				"type" : "filter",
+				"osmtags" : ["atm"]
 			}
 		}
 	}
