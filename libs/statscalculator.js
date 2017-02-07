@@ -33,30 +33,36 @@ export default class statsCalculator {
 		this.features.forEach((feature) => {
 			for (var insight in this.insights) {
 
-				var tagPresent = this.insights[insight] ? this.hasProperty(feature, this.insights[insight]["osmtags"]) : false;
-				if (tagPresent) {
-					if (obj[insight]) {
-						var toNumber = Number(feature.properties.tags[tagPresent]);
-						obj[insight] = Number.isInteger(toNumber) ? (obj[insight] + toNumber) : this.insights[insight].type === "value" ? (this.insights[insight].on === feature.properties.tags[tagPresent] ? obj[insight] + 1 : obj[insight] + 0) : obj[insight] + 1;
-						if (Number.isInteger(toNumber) && prop === 'total' && this.insights[insight].type === "slider") {
-							if (rangeMax[insight] !== undefined) {
-								if (toNumber > rangeMax[insight]) {
+				if(!this.insights[insight].hidden){
+
+					var tagPresent = this.insights[insight] ? this.hasProperty(feature, this.insights[insight]["osmtags"]) : false;
+					if (tagPresent) {
+						if (obj[insight]) {
+							var toNumber = Number(feature.properties.tags[tagPresent]);
+							obj[insight] = Number.isInteger(toNumber) ? (obj[insight] + toNumber) : this.insights[insight].type === "value" ? ( feature.properties.tags[tagPresent].toLowerCase().includes(this.insights[insight].on.toLowerCase()) ? obj[insight] + 1 : obj[insight] + 0) :  (feature.properties.tags[tagPresent] === "yes" ? obj[insight] + 1 : obj[insight] + 0 );
+							if (Number.isInteger(toNumber) && prop === 'total' && this.insights[insight].type === "slider") {
+								if (rangeMax[insight] !== undefined) {
+									if (toNumber > rangeMax[insight]) {
+										rangeMax[insight] = toNumber;
+									}
+								} else {
 									rangeMax[insight] = toNumber;
 								}
-							} else {
-								rangeMax[insight] = toNumber;
-							}
 
+							}
+						} else {
+							var toNumber = Number(feature.properties.tags[tagPresent]);
+							obj[insight] = Number.isInteger(toNumber) ? toNumber : this.insights[insight].type === "value" ? (feature.properties.tags[tagPresent].toLowerCase().includes(this.insights[insight].on.toLowerCase()) ? 1 : 0) : (feature.properties.tags[tagPresent] === "yes" ? 1 : 0);
 						}
 					} else {
-						var toNumber = Number(feature.properties.tags[tagPresent]);
-						obj[insight] = Number.isInteger(toNumber) ? toNumber : this.insights[insight].type === "value" ? (this.insights[insight].on === feature.properties.tags[tagPresent] ? 1 : 0) : 1;
+						if (obj[insight] === undefined) {
+							obj[insight] = 0;
+						}
 					}
-				} else {
-					if (obj[insight] === undefined) {
-						obj[insight] = 0;
-					}
+
 				}
+
+				
 			}
 		})
 
@@ -79,7 +85,7 @@ export default class statsCalculator {
 							passFilter = false;
 						}
 					} else {
-						if (!(this.insights[filter]['type'] === "value" ?  feature.properties.tags[tagPresent] === this.insights[filter]['on'] : feature.properties.tags[tagPresent] === this.filters[filter])) {
+						if (!(this.insights[filter]['type'] === "value" ?  feature.properties.tags[tagPresent].toLowerCase().includes(this.insights[filter]['on'].toLowerCase()) : feature.properties.tags[tagPresent].toLowerCase().includes(this.filters[filter].toLowerCase()) )) {
 							passFilter = false;
 						}
 					}
