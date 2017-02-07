@@ -79,7 +79,7 @@ export default class statsCalculator {
 							passFilter = false;
 						}
 					} else {
-						if (!(feature.properties.tags[tagPresent] === this.filters[filter])) {
+						if (!(this.insights[filter]['type'] === "value" ?  feature.properties.tags[tagPresent] === this.insights[filter]['on'] : feature.properties.tags[tagPresent] === this.filters[filter])) {
 							passFilter = false;
 						}
 					}
