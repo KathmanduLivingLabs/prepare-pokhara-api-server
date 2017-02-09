@@ -25,6 +25,21 @@ export default class statsCalculator {
 
 	}
 
+	includesTag(objectParsed,tagPresent){
+
+		var tagExists = false;
+
+		for(var tag=0;tag<objectParsed.length;tag++){
+			if(tagPresent.toLowerCase().includes(objectParsed[tag].toLowerCase())){
+				tagExists = true;
+				break;
+			}
+		}
+
+		return tagExists;
+
+	}
+
 	calculate(prop, rangeMax) {
 
 		var obj = {};
@@ -85,9 +100,18 @@ export default class statsCalculator {
 							passFilter = false;
 						}
 					} else {
-						if (!(this.insights[filter]['type'] === "value" ?  feature.properties.tags[tagPresent].toLowerCase().includes(this.insights[filter]['on'].toLowerCase()) : feature.properties.tags[tagPresent].toLowerCase().includes(this.filters[filter].toLowerCase()) )) {
+						if(this.insights[filter]['object'] ){
+							if(typeof this.filters[filter] === "object" ){
+								var objectParsed = this.filters[filter];
+							}else{
+								var objectParsed = JSON.parse(this.filters[filter]);
+							}
+						}
+
+						if (!(this.insights[filter]['type'] === "value" ?  feature.properties.tags[tagPresent].toLowerCase().includes(this.insights[filter]['on'].toLowerCase()) : this.insights[filter]['object'] ? this.includesTag(objectParsed,feature.properties.tags[tagPresent])   :  feature.properties.tags[tagPresent].toLowerCase().includes(this.filters[filter].toLowerCase()) )) {
 							passFilter = false;
 						}
+						
 					}
 				} else {
 					passFilter = false;
