@@ -77,7 +77,8 @@ module.exports = {
 				"type": "filter",
 				"osmtags": ["operator:type","operator"],
 				"hidden" : true,
-				"object" : true
+				"object" : true,
+				"others" : ["private","government","community"]
 			},
 			"Private" : {
 				"type": "value",

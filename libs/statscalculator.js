@@ -25,12 +25,50 @@ export default class statsCalculator {
 
 	}
 
-	includesTag(objectParsed,tagPresent){
+	matchAgainst(matches,string){
+		var matched = false;
+		string = string.toLowerCase();
+		
+
+		for(var match=0;match<matches.length;match++){
+			
+			var expr = new RegExp(matches[match]);
+
+			if(expr.test(string) ){
+				matched = true;
+				break;
+			}
+		}
+		
+		return matched;
+
+		// for(var match=0;match<matches.length;match++){
+		// 	var expr = new RegExp(matches[match]);
+		// 	if(expr.test(string) ){
+		// 		matched = true;
+		// 	}else{
+
+		// 		if(matches.indexOf(string)  !== -1){
+		// 			matched = true;
+		// 		}else{
+		// 			matched = false;
+		// 		}
+		// 	}
+		// 	console.log('****',string,expr,matched)
+		// }
+		
+		// return matched;
+
+	}
+
+
+
+	includesTag(objectParsed,tagPresent,others){
 
 		var tagExists = false;
 
 		for(var tag=0;tag<objectParsed.length;tag++){
-			if(tagPresent.toLowerCase().includes(objectParsed[tag].toLowerCase())){
+			if((tagPresent.toLowerCase().includes(objectParsed[tag].toLowerCase())) || (others && others.length && objectParsed.indexOf("others") !== -1 && !this.matchAgainst(others,tagPresent))  ){
 				tagExists = true;
 				break;
 			}
@@ -93,6 +131,15 @@ export default class statsCalculator {
 			for (var filter in this.filters) {
 				var tagPresent = this.insights[filter] ? this.hasProperty(feature, this.insights[filter]["osmtags"]) : false;
 
+				if(this.insights[filter]['object'] ){
+					if(typeof this.filters[filter] === "object" ){
+						var objectParsed = this.filters[filter];
+					}else{
+						var objectParsed = JSON.parse(this.filters[filter]);
+					}
+				}
+
+
 				if (tagPresent) {
 					var parseNum = Number(feature.properties.tags[tagPresent]);
 					if (Number.isInteger(parseNum)) {
@@ -100,21 +147,18 @@ export default class statsCalculator {
 							passFilter = false;
 						}
 					} else {
-						if(this.insights[filter]['object'] ){
-							if(typeof this.filters[filter] === "object" ){
-								var objectParsed = this.filters[filter];
-							}else{
-								var objectParsed = JSON.parse(this.filters[filter]);
-							}
-						}
-
-						if (!(this.insights[filter]['type'] === "value" ?  feature.properties.tags[tagPresent].toLowerCase().includes(this.insights[filter]['on'].toLowerCase()) : this.insights[filter]['object'] ? this.includesTag(objectParsed,feature.properties.tags[tagPresent])   :  feature.properties.tags[tagPresent].toLowerCase().includes(this.filters[filter].toLowerCase()) )) {
+						
+						if (!(this.insights[filter]['type'] === "value" ?  feature.properties.tags[tagPresent].toLowerCase().includes(this.insights[filter]['on'].toLowerCase()) : this.insights[filter]['object'] ? this.includesTag(objectParsed,feature.properties.tags[tagPresent],this.insights[filter]["others"] )   :  feature.properties.tags[tagPresent].toLowerCase().includes(this.filters[filter].toLowerCase()) )) {
 							passFilter = false;
 						}
 						
 					}
 				} else {
-					passFilter = false;
+					if(this.insights[filter]["others"] && this.insights[filter]["others"].length && objectParsed.indexOf("others") !== -1){
+
+					}else{
+						passFilter = false;
+					}
 				}
 
 			}
