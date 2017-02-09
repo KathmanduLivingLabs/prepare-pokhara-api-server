@@ -11,9 +11,16 @@ module.exports = {
 	},
 
 	amenities: {
-		'hospital': 'hospital',
-		'school': 'school',
-		'bank' : 'bank'
+		'hospital': {
+			value : 'hospital'
+		},
+		'school': {
+			value : 'school'
+		},
+		'bank' : {
+			value : 'bank',
+			constraints : ['operator']
+		}
 	},
 
 	boundingCoordinates: "(28.15504264831543, 83.93202209472656,28.275711059570426, 84.03964233398443)",
@@ -69,7 +76,8 @@ module.exports = {
 			"Operator Type": {
 				"type": "filter",
 				"osmtags": ["operator:type","operator"],
-				"hidden" : true
+				"hidden" : true,
+				"object" : true
 			},
 			"Private" : {
 				"type": "value",
@@ -96,6 +104,11 @@ module.exports = {
 			"ATM" : {
 				"type" : "filter",
 				"osmtags" : ["atm"]
+			},
+			"Operator" : {
+				"type" : "filter",
+				"osmtags" : ["operator"],
+				"hidden":true
 			}
 		}
 	}
