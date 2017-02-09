@@ -39,7 +39,7 @@ module.exports = (router) => {
 	 *							"type":"school",
 	 *							"ward" : "relation/6270328",
 	 *							"filters" : {
-	 *								"Operator Type":["private","government","community"]
+	 *								"Operator Type":["private","government","community","others"]
 	 								
 	 *							},
 	 *							"variables" : {
