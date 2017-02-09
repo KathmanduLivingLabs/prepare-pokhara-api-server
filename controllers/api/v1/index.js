@@ -46,10 +46,20 @@ module.exports = (router) => {
 	 *								"Students" : 300				
 	 *							}
 	 *						}
+	 * @apiSuccessExample {json} Parameters Format - Bank
+	 *						{
+	 *							"type":"bank",
+	 *							"ward" : "relation/6270328",
+	 *							"filters" : {
+	 *								"Operator":"Prabhu Bank",
+	 *								"ATM" : "yes"
+	 *								
+	 *							}
+	 *						}
 	 * @apiSuccess {Integer} success Success status
 	 * @apiSuccess {String} message Success message
 	 * @apiSuccess {Object[]} geojson GeoJSON  data 
-	 * @apiSuccessExample {json} Success-Response
+	 * @apiSuccessExample {json} Success-Response-Hospital
 	 *  {
 	 *       "success": 1,
 	 *       "message": "Features fetched successfully !",
@@ -125,6 +135,73 @@ module.exports = (router) => {
 	 *	} 
 	 *
 	 *
+	 *
+	 * @apiSuccessExample {json} Success-Response-Bank
+	 *   {
+	 *       "success": 1,
+	 *       "message": "Features fetched successfully !",
+	 * 		 "geojson" : {
+	 *			"type" : "FeatureCollection",
+	 *			"features" : [
+	 *				 {
+	 *				         "type": "Feature",
+	 *				         "id": "node/4599355485",
+	 *				         "properties": {
+	 *				           "type": "node",
+	 *				           "id": 4599355485,
+	 * 				           "tags": {
+	 *				             "alt_name": "ATM",
+	 *				             "amenity": "bank",
+	 *				             "atm": "yes",
+	 *				             "contact:email": "pokhara.ro@adbl.gov.np",
+	 *				             "contact:fax": "521107",
+	 *				             "contact:phone": "061-528445, 520458, 520156",
+	 *				             "contact:website": "www.adbl.gov.np",
+     *				             "name": "Agriculture Development Bank Limited",
+	 *				             "operator": "Agriculture Development Bank Limited",
+	 *				             "source": "2C Pokhara Field Data Collection"
+	 *				           },
+	 *				           "relations": [],
+	 *				           "meta": {}
+	 *				         },
+	 *				         "geometry": {
+	 *				           "type": "Point",
+	 *				           "coordinates": [
+	 *				             83.9868009,
+     *				             28.21063
+	 *				           ]
+	 *				         }
+	 *				}
+	 *
+	 *			]
+	 * 		},
+     *	 	"stats": {
+	 *	 	     "overall": {
+	 *	 	       "total": 191,
+	 *	 	       "ATM": 90
+	 *	 	     },
+	 *	 	     "insights": {
+	 *	 	       "total": 100,
+	 *	 	       "ATM": 100
+	 *	 	     },
+	 *	 	     "selection": {
+	 *	 	       "total": 191,
+	 *	 	       "ATM": 90
+	 *	 	     }
+	 *	 	   }
+	 *		"initialMetrics" : {
+	 *			"slider" : {
+	 *				
+	 *			}
+	 *		},
+	 *		"constraints" : {
+	 *			"operator" : ["Laxmi Bank Ltd.","Agriculture Development Bank Limited"]
+	 *		}
+     *
+	 *	} 
+
+	 *
+	 *
 	 * @apiDescription API that fetch features
 	 * @apiVersion 1.0.0
 	 */
@@ -140,6 +217,8 @@ module.exports = (router) => {
 		apiFeatures.fiter,
 		apiWards.filter,
 		stats.compare,
+		apiWards.polygon,
+		apiFeatures.constraints,
 		apiFeatures.log,
 		mw.respond, mw.error);
 

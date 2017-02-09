@@ -28,7 +28,7 @@ export default class queryBuilder {
 			for (var tag in tags) {
 
 				if(!Number.isInteger(tags[tag])){
-					filters = filters + '["' + tag + '"~"' + (tag === 'amenity' ? amenities[this.json.tags[tag]] : tags[tag]  ) + '"]';	
+					filters = filters + '["' + tag + '"~"' + (tag === 'amenity' ? amenities[this.json.tags[tag]].value : tags[tag]  ) + '"]';	
 				}else{
 					filters = filters + '["' + tag + '"]';	
 				}

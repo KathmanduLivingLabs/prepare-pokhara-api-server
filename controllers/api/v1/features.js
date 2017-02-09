@@ -61,7 +61,7 @@ export default {
 		console.log(' EXECUTING QUERY <<< ', query , '>>>>>');
 
 		request(overpassConfig.baseUrl + query, (err, response) => {
-
+			
 			if (err) return next(err);
 
 			if (response && response.statusCode) {
@@ -140,6 +140,31 @@ export default {
 			req.cdata.geojson.features.forEach((feature)=>{
 				console.log('NAME',feature.properties.tags['name'] || feature.properties.tags['name:ne'] || feature.properties.tags['name:en'] );
 			})
+		}
+
+		return next();
+
+	},
+
+	constraints : (req,res,next)=>{
+
+		if(req.collects.type && config.amenities[req.collects.type]  && config.amenities[req.collects.type].constraints && config.amenities[req.collects.type].constraints.length && req.cdata.geojson && req.cdata.geojson.features && req.cdata.geojson.features.length){
+
+			var constraintsFeed = {};
+
+			config.amenities[req.collects.type].constraints.forEach((constraint)=>{
+				constraintsFeed[constraint] = [];
+				req.cdata.geojson.features.forEach((feature)=>{
+					if(feature.properties.tags && feature.properties.tags[constraint] && constraintsFeed[constraint].indexOf(feature.properties.tags[constraint]) === -1){
+						constraintsFeed[constraint].push(feature.properties.tags[constraint]);
+					}
+				})
+			})
+
+
+			req.cdata.constraints = constraintsFeed;
+			
+
 		}
 
 		return next();

@@ -25,6 +25,18 @@ export default {
 		}
 		return next();
 
+	},
+
+	polygon : (req,res,next) => {
+
+		if (req.collects.ward && req.collects.ward !== '*' ) {
+			
+			var wardGeojsonparser = new geoJSONParser('wards');
+			req.cdata.wardGeojson = wardGeojsonparser.getWardPolygon(req.collects.ward);
+		}
+
+		return next();
+
 	}
 
 }

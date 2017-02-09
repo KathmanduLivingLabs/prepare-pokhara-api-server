@@ -154,4 +154,15 @@ export default class geoJSONParser {
 	getFile() {
 		return this.geoJsonFile;
 	}
+
+
+	getWardPolygon(referenceWard){
+
+		return _.filter(this.geoJsonFile.features, (feature) => {
+			if (feature['properties']['@id'] === referenceWard) {
+				return feature;
+			}
+		})[0];
+
+	}
 }
