@@ -31,7 +31,7 @@ module.exports = (router) => {
 	 								"Ambulance" : "yes"
 	 *							},
 	 *							"variables" : {
-	 *								"Bed Capacity" : 30						
+	 *								"Bed Capacity" : {"high":750,"low":100}						
 	 *							}
 	 *						}
 	 * @apiSuccessExample {json} Parameters Format - School
@@ -43,7 +43,7 @@ module.exports = (router) => {
 	 								
 	 *							},
 	 *							"variables" : {
-	 *								"Students" : 300				
+	 *								"Students" : {"high":750,"low":100}				
 	 *							}
 	 *						}
 	 * @apiSuccessExample {json} Parameters Format - Bank
