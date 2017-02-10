@@ -123,11 +123,35 @@ export default class statsCalculator {
 
 
 				if (tagPresent) {
+
 					var parseNum = Number(feature.properties.tags[tagPresent]);
+
 					if (Number.isInteger(parseNum)) {
-						if (!(parseNum >= this.filters[filter])) {
-							passFilter = false;
+
+						if (this.insights[filter]['type'] === "slider") {
+
+							if (typeof this.filters[filter] === "object") {
+
+								if (!(this.filters[filter].low !==undefined && this.filters[filter].high !==undefined )) throw new Error('High and low values need to be specified for slider types');
+
+								if (!(parseNum >= Number(this.filters[filter].low) && parseNum <= Number(this.filters[filter].high))) {
+									passFilter = false;
+								}
+
+							} else {
+
+								if (!(parseNum >= Number(this.filters[filter]))) {
+									passFilter = false;
+								}
+
+							}
+
+						} else {
+							if (!(parseNum >= Number(this.filters[filter]))) {
+								passFilter = false;
+							}
 						}
+
 					} else {
 
 						if (!(this.insights[filter]['type'] === "value" ? feature.properties.tags[tagPresent].toLowerCase().includes(this.insights[filter]['on'].toLowerCase()) : this.insights[filter]['object'] ? this.includesTag(objectParsed, feature.properties.tags[tagPresent], this.insights[filter]["others"]) : this.insights[filter]['equalityCheck'] ? feature.properties.tags[tagPresent].toLowerCase() === (this.filters[filter].toLowerCase()) : feature.properties.tags[tagPresent].toLowerCase().includes(this.filters[filter].toLowerCase()))) {
@@ -139,6 +163,7 @@ export default class statsCalculator {
 					if (this.insights[filter]["others"] && this.insights[filter]["others"].length && objectParsed.indexOf("others") !== -1) {
 
 					} else {
+						
 						passFilter = false;
 					}
 				}
