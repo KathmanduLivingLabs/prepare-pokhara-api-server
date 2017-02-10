@@ -8,7 +8,7 @@ import turf from '@turf/turf';
 import geoJSONParser from "../../../libs/geojson-parser";
 import statsCalculator from "../../../libs/statscalculator";
 import proc from 'proc-utils';
-
+import capitalize from 'capitalize';
 
 var sanitize = googleCaja.sanitize;
 var overpassConfig = config.overpass;
@@ -148,15 +148,37 @@ export default {
 
 	constraints : (req,res,next)=>{
 
-		if(req.collects.type && config.amenities[req.collects.type]  && config.amenities[req.collects.type].constraints && config.amenities[req.collects.type].constraints.length && req.cdata.geojson && req.cdata.geojson.features && req.cdata.geojson.features.length && !(req.collects.filters)){
+		function trim(str) {
+			var string = str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+		    return string.toUpperCase();
+		}
+
+
+
+		if(req.collects.type && config.amenities[req.collects.type]  && config.amenities[req.collects.type].constraints && config.amenities[req.collects.type].constraints.length && req.cdata.geojson && req.cdata.geojson.features && req.cdata.geojson.features.length && !(req.collects.filters && Object.keys(req.collects.filters).length )){
 
 			var constraintsFeed = {};
 
 			config.amenities[req.collects.type].constraints.forEach((constraint)=>{
-				constraintsFeed[constraint] = [];
+				constraintsFeed[constraint['constraint']] = [];
 				req.cdata.geojson.features.forEach((feature)=>{
-					if(feature.properties.tags && feature.properties.tags[constraint] && constraintsFeed[constraint].indexOf(feature.properties.tags[constraint]) === -1){
-						constraintsFeed[constraint].push(feature.properties.tags[constraint]);
+					if(feature.properties.tags && feature.properties.tags[constraint['constraint']]){
+
+						if(constraint.multiple){
+							feature.properties.tags[constraint['constraint']].split(',').forEach((eachtag)=>{
+								var trimmedValue = capitalize.words(trim(eachtag));
+								if(constraintsFeed[constraint['constraint']].indexOf(trimmedValue) === -1 && trimmedValue.length )  {
+									constraintsFeed[constraint['constraint']].push(trimmedValue);
+								}
+							})
+
+						}else{
+							if(constraintsFeed[constraint['constraint']].indexOf(feature.properties.tags[constraint['constraint']]) === -1){
+								constraintsFeed[constraint['constraint']].push(feature.properties.tags[constraint['constraint']]);
+							}
+						}
+
+						
 					}
 				})
 			})

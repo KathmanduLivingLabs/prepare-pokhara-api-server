@@ -195,7 +195,8 @@ module.exports = (router) => {
 	 *			}
 	 *		},
 	 *		"constraints" : {
-	 *			"operator" : ["Laxmi Bank Ltd.","Agriculture Development Bank Limited"]
+	 *			"operator" : ["Laxmi Bank Ltd.","Agriculture Development Bank Limited"],
+	 *			"network":["VISA","VISA ELECTRON"]
 	 *		}
      *
 	 *	} 
