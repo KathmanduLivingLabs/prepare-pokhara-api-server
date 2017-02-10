@@ -148,7 +148,7 @@ export default {
 
 	constraints : (req,res,next)=>{
 
-		if(req.collects.type && config.amenities[req.collects.type]  && config.amenities[req.collects.type].constraints && config.amenities[req.collects.type].constraints.length && req.cdata.geojson && req.cdata.geojson.features && req.cdata.geojson.features.length){
+		if(req.collects.type && config.amenities[req.collects.type]  && config.amenities[req.collects.type].constraints && config.amenities[req.collects.type].constraints.length && req.cdata.geojson && req.cdata.geojson.features && req.cdata.geojson.features.length && !(req.collects.filters && req.collects.filters.Operator)){
 
 			var constraintsFeed = {};
 
