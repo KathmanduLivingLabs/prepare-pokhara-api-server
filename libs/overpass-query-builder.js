@@ -17,7 +17,8 @@ export default class queryBuilder {
 		this.query = "";
 
 		this.headGenerator = (query)=>{
-			return query + "[out:" + this.json.requestConfig.dataType + "][timeout:" + this.json.requestConfig.timeout + "]; ";
+			// return query + "[out:" + this.json.requestConfig.dataType + "][timeout:" + this.json.requestConfig.timeout + "]; ";
+			return `${query} [out:${this.json.requestConfig.dataType}][timeout:${this.json.requestConfig.timeout}]; `;
 		}
 
 		this.bodyGenerator = (query)=>{
@@ -28,9 +29,11 @@ export default class queryBuilder {
 			for (var tag in tags) {
 
 				if(!Number.isInteger(tags[tag])){
-					filters = filters + '["' + tag + '"~"' + (tag === 'amenity' ? amenities[this.json.tags[tag]].value : tags[tag]  ) + '"]';	
+					// filters = filters + '["' + tag + '"~"' + (tag === 'amenity' ? amenities[this.json.tags[tag]].value : tags[tag]  ) + '"]';
+					filters = `${filters} ["${tag}"~"${tag === 'amenity' ? amenities[this.json.tags[tag]].value : tags[tag]}"] `;	
 				}else{
-					filters = filters + '["' + tag + '"]';	
+					filters = `${filters} ["${tag}"]  `;
+					// filters = filters + '["' + tag + '"]';	
 				}
 			}
 
