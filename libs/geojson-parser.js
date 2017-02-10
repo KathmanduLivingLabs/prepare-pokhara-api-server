@@ -6,10 +6,6 @@ import _ from 'underscore';
 
 import turf from '@turf/turf';
 
-// var pokharaGeoJson = appRootPath + '/geojson-data/pokhara-geojson.json';
-
-// const geoJsonFile = jsonFile.readFileSync(pokharaGeoJson);
-
 export default class geoJSONParser {
 
 
@@ -41,58 +37,27 @@ export default class geoJSONParser {
 
 	}
 
-	bBoxCalculator(coordinates) {
-		const poly = {
-			minLat: coordinates[0][1],
-			minLng: coordinates[0][0],
-			maxLat: coordinates[0][1],
-			maxLng: coordinates[0][0]
-		};
-
-		coordinates.forEach((coordinate) => {
-
-			if (poly.minLat > coordinate[1]) {
-				poly.minLat = coordinate[1];
-			}
-
-			if (poly.minLng > coordinate[0]) {
-				poly.minLng = coordinate[0];
-			}
-
-			if (poly.maxLat < coordinate[1]) {
-				poly.maxLat = coordinate[1];
-			}
-
-			if (poly.maxLng < coordinate[0]) {
-				poly.maxLng = coordinate[0];
-			}
-		})
-
-		var bbox = "(" + poly.minLat + "," + poly.minLng + "," + poly.maxLat + "," + poly.maxLng + ")";
-		// console.log('BOX', bbox)
-
-		return bbox;
-
-
-	}
 
 
 	boundingBox() {
 
-		const coordinates = this.geoJsonFile.features[0].geometry.coordinates[0];
 
-		return this.bBoxCalculator(coordinates);
+		var bboxCoords = turf.bbox(this.geoJsonFile);
+		return `(${bboxCoords[1]},${bboxCoords[0]},${bboxCoords[3]},${bboxCoords[2]})`;
+
+
+
 	}
 
 	parseWards(referenceWard) {
 
 		const features = this.geoJsonFile.features;
 
-		return this.bBoxCalculator(_.filter(features, (feature) => {
+		return turf.bbox(_.filter(features, (feature) => {
 			if (feature['properties']['@id'] === referenceWard) {
 				return feature
 			}
-		})[0].geometry.coordinates[0]);
+		})[0]);
 
 	}
 
@@ -156,7 +121,7 @@ export default class geoJSONParser {
 	}
 
 
-	getWardPolygon(referenceWard){
+	getWardPolygon(referenceWard) {
 
 		return _.filter(this.geoJsonFile.features, (feature) => {
 			if (feature['properties']['@id'] === referenceWard) {

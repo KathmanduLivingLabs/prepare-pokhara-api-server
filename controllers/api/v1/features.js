@@ -58,10 +58,10 @@ export default {
 
 		var query = overPassQueryBuilder.build();
 
-		console.log(' EXECUTING QUERY <<< ', query , '>>>>>');
+		console.log(' EXECUTING QUERY <<< ', query, '>>>>>');
 
 		request(overpassConfig.baseUrl + query, (err, response) => {
-			
+
 			if (err) return next(err);
 
 			if (response && response.statusCode) {
@@ -134,11 +134,11 @@ export default {
 
 	},
 
-	log : (req,res,next)=>{
+	log: (req, res, next) => {
 
-		if(req.cdata.geojson && req.cdata.geojson.features &&  req.cdata.geojson.features.length && req.collects.log === "true" ){
-			req.cdata.geojson.features.forEach((feature)=>{
-				console.log('NAME',feature.properties.tags['name'] || feature.properties.tags['name:ne'] || feature.properties.tags['name:en'] );
+		if (req.cdata.geojson && req.cdata.geojson.features && req.cdata.geojson.features.length && req.collects.log === "true") {
+			req.cdata.geojson.features.forEach((feature) => {
+				console.log('NAME', feature.properties.tags['name'] || feature.properties.tags['name:ne'] || feature.properties.tags['name:en']);
 			})
 		}
 
@@ -146,46 +146,44 @@ export default {
 
 	},
 
-	constraints : (req,res,next)=>{
+	constraints: (req, res, next) => {
 
 		function trim(str) {
 			var string = str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-		    return string.toUpperCase();
+			return string.toUpperCase();
 		}
 
 
-
-		if(req.collects.type && config.amenities[req.collects.type]  && config.amenities[req.collects.type].constraints && config.amenities[req.collects.type].constraints.length && req.cdata.geojson && req.cdata.geojson.features && req.cdata.geojson.features.length && !(req.collects.filters && Object.keys(req.collects.filters).length )){
+		if (req.collects.type && config.amenities[req.collects.type] && config.amenities[req.collects.type].constraints && config.amenities[req.collects.type].constraints.length && req.cdata.geojson && req.cdata.geojson.features && req.cdata.geojson.features.length && !(req.collects.filters && Object.keys(req.collects.filters).length)) {
 
 			var constraintsFeed = {};
 
-			config.amenities[req.collects.type].constraints.forEach((constraint)=>{
+			config.amenities[req.collects.type].constraints.forEach((constraint) => {
 				constraintsFeed[constraint['constraint']] = [];
-				req.cdata.geojson.features.forEach((feature)=>{
-					if(feature.properties.tags && feature.properties.tags[constraint['constraint']]){
+				req.cdata.geojson.features.forEach((feature) => {
+					if (feature.properties.tags && feature.properties.tags[constraint['constraint']]) {
 
-						if(constraint.multiple){
-							feature.properties.tags[constraint['constraint']].split(',').forEach((eachtag)=>{
+						if (constraint.multiple) {
+							feature.properties.tags[constraint['constraint']].split(',').forEach((eachtag) => {
 								var trimmedValue = capitalize.words(trim(eachtag));
-								if(constraintsFeed[constraint['constraint']].indexOf(trimmedValue) === -1 && trimmedValue.length )  {
+								if (constraintsFeed[constraint['constraint']].indexOf(trimmedValue) === -1 && trimmedValue.length) {
 									constraintsFeed[constraint['constraint']].push(trimmedValue);
 								}
 							})
 
-						}else{
-							if(constraintsFeed[constraint['constraint']].indexOf(feature.properties.tags[constraint['constraint']]) === -1){
+						} else {
+							if (constraintsFeed[constraint['constraint']].indexOf(feature.properties.tags[constraint['constraint']]) === -1) {
 								constraintsFeed[constraint['constraint']].push(feature.properties.tags[constraint['constraint']]);
 							}
 						}
 
-						
 					}
 				})
 			})
 
 
 			req.cdata.constraints = constraintsFeed;
-			
+
 
 		}
 
