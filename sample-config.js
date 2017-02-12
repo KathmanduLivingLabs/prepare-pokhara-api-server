@@ -127,7 +127,7 @@ module.exports = {
 			},
 			"Operator" : {
 				"type" : "filter",
-				"osmtags" : ["operator"],
+				"osmtags" : ["name"],
 				"hidden":true,
 				"equalityCheck" : true
 			},
