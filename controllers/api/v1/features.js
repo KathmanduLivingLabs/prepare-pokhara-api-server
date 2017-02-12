@@ -159,21 +159,21 @@ export default {
 			var constraintsFeed = {};
 
 			config.amenities[req.collects.type].constraints.forEach((constraint) => {
-				constraintsFeed[constraint['constraint']] = [];
+				constraintsFeed[constraint['keyname']] = [];
 				req.cdata.geojson.features.forEach((feature) => {
 					if (feature.properties.tags && feature.properties.tags[constraint['constraint']]) {
 
 						if (constraint.multiple) {
 							feature.properties.tags[constraint['constraint']].split(',').forEach((eachtag) => {
 								var trimmedValue = capitalize.words(trim(eachtag));
-								if (constraintsFeed[constraint['constraint']].indexOf(trimmedValue) === -1 && trimmedValue.length) {
-									constraintsFeed[constraint['constraint']].push(trimmedValue);
+								if (constraintsFeed[constraint['keyname']].indexOf(trimmedValue) === -1 && trimmedValue.length) {
+									constraintsFeed[constraint['keyname']].push(trimmedValue);
 								}
 							})
 
 						} else {
-							if (constraintsFeed[constraint['constraint']].indexOf(feature.properties.tags[constraint['constraint']]) === -1) {
-								constraintsFeed[constraint['constraint']].push(feature.properties.tags[constraint['constraint']]);
+							if (constraintsFeed[constraint['keyname']].indexOf(feature.properties.tags[constraint['constraint']]) === -1) {
+								constraintsFeed[constraint['keyname']].push(feature.properties.tags[constraint['constraint']]);
 							}
 						}
 

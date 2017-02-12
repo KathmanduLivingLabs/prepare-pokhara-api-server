@@ -27,11 +27,17 @@ module.exports = {
 		'bank' : {
 			value : 'bank',
 			constraints : [{
-				'constraint' : 'operator',
+				'constraint' : 'name',
+				'keyname' : 'operator',
 				'multiple' : false
-			},{
-				'constraint' : 'network',
-				'multiple' : true
+			}]
+		},
+		'atm' : {
+			value  : 'atm',
+			constraints : [{
+				'constraint' : 'operator',
+				'keyname' : 'operator',
+				'multiple' : false
 			}]
 		}
 	},
@@ -131,6 +137,15 @@ module.exports = {
 				"hidden" : true,
 				"object" : true,
 				"others" : []
+			}
+		},
+
+		atm : {
+			"Operator" : {
+				"type" : "filter",
+				"osmtags" : ["operator","brand"],
+				"hidden":true,
+				"equalityCheck" : true
 			}
 		}
 	}

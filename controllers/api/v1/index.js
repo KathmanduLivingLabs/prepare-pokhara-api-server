@@ -57,6 +57,15 @@ module.exports = (router) => {
 	 *								
 	 *							}
 	 *						}
+	 * @apiSuccessExample {json} Parameters Format - ATM
+	 *						{
+	 *							"type":"atm",
+	 *							"ward" : "relation/6275741",
+	 *							"filters" : {
+	 *								"Operator":"Laxmi Bank"
+	 *								
+	 *							}
+	 *						}
 	 * @apiSuccess {Integer} success Success status
 	 * @apiSuccess {String} message Success message
 	 * @apiSuccess {Object[]} geojson GeoJSON  data 
