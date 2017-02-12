@@ -60,7 +60,11 @@ export default {
 
 		console.log(' EXECUTING QUERY <<< ', query, '>>>>>');
 
-		request(overpassConfig.baseUrl + query, (err, response) => {
+		var requestConfig = {
+			timeout : overpassConfig.timeout * 1000
+		}
+
+		request(overpassConfig.baseUrl + query, requestConfig , (err, response) => {
 
 			if (err) return next(err);
 
