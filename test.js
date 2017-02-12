@@ -1,6 +1,6 @@
 var request = require('request'),
-    url = "http://192.168.0.113:4040/api/v1/hospitals/fetch";
-    // url = "https://www.openstreetmap.org/api/0.6/user/details";
+    // url = "http://192.168.0.113:4040/api/v1/hospitals/fetch";
+    url = "https://www.openstreetmap.org/api/0.6/user/details";
     // auth = "Basic " + new Buffer(username + ":" + password).toString("base64");
 request(
     {

@@ -10,6 +10,13 @@ module.exports = {
 		include: ['node', 'way']
 	},
 
+	osmapi : {
+
+		baseUrlLive : 'http://api.openstreetmap.org/',
+		baseUrlDev : 'http://api06.dev.openstreetmap.org/' 
+
+	},
+
 	amenities: {
 		'hospital': {
 			value : 'hospital'
@@ -19,7 +26,13 @@ module.exports = {
 		},
 		'bank' : {
 			value : 'bank',
-			constraints : ['operator']
+			constraints : [{
+				'constraint' : 'operator',
+				'multiple' : false
+			},{
+				'constraint' : 'network',
+				'multiple' : true
+			}]
 		}
 	},
 
@@ -115,7 +128,9 @@ module.exports = {
 			"Network" : {
 				"type" : "filter",
 				"osmtags" : ["network"],
-				"hidden" : true
+				"hidden" : true,
+				"object" : true,
+				"others" : []
 			}
 		}
 	}

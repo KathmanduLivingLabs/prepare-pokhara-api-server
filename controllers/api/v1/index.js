@@ -4,6 +4,7 @@ import apiWards from './wards';
 import apiMetrics from './metrics';
 import validate from './validator';
 import stats from './stats';
+import auth from './auth';
 
 module.exports = (router) => {
 
@@ -257,5 +258,14 @@ module.exports = (router) => {
 		mw.respond, mw.error);
 
 	// router.get('/api/v1/metrics', apis.metrics, mw.respond, mw.error);
+
+
+
+	router.put('/api/v1/features',
+		apiFeatures.collect,
+		auth.authenticate,
+		mw.respond,
+		mw.error
+	)
 
 }
