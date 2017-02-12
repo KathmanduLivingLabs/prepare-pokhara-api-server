@@ -179,8 +179,8 @@ export default {
 
 					}
 				})
+				constraintsFeed[constraint['keyname']].sort();
 			})
-
 
 			req.cdata.constraints = constraintsFeed;
 

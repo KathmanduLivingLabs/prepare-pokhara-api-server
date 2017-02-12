@@ -49,9 +49,8 @@ export default {
 
 			for(var filter in req.collects.filters){
 				if(typeof req.collects.filters[filter] !== "object"){
-
-					if(req.collects.filters[filter].toLowerCase() === "*"){
-						req.collects.filters = {};
+					if(req.collects.filters[filter] === "*"){
+						delete req.collects.filters[filter];
 					}
 				}
 			}
