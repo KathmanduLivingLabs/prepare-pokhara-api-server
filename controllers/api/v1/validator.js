@@ -47,8 +47,19 @@ export default {
 				return next(new Error('Make sure filter parameters are valid for this type'));
 			}
 
+			for(var filter in req.collects.filters){
+				if(typeof req.collects.filters[filter] !== "object"){
+
+					if(req.collects.filters[filter].toLowerCase() === "*"){
+						req.collects.filters = {};
+					}
+				}
+			}
+
 
 		}
+
+		
 
 		next();
 
