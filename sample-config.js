@@ -12,8 +12,7 @@ module.exports = {
 
 	osmapi : {
 
-		baseUrlLive : 'http://api.openstreetmap.org/',
-		baseUrlDev : 'http://api06.dev.openstreetmap.org/' 
+		baseUrl : 'https://www.openstreetmap.org'
 
 	},
 
