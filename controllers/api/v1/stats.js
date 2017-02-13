@@ -54,7 +54,7 @@ export default {
 
 		var selectionStats = compare(req.stats.overall,req.stats.selection,req.stats.overall,req.stats.insights);
 
-		// var regionStats = compare(req.stats.overall,req.stats.selection,req.stats.region,req.stats.regionInsights);
+		var regionStats = compare(req.stats.overall,req.stats.selection,req.stats.region,req.stats.regionInsights);
 
 
 		req.cdata.stats = req.stats;

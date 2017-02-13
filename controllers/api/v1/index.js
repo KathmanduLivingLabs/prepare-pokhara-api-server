@@ -50,7 +50,7 @@ module.exports = (router) => {
 	 * @apiSuccessExample {json} Parameters Format - Bank
 	 *						{
 	 *							"type":"bank",
-	 *							"ward" : "relation/6270328",
+	 *							"ward" : "relation/6272781",
 	 *							"filters" : {
 	 *								"Operator":"Prabhu Bank",
 	 *								"ATM" : "yes"
@@ -197,7 +197,15 @@ module.exports = (router) => {
 	 *	 	     "selection": {
 	 *	 	       "total": 191,
 	 *	 	       "ATM": 90
-	 *	 	     }
+	 *	 	     },
+	 *			 "region" : {
+	 *				"total" : 43,
+	 *				"ATM" : 16
+	 *			 },
+	 *			 "regionInsights" : {
+	 *				"total" : 37,
+	 *				"ATM" : "100"
+	 *			 }
 	 *	 	   }
 	 *		"initialMetrics" : {
 	 *			"slider" : {
@@ -220,13 +228,14 @@ module.exports = (router) => {
 
 	router.get('/api/v1/features',
 		apiFeatures.collect,
+		apiFeatures.required,
 		validate.type,
 		validate.filters,
 		apiFeatures.fetch,
 		apiFeatures.within,
 		stats.total,
 		apiWards.filter,
-		// stats.region,
+		stats.region,
 		apiFeatures.fiter,
 		stats.compare,
 		apiWards.polygon,
@@ -271,7 +280,7 @@ module.exports = (router) => {
 
 
 
-	router.put('/api/v1/features',
+	router.put('/api/v1/features/edit',
 		apiFeatures.collect,
 		auth.authenticate,
 		mw.respond,

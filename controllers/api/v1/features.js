@@ -27,12 +27,16 @@ export default {
 
 		})
 
+		next();
+
+	},
+
+	required : (req,res,next)=>{
+
 		var err = proc.utils.required(req.collects, ['type']);
 		if (err) return next(err);
 
 		next();
-
-
 	},
 
 	fetch: (req, res, next) => {
