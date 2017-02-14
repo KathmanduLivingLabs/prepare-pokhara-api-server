@@ -2,12 +2,12 @@ import config from '../../../config';
 import geoJSONParser from "../../../libs/geojson-parser";
 import statsCalculator from "../../../libs/statscalculator";
 
-function compare(overall,selection,statsobj,stat){
+function compare(overall,selection,stat){
 	for (var metric in overall) {
 		if (!(selection && selection[metric])) {
 			selection[metric] = 0;
 		}
-		var relativeRegion = (selection[metric] / statsobj[metric]) * 100;
+		var relativeRegion = (selection[metric] / overall[metric]) * 100;
 		stat[metric] = relativeRegion > 0.5 ? Math.round(relativeRegion) : Math.round(relativeRegion * 100) / 100;
 	}
 
@@ -41,6 +41,13 @@ export default {
 
 		req.stats.regionInsights = {};
 
+		for (var metric in req.stats.overall) {
+
+			var relative = (req.stats.region[metric] / req.stats.region['total']) * 100;
+			req.stats.regionInsights[metric] = relative > 0.5 ? Math.round(relative) : Math.round(relative * 100) / 100;
+
+		}
+
 		
 		next();
 	},
@@ -52,9 +59,9 @@ export default {
 		req.stats.selection = (req.cdata.geojson.features && req.cdata.geojson.features.length) ? new statsCalculator(req.cdata.geojson.features, req.collects.type, config.statsIndicator[req.collects.type])
 			.calculate('selection') : {}
 
-		var selectionStats = compare(req.stats.overall,req.stats.selection,req.stats.overall,req.stats.insights);
+		var selectionStats = compare(req.stats.overall,req.stats.selection,req.stats.insights);
 
-		var regionStats = compare(req.stats.overall,req.stats.selection,req.stats.region,req.stats.regionInsights);
+		// var regionStats = compare(req.stats.overall,req.stats.selection,req.stats.region,req.stats.regionInsights);
 
 
 		req.cdata.stats = req.stats;
