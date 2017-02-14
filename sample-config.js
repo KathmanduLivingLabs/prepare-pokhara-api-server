@@ -7,12 +7,14 @@ module.exports = {
 		baseUrl: 'http://www.overpass-api.de/api/interpreter?data=',
 		timeout: 25,
 		dataType: 'json',
-		include: ['node', 'way']
+		include: ['node', 'way'],
+		metaOn : false
 	},
 
 	osmapi : {
 
-		baseUrl : 'https://www.openstreetmap.org'
+		liveBaseUrl : 'https://www.openstreetmap.org',
+		devBaseUrl : 'https://api06.dev.openstreetmap.org'
 
 	},
 

@@ -62,7 +62,10 @@ export default class queryBuilder {
 		}
 
 		this.tailGenerator = (query)=>{
-			return query + "out body;" +
+
+			var output = config.overpass.metaOn ? "out meta;" : "out body;";
+
+			return query + output +
 				">; " +
 				"out skel qt;"
 		}

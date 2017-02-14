@@ -280,7 +280,7 @@ module.exports = (router) => {
 
 
 
-	router.get('/api/v1/features/info',
+	router.put('/api/v1/features/info',
 		apiFeatures.collect,
 		auth.authenticate,
 		mw.respond,
