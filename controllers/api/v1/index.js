@@ -280,11 +280,15 @@ module.exports = (router) => {
 
 
 
-	router.put('/api/v1/features/edit',
+	router.get('/api/v1/features/info',
 		apiFeatures.collect,
 		auth.authenticate,
 		mw.respond,
 		mw.error
 	)
+
+	router.get('/template',function(req,res){
+		console.log('YYAHHHA***')
+	})
 
 }
