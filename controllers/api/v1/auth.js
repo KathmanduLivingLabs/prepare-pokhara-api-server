@@ -10,11 +10,19 @@ export default {
 		// console.log('PRARA', req.body.roll)
 
 		var xml = '<osm version="0.6" generator="CGImap 0.5.8 (27876 thorn-03.openstreetmap.org)" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">\
-					 <node id="12345" changeset="98982" version="2" lat="58.4202102" lon="23.1211032">\
-						  <tag k="natural" v="tree222"/>\
-						  <tag k="amenity" v="testtree2222"/>\
-					 </node>\
-				</osm>'
+						 <node id="12345" changeset="99148" version="4" lat="58.4202102" lon="23.1211032">\
+							  <tag k="natural" v="tree555"/>\
+							  <tag k="amenity" v="testtree555"/>\
+						 </node>\
+					</osm>';
+
+
+		// var xml = 	'<osm>\
+		// 				  <changeset>\
+		// 				    <tag k="created_by" v="API"/>\
+		// 				    <tag k="comment" v="Testing on dev server "/>\
+		// 				  </changeset>\
+		// 			</osm>';
 
 
 
@@ -32,6 +40,7 @@ export default {
 			},
 			function(error, response, body) {
 				if (error) return next(error);
+				console.log("***STATUS***", response.statusCode)
 				console.log("***XML***", response.body)
 
 
@@ -65,11 +74,11 @@ export default {
 
 				// console.log("***RESPONSE***",newParser)
 
-				// req.cdata = {
-				// 	success : 1,
-				// 	message : 'Done !'
-				// }
-				// next();
+				req.cdata = {
+					success: 1,
+					message: 'Done !'
+				}
+				next();
 			}
 		);
 
