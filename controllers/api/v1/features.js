@@ -123,6 +123,12 @@ export default {
 
 	},
 
+	tagWards : (req,res,next) => {
+		var geojsonparser = new geoJSONParser('wards');
+		req.cdata.geojson.features = geojsonparser.tagWardId(req.cdata.geojson.features);
+		return next();
+	},
+
 	fiter: (req, res, next) => {
 
 		var filters = req.collects.filters;
