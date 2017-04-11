@@ -104,7 +104,7 @@ export default class geoJSONParser {
 	tagWardId(features) {
 		var wardsPolygon = this.geoJsonFile.features;
 		features.forEach(function(feature) {
-			for (var wardPolygon = 0; wardPolygon < wardsPolygon.length - 1; wardPolygon++) {
+			for (var wardPolygon = 0; wardPolygon < wardsPolygon.length; wardPolygon++) {
 				if (turf.inside(feature, wardsPolygon[wardPolygon])) {
 					feature.wardId = wardsPolygon[wardPolygon].id;
 					break;
