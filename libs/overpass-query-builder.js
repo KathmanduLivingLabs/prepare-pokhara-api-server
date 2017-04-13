@@ -30,7 +30,7 @@ export default class queryBuilder {
 
 				if(!Number.isInteger(tags[tag])){
 					// filters = filters + '["' + tag + '"~"' + (tag === 'amenity' ? amenities[this.json.tags[tag]].value : tags[tag]  ) + '"]';
-					filters = `${filters} ["${tag}"~"${tag === 'amenity' ? amenities[this.json.tags[tag]].value : tags[tag]}"] `;	
+					filters = `${filters} ["${tag}"="${tag === 'amenity' ? amenities[this.json.tags[tag]].value : tags[tag]}"] `;	
 				}else{
 					filters = `${filters} ["${tag}"]  `;
 					// filters = filters + '["' + tag + '"]';	
