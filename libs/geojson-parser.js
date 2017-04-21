@@ -124,13 +124,24 @@ export default class geoJSONParser {
 				break;
 			}
 		}
-
 		return tagExists;
 
 	}
 
 	getFile() {
-		return this.geoJsonFile;
+		
+		var wardsGeojson =  jsonFile.readFileSync(appRootPath + '/geojson-data/wards.json');
+		var wardsInfo = this.geoJsonFile;
+
+		wardsInfo.wards.forEach(function(wardInfo){
+			wardsGeojson.features.forEach(function(feature){
+				if(feature.id === wardInfo.osmID){
+					wardInfo.centroid = turf.centroid(feature).geometry.coordinates;
+				}
+			})
+		})
+
+		return wardsInfo;
 	}
 
 
