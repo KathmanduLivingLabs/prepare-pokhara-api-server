@@ -9,6 +9,7 @@ import geoJSONParser from "../../../libs/geojson-parser";
 import statsCalculator from "../../../libs/statscalculator";
 import proc from 'proc-utils';
 import capitalize from 'capitalize';
+import fs from 'fs';
 
 var sanitize = googleCaja.sanitize;
 var overpassConfig = config.overpass;
@@ -31,7 +32,7 @@ export default {
 
 	},
 
-	required : (req,res,next)=>{
+	required: (req, res, next) => {
 
 		var err = proc.utils.required(req.collects, ['type']);
 		if (err) return next(err);
@@ -41,73 +42,93 @@ export default {
 
 	fetch: (req, res, next) => {
 
-		var json = {
-			requestConfig: {
-				dataType: overpassConfig.dataType,
-				timeout: overpassConfig.timeout
-			},
-			tags: {
-				'amenity': req.collects.type
-			},
-			featureTypes: overpassConfig.include
-		}
-
-		// if (req.collects.ward) json['ward'] = req.collects.ward;
-
-		// if (req.collects.filters) json.tags = Object.assign(json.tags, req.collects.filters)
-
-		var overPassQueryBuilder = new queryBuilder({
-			json: json
-		});
-
-		var query = overPassQueryBuilder.build();
-
-		console.log(' EXECUTING QUERY <<< ', query, '>>>>>');
-
-		var requestConfig = {
-			timeout : overpassConfig.timeout * 1000
-		}
-
-		request(overpassConfig.baseUrl + query, requestConfig , (err, response) => {
-
-			if (err) return next(err);
-
-			if (response && response.statusCode) {
-
-				try {
-					var geojsonResponse = osmToGeojson(JSON.parse(response.body));
-				} catch (e) {
-
-					req.cdata = {
-						success: 0,
-						message: response.body
-					}
-					return next();
-				}
-
-				geojsonResponse.features.forEach((feature) => {
-					if (feature.geometry.type === "Polygon") {
-						feature.geometry = turf.centroid(feature).geometry;
-					}
-				})
-
-				req.cdata = {
-					success: 1,
-					geojson: geojsonResponse,
-					message: 'Features fetched successfully !'
-				}
-
-			} else {
-				req.cdata = {
-					success: 0,
-					message: "Something went wrong !"
-				}
+		if (!config.useSnapshot) {
+			var json = {
+				requestConfig: {
+					dataType: overpassConfig.dataType,
+					timeout: overpassConfig.timeout
+				},
+				tags: {
+					'amenity': req.collects.type
+				},
+				featureTypes: overpassConfig.include
 			}
 
+			// if (req.collects.ward) json['ward'] = req.collects.ward;
+
+			// if (req.collects.filters) json.tags = Object.assign(json.tags, req.collects.filters)
+
+			var overPassQueryBuilder = new queryBuilder({
+				json: json
+			});
+
+			var query = overPassQueryBuilder.build();
+
+			console.log(' EXECUTING QUERY <<< ', query, '>>>>>');
+
+			var requestConfig = {
+				timeout: overpassConfig.timeout * 1000
+			}
+
+			request(overpassConfig.baseUrl + query, requestConfig, (err, response) => {
+
+				if (err) return next(err);
+
+				if (response && response.statusCode) {
+
+					try {
+						var geojsonResponse = osmToGeojson(JSON.parse(response.body));
+					} catch (e) {
+
+						req.cdata = {
+							success: 0,
+							message: response.body
+						}
+						return next();
+					}
+
+					geojsonResponse.features.forEach((feature) => {
+						if (feature.geometry.type === "Polygon") {
+							feature.geometry = turf.centroid(feature).geometry;
+						}
+					})
+
+					req.cdata = {
+						success: 1,
+						geojson: geojsonResponse,
+						message: 'Features fetched successfully !'
+					}
+
+				} else {
+					req.cdata = {
+						success: 0,
+						message: "Something went wrong !"
+					}
+				}
+
+				return next();
+
+
+			})
+		} else {
+
+			try {
+				var geojsonResponse = JSON.parse(fs.readFileSync(`./snapshots/${req.collects.type}.json`, 'utf8'));
+			} catch (e) {
+				req.cdata = {
+					success: 0,
+					message: e
+				}
+				return next(e);
+			}
+			req.cdata = {
+				success: 1,
+				geojson: geojsonResponse,
+				message: 'Features fetched successfully !'
+			};
 			return next();
 
-
-		})
+		}
 
 	},
 
@@ -123,7 +144,7 @@ export default {
 
 	},
 
-	tagWards : (req,res,next) => {
+	tagWards: (req, res, next) => {
 		var geojsonparser = new geoJSONParser('wards');
 		req.cdata.geojson.features = geojsonparser.tagWardId(req.cdata.geojson.features);
 		return next();
@@ -203,5 +224,78 @@ export default {
 
 		return next();
 
+	},
+
+	snapshot: (req, res, next) => {
+
+		var createSnapShotsFor = ['school', 'bank', 'hospital'];
+
+		function snapshotPromiseGenerator(snapshotFor) {
+			
+			return new Promise((resolve, reject) => {
+				var json = {
+					requestConfig: {
+						dataType: overpassConfig.dataType,
+						timeout: overpassConfig.timeout
+					},
+					tags: {
+						'amenity': snapshotFor
+					},
+					featureTypes: overpassConfig.include
+				}
+				var overPassQueryBuilder = new queryBuilder({
+					json: json
+				});
+				var query = overPassQueryBuilder.build();
+				console.log(' EXECUTING QUERY <<< ', query, '>>>>>');
+				var requestConfig = {
+					timeout: overpassConfig.timeout * 1000
+				}
+				request(overpassConfig.baseUrl + query, requestConfig, (err, response) => {
+					if (err) reject(err);
+					if (response && response.statusCode) {
+						try {
+							var geojsonResponse = osmToGeojson(JSON.parse(response.body));
+						} catch (e) {
+							reject(e)
+						}
+						geojsonResponse.features.forEach((feature) => {
+							if (feature.geometry.type === "Polygon") {
+								feature.geometry = turf.centroid(feature).geometry;
+							}
+						})
+						geojsonResponse.createdOn = new Date().getTime();
+						var json = JSON.stringify(geojsonResponse);
+						fs.writeFile(`./snapshots/${snapshotFor}.json`, json, 'utf8', (err, response) => {
+							if (err) reject(err);
+							resolve();
+						});
+					} else {
+						reject("Something went wrong !");
+					}
+
+				})
+			})
+		}
+
+		var snapshots = [];
+		createSnapShotsFor.forEach((snapshotFor) => {
+			snapshots.push(snapshotPromiseGenerator(snapshotFor));
+		})
+		Promise.all(snapshots)
+			.then((response) => {
+				req.cdata = {
+					success: 1,
+					message: `Snapshot created successfully`
+				};
+				return next();
+			})
+			.catch((err) => {
+				req.cdata = {
+					success: 0,
+					message: err
+				}
+				return next();
+			})
 	}
 }

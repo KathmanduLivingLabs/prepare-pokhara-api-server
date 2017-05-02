@@ -290,6 +290,14 @@ module.exports = (router) => {
 
 	router.get('/template',function(req,res){
 		console.log('YYAHHHA***')
-	})
+	});
+
+
+	router.post('/api/v1/snapshot/create',
+		apiFeatures.collect,
+		apiFeatures.snapshot,
+		mw.respond,
+		mw.error
+	);
 
 }

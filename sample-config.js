@@ -11,6 +11,8 @@ module.exports = {
 		metaOn : false
 	},
 
+	useSnapshot : false,
+
 	osmapi : {
 
 		liveBaseUrl : 'https://www.openstreetmap.org',
