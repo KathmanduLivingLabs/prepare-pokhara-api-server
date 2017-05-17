@@ -99,6 +99,8 @@ export default {
 						message: 'Features fetched successfully !'
 					}
 
+					req.cdata.unfilteredFeatures = geojsonResponse.features;
+
 				} else {
 					req.cdata = {
 						success: 0,
@@ -188,14 +190,14 @@ export default {
 			return string.toUpperCase();
 		}
 
-
-		if (req.collects.type && config.amenities[req.collects.type] && config.amenities[req.collects.type].constraints && config.amenities[req.collects.type].constraints.length && req.cdata.geojson && req.cdata.geojson.features && req.cdata.geojson.features.length && !(req.collects.filters && Object.keys(req.collects.filters).length)) {
+		// && !(req.collects.filters && Object.keys(req.collects.filters).length)
+		if (req.collects.type && config.amenities[req.collects.type] && config.amenities[req.collects.type].constraints && config.amenities[req.collects.type].constraints.length && req.cdata.geojson && req.cdata.geojson.features && req.cdata.geojson.features.length ) {
 
 			var constraintsFeed = {};
 
 			config.amenities[req.collects.type].constraints.forEach((constraint) => {
 				constraintsFeed[constraint['keyname']] = [];
-				req.cdata.geojson.features.forEach((feature) => {
+				req.cdata.unfilteredFeatures.forEach((feature) => {
 					if (feature.properties.tags && feature.properties.tags[constraint['constraint']]) {
 
 						if (constraint.multiple) {
