@@ -21,6 +21,7 @@
     "funsole": "^1.0.16",
     "google-caja": "0.0.2",
     "jade": "~1.11.0",
+    "json2csv": "^3.7.3",
     "jsonfile": "^2.4.0",
     "morgan": "~1.7.0",
     "osmtogeojson": "^2.2.12",

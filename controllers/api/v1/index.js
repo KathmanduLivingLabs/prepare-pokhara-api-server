@@ -5,6 +5,7 @@ import apiMetrics from './metrics';
 import validate from './validator';
 import stats from './stats';
 import auth from './auth';
+import csvWorker from './csvworker';
 
 module.exports = (router) => {
 
@@ -298,6 +299,25 @@ module.exports = (router) => {
 		apiFeatures.snapshot,
 		mw.respond,
 		mw.error
+	);
+
+	router.get('/api/v1/csv/generate',
+		apiFeatures.collect,
+		apiFeatures.required,
+		validate.type,
+		validate.filters,
+		apiFeatures.fetch,
+		apiFeatures.within,
+		stats.total,
+		apiWards.filter,
+		apiFeatures.fiter,
+		stats.region,
+		stats.compare,
+		apiWards.polygon,
+		apiFeatures.constraints,
+		apiFeatures.tagWards,
+		apiFeatures.log,
+		csvWorker.generate
 	);
 
 }
