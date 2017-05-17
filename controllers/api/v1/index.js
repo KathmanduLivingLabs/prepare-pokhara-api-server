@@ -301,7 +301,7 @@ module.exports = (router) => {
 		mw.error
 	);
 
-	router.get('/api/v1/csv/generate',
+	router.get('/api/v1/extracts/generate',
 		apiFeatures.collect,
 		apiFeatures.required,
 		validate.type,
