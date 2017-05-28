@@ -317,7 +317,10 @@ module.exports = (router) => {
 		apiFeatures.constraints,
 		apiFeatures.tagWards,
 		apiFeatures.log,
-		csvWorker.generate
+		csvWorker.generate,
+		mw.respond,
+		mw.error
+
 	);
 
 }

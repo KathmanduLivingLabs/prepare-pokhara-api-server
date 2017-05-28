@@ -19,24 +19,29 @@ export default {
 		var filename = new Date().getTime();
 		fs.writeFile('./extracts/'+filename+'.csv', csv, function(err) {
 		  if (err) {
-		  	return res.json({
+		  	req.cdata = {
 		  		success : 0,
 		  		message : err
-		  	})
+		  	};
+		  	return next();
 		  }
 		  var jsonObj = JSON.stringify(req.cdata);
 		  fs.writeFile('./extracts/'+filename+'.json', jsonObj, 'utf8', function(err,jsonResponse){
 		  	if (err) {
-		  		return res.json({
+		  		req.cdata = {
 		  			success : 0,
 		  			message : err
-		  		})
+		  		};
+		  		
+		  	}else{
+		  		req.cdata = {
+		  			success : 1,
+		  			csvlink : 'extracts/'+filename+'.csv',
+		  			geojsonlink : 'extracts/'+filename+'.json'
+		  		};
 		  	}
-		  	return res.json({
-		  		success : 1,
-		  		csvlink : 'extracts/'+filename+'.csv',
-		  		geojsonlink : 'extracts/'+filename+'.json'
-		  	})
+		  	
+		  	return next();
 		  });
 
 		  
