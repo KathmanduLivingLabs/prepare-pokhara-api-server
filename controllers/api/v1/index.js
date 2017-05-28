@@ -301,6 +301,26 @@ module.exports = (router) => {
 		mw.error
 	);
 
+	/**
+	    * @api {get} /api/v1/extracts/generate  Generate CSV / GeoJSON  
+	    * @apiName Generate
+	    * @apiGroup Extracts
+	   
+		* @apiSuccess {Integer} success Success status
+	    * @apiSuccess {Object[]} wards Extract link  Object
+	    * @apiSuccessExample {json} Success-Response:
+	    *
+	    *	{
+	    *	  "success": 1,
+	   	*	  "csvlink" : "extracts/1495945856052.csv",
+	   	* 	  "geojsonlink" : "extracts/1495945856052.json"
+	   	*	}
+		*	
+	    *
+	    * @apiDescription API that generates CSV / GeoJSON
+	    * @apiVersion 1.0.0
+	    */
+
 	router.get('/api/v1/extracts/generate',
 		apiFeatures.collect,
 		apiFeatures.required,
