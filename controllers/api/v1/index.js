@@ -244,6 +244,7 @@ module.exports = (router) => {
 		validate.type,
 		validate.filters,
 		apiFeatures.fetch,
+		apiFeatures.applyGrades,
 		apiFeatures.within,
 		stats.total,
 		apiWards.filter,

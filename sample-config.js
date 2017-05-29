@@ -37,7 +37,14 @@ module.exports = {
 				'constraint' : 'nrb_class',
 				'keyname' : 'nrb_class',
 				'multiple' : false
-			}]
+			}],
+			// grades : {
+			// 	"development" : ["development","b"],
+			// 	"commercial" : ["commercial" , "a"],
+			// 	"co-operative" : ["co-operative"],
+			// 	"finance companies" : ["finance companies"],
+			// 	"micro finance" : ["micro finance"]
+			// }
 		},
 		'atm' : {
 			value  : 'atm',
@@ -136,7 +143,9 @@ module.exports = {
 				"type" : "filter",
 				"osmtags" : ["nrb_class"],
 				"hidden":true,
-				"equalityCheck" : true
+				"object" : true,
+				"equalityCheck" : true,
+				"others" : ["development","commercial","co-operative","finance companies","micro finance"]
 			},
 			"Operator" : {
 				"type" : "filter",

@@ -301,5 +301,28 @@ export default {
 				}
 				return next();
 			})
+	},	
+
+	applyGrades : (req,res,next)=>{
+		if(req.collects.type && config.amenities[req.collects.type].grades){
+
+			// req.cdata.geojson.features.forEach(function(feature){
+			// 	if(feature.properties.tags && Object.keys(feature.properties.tags).length){
+			// 		if(feature.properties.tags['nrb_class']){
+			// 			var classValue = feature.properties.tags['nrb_class'];
+			// 			for(var grade in config.amenities[req.collects.type].grades){
+			// 				if(config.amenities[req.collects.type].grades[grade].indexOf(classValue) !== -1){
+			// 					feature.properties.tags['nrb_class'] = grade;
+			// 				}
+			// 			}
+			// 		}
+			// 	}
+			// });
+
+			return next();
+
+		}else{
+			return next();
+		}
 	}
 }
