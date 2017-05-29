@@ -200,9 +200,8 @@ export default {
 
 			config.amenities[req.collects.type].constraints.forEach((constraint) => {
 				constraintsFeed[constraint['keyname']] = [];
-				req.unfilteredFeatures.forEach((feature) => {
+				req.cdata.geojson.features.forEach((feature) => {
 					if (feature.properties.tags && feature.properties.tags[constraint['constraint']]) {
-
 						if (constraint.multiple) {
 							feature.properties.tags[constraint['constraint']].split(',').forEach((eachtag) => {
 								var trimmedValue = capitalize.words(trim(eachtag));
@@ -210,7 +209,6 @@ export default {
 									constraintsFeed[constraint['keyname']].push(trimmedValue);
 								}
 							})
-
 						} else {
 							if (constraintsFeed[constraint['keyname']].indexOf(feature.properties.tags[constraint['constraint']]) === -1) {
 								constraintsFeed[constraint['keyname']].push(feature.properties.tags[constraint['constraint']]);

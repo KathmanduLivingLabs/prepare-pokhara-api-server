@@ -54,7 +54,8 @@ module.exports = (router) => {
 	 *							"ward" : "relation/6272781",
 	 *							"filters" : {
 	 *								"Operator":"Prabhu Bank",
-	 *								"ATM" : "yes"
+	 *								"ATM" : "yes",
+	 								"NRB Class" : "development"
 	 *								
 	 *							}
 	 *						}
