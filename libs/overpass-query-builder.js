@@ -61,9 +61,9 @@ export default class queryBuilder {
 			return query;
 		}
 
-		this.tailGenerator = (query)=>{
+		this.tailGenerator = (query,metaData)=>{
 
-			var output = config.overpass.metaOn ? "out meta;" : "out body;";
+			var output = config.overpass.metaOn || (metaData && metaData.metaOn) ? "out meta;" : "out body;";
 
 			return query + output +
 				">; " +
@@ -71,11 +71,11 @@ export default class queryBuilder {
 		}
 	}
 
-	build() {
+	build(metaData) {
 
 		this.query = this.headGenerator(this.query);
 		this.query = this.bodyGenerator(this.query);
-		this.query = this.tailGenerator(this.query);
+		this.query = this.tailGenerator(this.query,metaData);
 
 		return this.query;
 

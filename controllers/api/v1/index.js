@@ -354,6 +354,7 @@ module.exports = (router) => {
 		apiFeatures.required,
 		validate.type,
 		validate.filters,
+		csvWorker.metaDataOn,
 		apiFeatures.fetch,
 		apiFeatures.within,
 		stats.total,

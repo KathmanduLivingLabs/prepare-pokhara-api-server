@@ -62,7 +62,7 @@ export default {
 				json: json
 			});
 
-			var query = overPassQueryBuilder.build();
+			var query = overPassQueryBuilder.build({metaOn:req.metaDataOn});
 
 			console.log(' EXECUTING QUERY <<< ', query, '>>>>>');
 
