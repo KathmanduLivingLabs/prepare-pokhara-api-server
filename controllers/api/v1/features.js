@@ -116,6 +116,7 @@ export default {
 
 			try {
 				var geojsonResponse = JSON.parse(fs.readFileSync(`./snapshots/${req.collects.type}.json`, 'utf8'));
+				req.unfilteredFeatures = geojsonResponse.features;
 			} catch (e) {
 				req.cdata = {
 					success: 0,

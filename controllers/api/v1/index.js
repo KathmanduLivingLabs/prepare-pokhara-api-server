@@ -216,10 +216,20 @@ module.exports = (router) => {
 	 *		"constraints" : {
 	 *			"operator" : ["Laxmi Bank Ltd.","Agriculture Development Bank Limited"],
 	 *			"network":["VISA","VISA ELECTRON"]
-	 *		}
+	 *		},
+	 *		"nrb_class": [
+	 *		      "a",
+	 *		      "b",
+	 *		      "co-operative",
+	 *		      "commercial",
+	 *		      "cooperative",
+	 *		      "development",
+	 *		      "finance companies",
+	 *		      "micro finance"
+	 *		]
      *
 	 *	} 
-
+	 *
 	 *
 	 *
 	 * @apiDescription API that fetch features
@@ -307,7 +317,25 @@ module.exports = (router) => {
 	    * @apiGroup Extracts
 	   
 		* @apiSuccess {Integer} success Success status
-	    * @apiSuccess {Object[]} wards Extract link  Object
+	    * @apiSuccess {Object[]} link Extract link  Object
+	    * @apiSuccessExample {json} Parameters Format - Hospital
+	    *						{
+	    *							"type":"hospital",
+	    *							"ward" : "relation/6270328",
+	    *							"filters" : {
+	    *								"Emergency":"yes",
+	    								"ICU" : "yes",
+	    								"NICU" : "yes",
+	    								"Ventilator" : "yes",
+	    								"Xray" : "yes",
+	    								"Operation Theatre" : "yes",
+	    								"Ambulance" : "yes"
+	    *							},
+	    *							"variables" : {
+	    *								"Bed Capacity" : {"high":750,"low":100}						
+	    *							}
+	    *						}
+
 	    * @apiSuccessExample {json} Success-Response:
 	    *
 	    *	{

@@ -33,6 +33,10 @@ module.exports = {
 				'constraint' : 'name',
 				'keyname' : 'operator',
 				'multiple' : false
+			},{
+				'constraint' : 'nrb_class',
+				'keyname' : 'nrb_class',
+				'multiple' : false
 			}]
 		},
 		'atm' : {
@@ -127,6 +131,12 @@ module.exports = {
 			"ATM" : {
 				"type" : "filter",
 				"osmtags" : ["atm"]
+			},
+			"NRB Class" : {
+				"type" : "filter",
+				"osmtags" : ["nrb_class"],
+				"hidden":true,
+				"equalityCheck" : true
 			},
 			"Operator" : {
 				"type" : "filter",
