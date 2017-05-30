@@ -253,6 +253,7 @@ module.exports = (router) => {
 		stats.compare,
 		apiWards.polygon,
 		apiFeatures.constraints,
+		apiFeatures.applyPreservedTags,
 		apiFeatures.tagWards,
 		apiFeatures.log,
 		mw.respond, mw.error);

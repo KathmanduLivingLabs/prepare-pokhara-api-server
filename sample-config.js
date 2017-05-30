@@ -38,13 +38,16 @@ module.exports = {
 				'keyname' : 'nrb_class',
 				'multiple' : false
 			}],
-			// grades : {
-			// 	"development" : ["development","b"],
-			// 	"commercial" : ["commercial" , "a"],
-			// 	"co-operative" : ["co-operative"],
-			// 	"finance companies" : ["finance companies"],
-			// 	"micro finance" : ["micro finance"]
-			// }
+			grades : {
+				"on" : "nrb_class",
+				"values" : {
+					"development" : ["development","b"],
+					"commercial" : ["commercial" , "a"],
+					"co-operative" : ["co-operative","cooperative"],
+					"finance companies" : ["finance companies"],
+					"micro finance" : ["micro finance"]
+				}
+			}
 		},
 		'atm' : {
 			value  : 'atm',

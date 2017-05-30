@@ -162,7 +162,8 @@ export default {
 		var insights = config.statsIndicator[type];
 
 		if (filters) {
-			filtered = new statsCalculator(features, type, insights, filters).applyFilter();
+			var equalityCheck = true;
+			filtered = new statsCalculator(features, type, insights, filters).applyFilter(equalityCheck);
 			req.cdata.geojson.features = filtered;
 			next();
 
@@ -302,25 +303,34 @@ export default {
 				return next();
 			})
 	},	
-
 	applyGrades : (req,res,next)=>{
 		if(req.collects.type && config.amenities[req.collects.type].grades){
-
-			// req.cdata.geojson.features.forEach(function(feature){
-			// 	if(feature.properties.tags && Object.keys(feature.properties.tags).length){
-			// 		if(feature.properties.tags['nrb_class']){
-			// 			var classValue = feature.properties.tags['nrb_class'];
-			// 			for(var grade in config.amenities[req.collects.type].grades){
-			// 				if(config.amenities[req.collects.type].grades[grade].indexOf(classValue) !== -1){
-			// 					feature.properties.tags['nrb_class'] = grade;
-			// 				}
-			// 			}
-			// 		}
-			// 	}
-			// });
-
+			req.preserveTags = [];
+			req.cdata.geojson.features.forEach(function(feature){
+				req.preserveTags.push(JSON.parse(JSON.stringify(feature.properties.tags)));
+				if(feature.properties.tags && Object.keys(feature.properties.tags).length){
+					if(feature.properties.tags[config.amenities[req.collects.type].grades.on]){
+						var classValue = feature.properties.tags[config.amenities[req.collects.type].grades.on];
+						for(var grade in config.amenities[req.collects.type].grades.values){
+							if(config.amenities[req.collects.type].grades.values[grade].indexOf(classValue) !== -1){
+								feature.properties.tags[config.amenities[req.collects.type].grades.on] = grade;
+							}
+						}
+					}
+				}
+			});
 			return next();
+		}else{
+			return next();
+		}
+	},
 
+	applyPreservedTags : (req,res,next)=>{
+		if(req.preserveTags && req.preserveTags.length){
+			req.cdata.geojson.features.forEach(function(feature,index){
+				feature.properties.tags = req.preserveTags[index];
+			});
+			return next();
 		}else{
 			return next();
 		}

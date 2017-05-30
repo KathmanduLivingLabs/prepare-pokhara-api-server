@@ -22,7 +22,6 @@ export default class statsCalculator {
 
 		return tagExists;
 
-
 	}
 
 	matchAgainst(matches, string) {
@@ -38,24 +37,27 @@ export default class statsCalculator {
 				break;
 			}
 		}
-
 		return matched;
 
 	}
 
-
-
-	includesTag(objectParsed, tagPresent, others) {
+	includesTag(objectParsed, tagPresent, others,equalityCheck) {
 
 		var tagExists = false;
-
 		for (var tag = 0; tag < objectParsed.length; tag++) {
-			if ((tagPresent.toLowerCase().includes(objectParsed[tag].toLowerCase())) || (others && others.length && objectParsed.indexOf("others") !== -1 && !this.matchAgainst(others, tagPresent))) {
-				tagExists = true;
-				break;
+			if(equalityCheck){
+				if(objectParsed[tag] === tagPresent){
+					tagExists = true;
+					break;
+				}
+			}else{
+				if ((tagPresent.toLowerCase().includes(objectParsed[tag].toLowerCase())) || (others && others.length && objectParsed.indexOf("others") !== -1 && !this.matchAgainst(others, tagPresent))) {
+					tagExists = true;
+					break;
+				}
 			}
+			
 		}
-
 		return tagExists;
 
 	}
@@ -105,14 +107,13 @@ export default class statsCalculator {
 
 	}
 
-	applyFilter() {
+	applyFilter(equalityCheck) {
 
 		var filtered = [];
 		this.features.forEach((feature) => {
 			var passFilter = true;
 			for (var filter in this.filters) {
 				var tagPresent = this.insights[filter] ? this.hasProperty(feature, this.insights[filter]["osmtags"]) : false;
-
 				if (this.insights[filter]['object']) {
 					if (typeof this.filters[filter] === "object") {
 						var objectParsed = this.filters[filter];
@@ -120,12 +121,8 @@ export default class statsCalculator {
 						var objectParsed = JSON.parse(this.filters[filter]);
 					}
 				}
-
-
 				if (tagPresent) {
-
 					var parseNum = Number(feature.properties.tags[tagPresent]);
-
 					if (Number.isInteger(parseNum)) {
 
 						if (this.insights[filter]['type'] === "slider") {
@@ -137,27 +134,22 @@ export default class statsCalculator {
 								if (!(parseNum >= Number(this.filters[filter].low) && parseNum <= Number(this.filters[filter].high))) {
 									passFilter = false;
 								}
-
 							} else {
 
 								if (!(parseNum >= Number(this.filters[filter]))) {
 									passFilter = false;
 								}
-
 							}
-
 						} else {
 							if (!(parseNum >= Number(this.filters[filter]))) {
 								passFilter = false;
 							}
 						}
-
 					} else {
 
-						if (!(this.insights[filter]['type'] === "value" ? feature.properties.tags[tagPresent].toLowerCase().includes(this.insights[filter]['on'].toLowerCase()) : this.insights[filter]['object'] ? this.includesTag(objectParsed, feature.properties.tags[tagPresent], this.insights[filter]["others"]) : this.insights[filter]['equalityCheck'] ? feature.properties.tags[tagPresent].toLowerCase() === (this.filters[filter].toLowerCase()) : feature.properties.tags[tagPresent].toLowerCase().includes(this.filters[filter].toLowerCase()))) {
+						if (!(this.insights[filter]['type'] === "value" ? feature.properties.tags[tagPresent].toLowerCase().includes(this.insights[filter]['on'].toLowerCase()) : this.insights[filter]['object'] ? this.includesTag(objectParsed, feature.properties.tags[tagPresent], this.insights[filter]["others"],equalityCheck) : this.insights[filter]['equalityCheck'] ? feature.properties.tags[tagPresent].toLowerCase() === (this.filters[filter].toLowerCase()) : feature.properties.tags[tagPresent].toLowerCase().includes(this.filters[filter].toLowerCase()))) {
 							passFilter = false;
 						}
-
 					}
 				} else {
 					if (this.insights[filter]["others"] && this.insights[filter]["others"].length && objectParsed.indexOf("others") !== -1) {
@@ -167,7 +159,6 @@ export default class statsCalculator {
 						passFilter = false;
 					}
 				}
-
 			}
 			if (passFilter) filtered.push(feature);
 		});
