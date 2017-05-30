@@ -307,12 +307,16 @@ export default {
 		if(req.collects.type && config.amenities[req.collects.type].grades){
 			req.preserveTags = [];
 			req.cdata.geojson.features.forEach(function(feature){
-				req.preserveTags.push(JSON.parse(JSON.stringify(feature.properties.tags)));
+				
 				if(feature.properties.tags && Object.keys(feature.properties.tags).length){
 					if(feature.properties.tags[config.amenities[req.collects.type].grades.on]){
 						var classValue = feature.properties.tags[config.amenities[req.collects.type].grades.on];
 						for(var grade in config.amenities[req.collects.type].grades.values){
 							if(config.amenities[req.collects.type].grades.values[grade].indexOf(classValue) !== -1){
+								req.preserveTags.push({
+									id : feature.id,
+									tags : JSON.parse(JSON.stringify(feature.properties.tags))
+								});
 								feature.properties.tags[config.amenities[req.collects.type].grades.on] = grade;
 							}
 						}
@@ -328,7 +332,12 @@ export default {
 	applyPreservedTags : (req,res,next)=>{
 		if(req.preserveTags && req.preserveTags.length){
 			req.cdata.geojson.features.forEach(function(feature,index){
-				feature.properties.tags = req.preserveTags[index];
+				req.preserveTags.forEach(function(preservedTag){
+					if(preservedTag.id === feature.id){
+						feature.tags = preservedTag.tags;
+						delete feature.tags;
+					}
+				});
 			});
 			return next();
 		}else{
