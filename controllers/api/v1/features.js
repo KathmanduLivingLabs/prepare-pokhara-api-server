@@ -334,11 +334,11 @@ export default {
 			req.cdata.geojson.features.forEach(function(feature,index){
 				req.preserveTags.forEach(function(preservedTag){
 					if(preservedTag.id === feature.id){
-						feature.tags = preservedTag.tags;
-						delete feature.tags;
+						feature.properties.tags = JSON.parse(JSON.stringify(preservedTag.tags));
 					}
 				});
 			});
+			delete req.preserveTags;
 			return next();
 		}else{
 			return next();
