@@ -162,8 +162,7 @@ export default {
 		var insights = config.statsIndicator[type];
 
 		if (filters) {
-			var equalityCheck = true;
-			filtered = new statsCalculator(features, type, insights, filters).applyFilter(equalityCheck);
+			filtered = new statsCalculator(features, type, insights, filters).applyFilter();
 			req.cdata.geojson.features = filtered;
 			next();
 

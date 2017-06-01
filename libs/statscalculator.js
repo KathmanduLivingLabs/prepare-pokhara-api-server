@@ -41,11 +41,11 @@ export default class statsCalculator {
 
 	}
 
-	includesTag(objectParsed, tagPresent, others,equalityCheck) {
+	includesTag(objectParsed, tagPresent, others,matchTagValueExactly) {
 
 		var tagExists = false;
 		for (var tag = 0; tag < objectParsed.length; tag++) {
-			if(equalityCheck){
+			if(matchTagValueExactly){
 				if(objectParsed[tag] === tagPresent){
 					tagExists = true;
 					break;
@@ -107,7 +107,7 @@ export default class statsCalculator {
 
 	}
 
-	applyFilter(equalityCheck) {
+	applyFilter() {
 
 		var filtered = [];
 		this.features.forEach((feature) => {
@@ -147,7 +147,7 @@ export default class statsCalculator {
 						}
 					} else {
 
-						if (!(this.insights[filter]['type'] === "value" ? feature.properties.tags[tagPresent].toLowerCase().includes(this.insights[filter]['on'].toLowerCase()) : this.insights[filter]['object'] ? this.includesTag(objectParsed, feature.properties.tags[tagPresent], this.insights[filter]["others"],equalityCheck) : this.insights[filter]['equalityCheck'] ? feature.properties.tags[tagPresent].toLowerCase() === (this.filters[filter].toLowerCase()) : feature.properties.tags[tagPresent].toLowerCase().includes(this.filters[filter].toLowerCase()))) {
+						if (!(this.insights[filter]['type'] === "value" ? feature.properties.tags[tagPresent].toLowerCase().includes(this.insights[filter]['on'].toLowerCase()) : this.insights[filter]['object'] ? this.includesTag(objectParsed, feature.properties.tags[tagPresent], this.insights[filter]["others"],this.insights[filter]["matchTagValueExactly"]) : this.insights[filter]['equalityCheck'] ? feature.properties.tags[tagPresent].toLowerCase() === (this.filters[filter].toLowerCase()) : feature.properties.tags[tagPresent].toLowerCase().includes(this.filters[filter].toLowerCase()))) {
 							passFilter = false;
 						}
 					}

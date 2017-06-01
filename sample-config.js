@@ -48,6 +48,8 @@ module.exports = {
 					"micro finance" : ["micro finance"]
 				}
 			}
+				
+			
 		},
 		'atm' : {
 			value  : 'atm',
@@ -148,7 +150,8 @@ module.exports = {
 				"hidden":true,
 				"object" : true,
 				"equalityCheck" : true,
-				"others" : ["development","commercial","co-operative","finance companies","micro finance"]
+				"others" : ["development","commercial","co-operative","finance companies","micro finance"],
+				"matchTagValueExactly" : true
 			},
 			"Operator" : {
 				"type" : "filter",
