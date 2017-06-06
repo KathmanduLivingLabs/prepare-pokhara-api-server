@@ -47,7 +47,8 @@ module.exports = {
 					"finance companies" : ["finance companies"],
 					"micro finance" : ["micro finance"]
 				}
-			}
+			},
+			postFilter : ["Operator"]
 				
 			
 		},

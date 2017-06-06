@@ -158,15 +158,34 @@ export default {
 		var filters = req.collects.filters;
 		var features = req.cdata.geojson.features;
 		var filtered = [];
+		var postFiltered = [];
 		var type = req.collects.type;
 		var insights = config.statsIndicator[type];
 
-		if (filters) {
+		if (filters && Object.keys(filters).length) {
+			var backupFeatures = {} ;
+			if( config.amenities[req.collects.type].postFilter &&  config.amenities[req.collects.type].postFilter.length ){
+				config.amenities[req.collects.type].postFilter.forEach(function(postFilterParam){
+					if(filters[postFilterParam]){
+						backupFeatures[postFilterParam] = filters[postFilterParam];  
+						delete filters[postFilterParam];	
+					}
+				})
+			}
 			filtered = new statsCalculator(features, type, insights, filters).applyFilter();
-			req.cdata.geojson.features = filtered;
+			req.preFiltered = filtered;
+			if(backupFeatures && Object.keys(backupFeatures).length){
+				for(var backupFeature in backupFeatures){
+					filters[backupFeature] = backupFeatures[backupFeature];
+				}
+				postFiltered = new statsCalculator(features, type, insights, filters).applyFilter();
+				req.cdata.geojson.features = postFiltered;
+			}else{
+				req.cdata.geojson.features = filtered;
+			}
 			next();
-
 		} else {
+			req.preFiltered = features;
 			next();
 		}
 
@@ -200,7 +219,7 @@ export default {
 
 			config.amenities[req.collects.type].constraints.forEach((constraint) => {
 				constraintsFeed[constraint['keyname']] = [];
-				req.cdata.geojson.features.forEach((feature) => {
+				req.preFiltered.forEach((feature) => {
 					if (feature.properties.tags && feature.properties.tags[constraint['constraint']]) {
 						if (constraint.multiple) {
 							feature.properties.tags[constraint['constraint']].split(',').forEach((eachtag) => {
