@@ -100,7 +100,16 @@ module.exports = {
 				"type": 'slider',
 				"osmtags": ['personnel:count']
 			},
+			// "Ambulance": {
+			// 	"type": "value",
+			// 	"on": "ambulance",
+			// 	"osmtags": ["emergency:services", "emergency_service"]
+			// },
 			"Ambulance": {
+				"type": 'filter',
+				"osmtags": ['facility:ambulance']
+			},
+			"Emergency Service": {
 				"type": "value",
 				"on": "ambulance",
 				"osmtags": ["emergency:services", "emergency_service"]
