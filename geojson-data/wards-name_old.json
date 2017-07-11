@@ -1,0 +1,179 @@
+{
+	"collection" : "Wards of Pokhara",
+	"wards" : [
+		{
+			"name" : "Bagar",
+			"number" : "1",
+			"osmID" : "relation/6273322"
+
+		},
+		{
+			"name" : "Miruwa",
+			"number" : "2",
+			"osmID" : "relation/6273343"
+
+		},
+		{
+			"name" : "Nadipur",
+			"number" : "3",
+			"osmID" : "relation/6273323"
+
+		},
+		{
+			"name" : "Gairapatan",
+			"number" : "4",
+			"osmID" : "relation/6276353"
+
+		},
+		{
+			"name" : "Malepatan",
+			"number" : "5",
+			"osmID" : "relation/6273344"
+
+		},
+		{
+			"name" : "Baidam",
+			"number" : "6",
+			"osmID" : "relation/6275741"
+
+		},
+		{
+			"name" : "Ratnachowk",
+			"number" : "7",
+			"osmID" : "relation/6272780"
+
+		},
+		{
+			"name" : "Srijanachowk",
+			"number" : "8",
+			"osmID" : "relation/6272781"
+
+		},
+		{
+			"name" : "Naya Bazar",
+			"number" : "9",
+			"osmID" : "relation/6272283"
+
+		},
+		{
+			"name" : "Ram Bazar",
+			"number" : "10",
+			"osmID" : "relation/6270328"
+
+		},
+		{
+			"name" : "Ranipauwa",
+			"number" : "11",
+			"osmID" : "relation/6290413"
+
+		},
+		{
+			"name" : "Bajhapatan",
+			"number" : "12",
+			"osmID" : "relation/6272231"
+
+		},
+		{
+			"name" : "Miyapatan",
+			"number" : "13",
+			"osmID" : "relation/6272306"
+
+		},
+		{
+			"name" : "Majheripatan",
+			"number" : "14",
+			"osmID" : "relation/6276303"
+
+		},
+		{
+			"name" : "Dhungesaghu",
+			"number" : "15",
+			"osmID" : "relation/6275777"
+
+		},
+		{
+			"name" : "Lamachaur",
+			"number" : "16",
+			"osmID" : "relation/6290709"
+
+		},
+		{
+			"name" : "Pardi Birauta",
+			"number" : "17",
+			"osmID" : "relation/6275780"
+
+		},
+		{
+			"name" : "Chhinedanda",
+			"number" : "18",
+			"osmID" : "relation/6290414"
+
+		},
+		{
+			"name" : "Akala",
+			"number" : "19",
+			"osmID" : "relation/6290823"
+
+		},
+		{
+			"name" : "Bhalam",
+			"number" : "20",
+			"osmID" : "relation/6290710"
+
+		},
+		{
+			"name" : "Kahun",
+			"number" : "21",
+			"osmID" : "relation/6290682"
+
+		},
+		{
+			"name" : "Aarba Bijaya",
+			"number" : "22",
+			"osmID" : "relation/6290683"
+
+		},
+		{
+			"name" : "Nirmalpokhari",
+			"number" : "23",
+			"osmID" : "relation/6290684"
+
+		},
+		{
+			"name" : "Kristi Nachnechaur",
+			"number" : "24",
+			"osmID" : "relation/6290685"
+
+		},
+		{
+			"name" : "Pumdi Bhumdi",
+			"number" : "25",
+			"osmID" : "relation/6290686"
+
+		},
+		{
+			"name" : "Sarangkot",
+			"number" : "26",
+			"osmID" : "relation/6290824"
+
+		},
+		{
+			"name" : "Hemja(Lower)",
+			"number" : "27",
+			"osmID" : "relation/6290827"
+
+		},
+		{
+			"name" : "Armala",
+			"number" : "28",
+			"osmID" : "relation/6290826"
+
+		},
+		{
+			"name" : "Hemja(Upper)",
+			"number" : "29",
+			"osmID" : "relation/6290825"
+
+		}
+	]
+}

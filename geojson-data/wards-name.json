@@ -2,178 +2,197 @@
 	"collection" : "Wards of Pokhara",
 	"wards" : [
 		{
-			"name" : "Bagar",
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 1",
 			"number" : "1",
 			"osmID" : "relation/6273322"
 
 		},
 		{
-			"name" : "Miruwa",
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 2",
 			"number" : "2",
-			"osmID" : "relation/6273343"
+			"osmID" : "relation/6276333"
 
 		},
 		{
-			"name" : "Nadipur",
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 3",
 			"number" : "3",
 			"osmID" : "relation/6273323"
 
 		},
 		{
-			"name" : "Gairapatan",
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 4",
 			"number" : "4",
 			"osmID" : "relation/6276353"
 
 		},
 		{
-			"name" : "Malepatan",
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 5",
 			"number" : "5",
 			"osmID" : "relation/6273344"
 
 		},
 		{
-			"name" : "Baidam",
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 6",
 			"number" : "6",
 			"osmID" : "relation/6275741"
 
 		},
 		{
-			"name" : "Ratnachowk",
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 7",
 			"number" : "7",
 			"osmID" : "relation/6272780"
 
 		},
 		{
-			"name" : "Srijanachowk",
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 8",
 			"number" : "8",
 			"osmID" : "relation/6272781"
 
 		},
 		{
-			"name" : "Naya Bazar",
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 9",
 			"number" : "9",
 			"osmID" : "relation/6272283"
 
 		},
 		{
-			"name" : "Ram Bazar",
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 10",
 			"number" : "10",
 			"osmID" : "relation/6270328"
 
 		},
 		{
-			"name" : "Ranipauwa",
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 11",
 			"number" : "11",
 			"osmID" : "relation/6290413"
 
 		},
 		{
-			"name" : "Bajhapatan",
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 12",
 			"number" : "12",
 			"osmID" : "relation/6272231"
 
 		},
 		{
-			"name" : "Miyapatan",
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 13",
 			"number" : "13",
-			"osmID" : "relation/6272306"
+			"osmID" : "relation/6290683"
 
 		},
 		{
-			"name" : "Majheripatan",
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 14",
 			"number" : "14",
 			"osmID" : "relation/6276303"
 
 		},
 		{
-			"name" : "Dhungesaghu",
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 15",
 			"number" : "15",
 			"osmID" : "relation/6275777"
 
 		},
 		{
-			"name" : "Lamachaur",
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 16",
 			"number" : "16",
-			"osmID" : "relation/6290709"
+			"osmID" : "relation/6290826"
 
 		},
 		{
-			"name" : "Pardi Birauta",
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 17",
 			"number" : "17",
 			"osmID" : "relation/6275780"
 
 		},
 		{
-			"name" : "Chhinedanda",
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 18",
 			"number" : "18",
-			"osmID" : "relation/6290414"
+			"osmID" : "relation/6290824"
 
 		},
 		{
-			"name" : "Akala",
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 19",
 			"number" : "19",
 			"osmID" : "relation/6290823"
 
 		},
 		{
-			"name" : "Bhalam",
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 20",
 			"number" : "20",
 			"osmID" : "relation/6290710"
 
 		},
 		{
-			"name" : "Kahun",
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 21",
 			"number" : "21",
-			"osmID" : "relation/6290682"
-
-		},
-		{
-			"name" : "Aarba Bijaya",
-			"number" : "22",
-			"osmID" : "relation/6290683"
-
-		},
-		{
-			"name" : "Nirmalpokhari",
-			"number" : "23",
-			"osmID" : "relation/6290684"
-
-		},
-		{
-			"name" : "Kristi Nachnechaur",
-			"number" : "24",
 			"osmID" : "relation/6290685"
 
 		},
 		{
-			"name" : "Pumdi Bhumdi",
-			"number" : "25",
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 22",
+			"number" : "22",
 			"osmID" : "relation/6290686"
 
 		},
 		{
-			"name" : "Sarangkot",
-			"number" : "26",
-			"osmID" : "relation/6290824"
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 23",
+			"number" : "23",
+			"osmID" : "relation/7374354"
 
 		},
 		{
-			"name" : "Hemja(Lower)",
-			"number" : "27",
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 24",
+			"number" : "24",
+			"osmID" : "relation/6104166"
+
+		},
+		{
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 25",
+			"number" : "25",
 			"osmID" : "relation/6290827"
 
 		},
 		{
-			"name" : "Armala",
-			"number" : "28",
-			"osmID" : "relation/6290826"
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 26",
+			"number" : "26",
+			"osmID" : "relation/7376035"
 
 		},
 		{
-			"name" : "Hemja(Upper)",
-			"number" : "29",
-			"osmID" : "relation/6290825"
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 27",
+			"number" : "27",
+			"osmID" : "relation/7376120"
 
+		},
+		{
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 28",
+			"number" : "28",
+			"osmID" : "relation/7376167"
+
+		},
+		{
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 29",
+			"number" : "29",
+			"osmID" : "relation/7376122"
+		},
+		{
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 30",
+			"number" : "30",
+			"osmID" : "relation/7374518"
+		},
+		{
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 31",
+			"number" : "31",
+			"osmID" : "relation/7374469"
+		},
+		{
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 32",
+			"number" : "32",
+			"osmID" : "relation/7374453"
+		},
+		{
+			"name" : "Pokhara Lekhnath Metropolitan Ward No. 33",
+			"number" : "33",
+			"osmID" : "relation/6104746"
 		}
 	]
 }
