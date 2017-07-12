@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/extracts',  express.static(__dirname + '/extracts'));
-app.use(express.static(path.join(__dirname, '/apidocs')));
+app.use('/apidocs', express.static(path.join(__dirname, '/apidocs')));
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
