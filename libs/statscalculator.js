@@ -109,6 +109,22 @@ export default class statsCalculator {
 
 	applyFilter() {
 
+		function isAnException(filter,filters){
+			var passFilter;
+			var exceptions = ['Bed Capacity','Students']; // EXCEPTIONS FOR showing all data when LOW for slider is 0
+			if(exceptions.indexOf(filter) !== -1 ){
+				if(filters[filter].low && filters[filter].low == 0){
+					passFilter = true;
+				}else{
+					passFilter = false;
+				}
+			}else{
+				passFilter = false;
+
+			}
+			return passFilter;
+		}
+
 		var filtered = [];
 		this.features.forEach((feature) => {
 			var passFilter = true;
@@ -132,31 +148,41 @@ export default class statsCalculator {
 								if (!(this.filters[filter].low !==undefined && this.filters[filter].high !==undefined )) throw new Error('High and low values need to be specified for slider types');
 
 								if (!(parseNum >= Number(this.filters[filter].low) && parseNum <= Number(this.filters[filter].high))) {
-									passFilter = false;
+									passFilter = isAnException(filter,this.filters);
 								}
 							} else {
 
 								if (!(parseNum >= Number(this.filters[filter]))) {
-									passFilter = false;
+									passFilter = isAnException(filter,this.filters);
 								}
 							}
 						} else {
 							if (!(parseNum >= Number(this.filters[filter]))) {
-								passFilter = false;
+								passFilter = isAnException(filter,this.filters);
 							}
 						}
 					} else {
 
 						if (!(this.insights[filter]['type'] === "value" ? feature.properties.tags[tagPresent].toLowerCase().includes(this.insights[filter]['on'].toLowerCase()) : this.insights[filter]['object'] ? this.includesTag(objectParsed, feature.properties.tags[tagPresent], this.insights[filter]["others"],this.insights[filter]["matchTagValueExactly"]) : this.insights[filter]['equalityCheck'] ? feature.properties.tags[tagPresent].toLowerCase() === (this.filters[filter].toLowerCase()) : feature.properties.tags[tagPresent].toLowerCase().includes(this.filters[filter].toLowerCase()))) {
-							passFilter = false;
+							passFilter = isAnException(filter,this.filters);
 						}
 					}
 				} else {
 					if (this.insights[filter]["others"] && this.insights[filter]["others"].length && objectParsed.indexOf("others") !== -1) {
 
 					} else {
+						// var exceptions = ['Bed Capacity','Students']; // EXCEPTIONS FOR showing all data when LOW for slider is 0
+						// if(exceptions.indexOf(filter) !== -1 ){
+						// 	if(this.filters[filter].low == 0){
+						// 	}else{
+						// 		passFilter = false;
+						// 	}
+						// }else{
+						// 	passFilter = false;
+
+						// }
+						passFilter = isAnException(filter,this.filters);
 						
-						passFilter = false;
 					}
 				}
 			}
