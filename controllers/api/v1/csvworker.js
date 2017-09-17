@@ -19,7 +19,6 @@ var csvHeaders = {
 	'facility:ambulance' : 'Ambulance',
 	'facility:icu' : 'ICU',
 	'facility:nicu' : 'NICU',
-	'facility:operating_theater' : 'Operating Theatre',
 	'facility:operation_theatre' : 'Operation Theatre',
 	'facility:ventilator' : 'Ventilator',
 	'facility:x-ray' : 'X-ray',
@@ -33,7 +32,6 @@ var csvHeaders = {
 	'website' : 'Website',
 	'alt_name' : 'Alternate name',
 	'emergency:services' : 'Emergency services',
-	'facility:operating_theatre' : 'Operating theatre',
 	'addr:city' : 'City address',
 	'addr:street' : 'Street address',
 	'start_date' : 'Start date',
@@ -43,14 +41,11 @@ var csvHeaders = {
 	'fax' : 'Fax',
 	'contact:phone' : 'Phone contact',
 	'building:levels' : 'Building levels',
-	'personel:count' : 'Personel count',
 	'capacity:bed' : 'Bed capacity',
-	'facilityn:nicu' : 'NICU facility',
 	'contact:fax' : 'Fax contact',
 	'addr:place' : 'Place address',
 	'healthcare' : 'Healthcare',
 	'healthcare:speciality' : 'Healthcare speciality',
-	'contact:email' : 'Contact email',
 	'name:en' : 'English name',
 	'addr:housenumber' : 'Housenumber',
 	'type' : 'Feature type',
@@ -125,8 +120,9 @@ export default {
 		});
 
 		fields = fields.map(function(field){
-			return csvHeaders[field] || field;
-		})
+			return csvHeaders[field];
+		}).filter(Boolean);
+		
 		var csv = json2csv({
 			data: features,
 			fields: fields
