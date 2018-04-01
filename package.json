@@ -9,6 +9,35 @@
     "start": "./node_modules/babel-cli/bin/babel-node.js app.js",
     "postinstall": "npm install babel-cli && npm install babel-preset-es2015 && cp sample-config.js config.js && npm run apidocs && mkdir extracts"
   },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "parserOptions": {
+      "ecmaVersion": 7,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "experimentalObjectRestSpread": true
+      }
+    },
+    "env": {
+      "node": true
+    },
+    "rules": {
+      "no-console": 0,
+      "no-unused-vars": 1,
+      "semi": [
+        "error",
+        "always"
+      ],
+      "indent": [
+        "error",
+        "tab"
+      ],
+      "quotes": [
+        "error",
+        "double"
+      ]
+    }
+  },
   "dependencies": {
     "@turf/turf": "^3.9.0",
     "apidoc": "latest",
@@ -34,6 +63,7 @@
   "devDependencies": {
     "babel-cli": "^6.22.2",
     "babel-preset-es2015": "^6.22.0",
+    "eslint": "^4.19.1",
     "nodemon": "^1.11.0"
   }
 }
