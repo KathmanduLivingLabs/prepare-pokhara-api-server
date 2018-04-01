@@ -92,10 +92,10 @@ export default class geoJSONParser {
 
 		var filtered = [];
 		features.forEach((feature) => {
-			if (turf.inside(feature, this.geoJsonFile.features[0])) {
+			if (feature.geometry.type != 'LineString'  && turf.inside(feature, this.geoJsonFile.features[0])) {
 				filtered.push(feature);
 			}
-		})
+		});
 
 		return filtered;
 
