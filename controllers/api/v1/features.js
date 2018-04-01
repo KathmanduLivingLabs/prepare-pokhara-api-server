@@ -74,43 +74,41 @@ export default {
 
 				if (err) return next(err);
 
-				if (response && response.statusCode) {
-
+				if (response && response.statusCode && response.body) {
 					try {
 						var geojsonResponse = osmToGeojson(JSON.parse(response.body));
 					} catch (e) {
-
 						req.cdata = {
 							success: 0,
 							message: response.body
 						}
 						return next();
 					}
-
-					geojsonResponse.features.forEach((feature) => {
-						if (feature.geometry.type === "Polygon") {
-							feature.geometry = turf.centroid(feature).geometry;
+					if(geojsonResponse && geojsonResponse.features){
+						geojsonResponse.features.forEach((feature) => {
+							if (feature.geometry.type === "Polygon") {
+								feature.geometry = turf.centroid(feature).geometry;
+							}
+						})
+						req.cdata = {
+							success: 1,
+							geojson: geojsonResponse,
+							message: 'Features fetched successfully !'
 						}
-					})
-
-					req.cdata = {
-						success: 1,
-						geojson: geojsonResponse,
-						message: 'Features fetched successfully !'
+						req.unfilteredFeatures = geojsonResponse.features;
+						return next();
+					}else{
+						return next({
+							success: 0,
+							message: "Something went wrong !"
+						});
 					}
-
-					req.unfilteredFeatures = geojsonResponse.features;
-
 				} else {
-					req.cdata = {
+					return next({
 						success: 0,
 						message: "Something went wrong !"
-					}
+					});
 				}
-
-				return next();
-
-
 			})
 		} else {
 
