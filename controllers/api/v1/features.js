@@ -51,7 +51,8 @@ export default {
 				tags: {
 					'amenity': req.collects.type
 				},
-				featureTypes: overpassConfig.include
+				featureTypes: overpassConfig.include,
+				type : req.collects.type
 			}
 
 			// if (req.collects.ward) json['ward'] = req.collects.ward;
@@ -68,7 +69,7 @@ export default {
 
 			var requestConfig = {
 				timeout: overpassConfig.timeout * 1000
-			}
+			};
 
 			request(overpassConfig.baseUrl + query, requestConfig, (err, response) => {
 
