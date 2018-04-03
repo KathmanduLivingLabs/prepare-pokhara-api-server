@@ -8,7 +8,7 @@ module.exports = {
 		timeout: 250,
 		dataType: 'json',
 		include: ['node', 'way'],
-		metaOn : false
+		metaOn : true
 	},
 
 	useSnapshot : false,
@@ -59,6 +59,65 @@ module.exports = {
 				'keyname' : 'operator',
 				'multiple' : false
 			}]
+		},
+		"pharmacy" : {
+			value : "pharmacy"
+		},
+		"dentist" : {
+			value : "dentist"
+		},
+		"clinic" : {
+			value : "clinic"
+		},
+		"health_post" : {
+			value : "health_post"
+		},
+		"place_of_worship" : {
+			value : "place_of_worship"
+		},
+		"energy" : {
+			taggedon : {
+				"amenity" : {
+					value : "fuel"
+				}
+			}
+		},
+		"governance" : {
+			taggedon : {
+				"office" : {
+					value : "government,ngo"
+				}
+			}
+		},
+		"security" : {
+			taggedon : {
+				"amenity" : {
+					value : "police"
+				}
+			}
+		},
+		"tourism" : {
+			taggedon : {
+				"tourism" : {
+					value : "hotel,museum"
+				},
+				"amenity" : {
+					value : "restaurant"
+				},
+				"leisure" : {
+					value : "park"
+				},
+			}
+		},
+		"communication" : {
+			taggedon : {
+				"studio" : {
+					value : "radio,television"
+				},
+				"office" : {
+					value : "newspaper"
+				}
+			}
 		}
 	},
 
@@ -119,7 +178,7 @@ module.exports = {
 		school: {
 			"Students": {
 				"type": 'slider',
-				"osmtags": ['student:count']
+				"osmtags": ['student:count','student:coount','count:students']
 			},
 			"Operator Type": {
 				"type": "filter",
