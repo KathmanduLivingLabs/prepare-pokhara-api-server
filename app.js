@@ -1,92 +1,78 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+let express = require("express");
+let path = require("path");
+let favicon = require("serve-favicon");
+let logger = require("morgan");
+let cookieParser = require("cookie-parser");
+let bodyParser = require("body-parser");
 
-global['funsole'] = require('funsole');
+global["funsole"] = require("funsole");
 
-import config from './config';
+import config from "./config";
 
-var app = express();
+let app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "jade");
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
+app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/extracts',  express.static(__dirname + '/extracts'));
-app.use('/apidocs', express.static(path.join(__dirname, '/apidocs')));
+app.use(express.static(path.join(__dirname, "public")));
+app.use("/extracts",  express.static(__dirname + "/extracts"));
+app.use("/apidocs", express.static(path.join(__dirname, "/apidocs")));
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT ,DELETE');
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,Authorization");
-  next();
+	res.header("Access-Control-Allow-Origin", "*");
+	res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT ,DELETE");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,Authorization");
+	next();
 });
 
-var router = express.Router();
-app.use('/',router);
+let router = express.Router();
+// app.use("/",router);
 
-require('./controllers')(router);
+const versions = config.versions;
 
-var versions = config.versions;
-
-
-for(var version in versions){
-    require('./controllers'+ versions[version])(router);    
+for(let version in versions){
+	app.use(versions[version],require(`./controllers/api/${version}`)(router));
 }
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+	let err = new Error("Not Found");
+	err.status = 404;
+	next(err);
 });
 
-
-
-
-
 // error handlers
-
 // development error handler
 // will print stacktrace
-if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
-  });
+if (app.get("env") === "development") {
+	app.use(function(err, req, res, next) {
+		res.status(err.status || 500);
+		res.render("error", {
+			message: err.message,
+			error: err
+		});
+	});
 }
-
-
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+	res.status(err.status || 500);
+	res.render("error", {
+		message: err.message,
+		error: {}
+	});
 });
 
-var port = 4040;
-
-
-var listener =  app.listen(process.env.PORT || port,function(){
-    console.log('API server running at port ' +  listener.address().port)
-})
-
+let port = 4040;
+let listener =  app.listen(process.env.PORT || port,function(){
+	console.log("API server running at port " +  listener.address().port);
+});
 
 module.exports = app;
