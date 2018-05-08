@@ -11,8 +11,8 @@ import proc from "proc-utils";
 import capitalize from "capitalize";
 import fs from "fs";
 
-var sanitize = googleCaja.sanitize;
-var overpassConfig = config.overpass;
+let sanitize = googleCaja.sanitize;
+let overpassConfig = config.overpass;
 
 export default {
 
@@ -24,7 +24,6 @@ export default {
 			if (typeof req.body[field] !== "undefined" || typeof req.query[field] !== "undefined") {
 				req.collects[field] = JSON.parse(sanitize(JSON.stringify(req.body[field] || req.query[field])));
 			}
-
 		});
 		next();
 	},
@@ -50,7 +49,6 @@ export default {
 				featureTypes: overpassConfig.include,
 				type : req.collects.type
 			};
-
 			var overPassQueryBuilder = new queryBuilder({
 				json: json
 			});
@@ -60,9 +58,7 @@ export default {
 				timeout: overpassConfig.timeout * 1000
 			};
 			request(overpassConfig.baseUrl + query, requestConfig, (err, response) => {
-
 				if (err) return next(err);
-
 				if (response && response.statusCode && response.body) {
 					try {
 						var geojsonResponse = osmToGeojson(JSON.parse(response.body));
@@ -268,7 +264,6 @@ export default {
 					} else {
 						reject("Something went wrong !");
 					}
-
 				});
 			});
 		}
@@ -297,7 +292,6 @@ export default {
 		if(req.collects.type && config.amenities[req.collects.type].grades){
 			req.preserveTags = [];
 			req.cdata.geojson.features.forEach(function(feature){
-				
 				if(feature.properties.tags && Object.keys(feature.properties.tags).length){
 					if(feature.properties.tags[config.amenities[req.collects.type].grades.on]){
 						var classValue = feature.properties.tags[config.amenities[req.collects.type].grades.on];

@@ -1,11 +1,11 @@
-import mw from '../../../libs/middleware';
-import apiFeatures from './features';
-import apiWards from './wards';
-import apiMetrics from './metrics';
-import validate from './validator';
-import stats from './stats';
-import auth from './auth';
-import csvWorker from './csvworker';
+import mw from "../../../libs/middleware";
+import apiFeatures from "./features";
+import apiWards from "./wards";
+import apiMetrics from "./metrics";
+import validate from "./validator";
+import stats from "./stats";
+import auth from "./auth";
+import csvWorker from "./csvworker";
 
 import { Router } from "express";
 let api = Router();
@@ -226,7 +226,7 @@ module.exports = () => {
 	 *		      "b",
 	 *		      "co-operative",
 	 *		      "commercial",
-	 *		      "cooperative",
+	 *		      "cooperative", 	
 	 *		      "development",
 	 *		      "finance companies",
 	 *		      "micro finance"
@@ -241,7 +241,7 @@ module.exports = () => {
 	 */
 
 
-	api.get('/features',
+	api.get("/features",
 		apiFeatures.collect,
 		apiFeatures.required,
 		validate.type,
@@ -290,7 +290,7 @@ module.exports = () => {
 	    * @apiVersion 1.0.0
 	    */
 
-	api.get('/wards',
+	api.get("/wards",
 		apiMetrics.wards,
 		mw.respond, mw.error);
 
@@ -298,19 +298,19 @@ module.exports = () => {
 
 
 
-	api.put('/features/info',
+	api.put("/features/info",
 		apiFeatures.collect,
 		auth.authenticate,
 		mw.respond,
 		mw.error
-	)
+	);
 
-	api.get('/template',function(req,res){
-		console.log('YYAHHHA***')
+	api.get("/template",function(req,res){
+		console.log("YYAHHHA***");
 	});
 
 
-	api.post('/snapshot/create',
+	api.post("/snapshot/create",
 		apiFeatures.collect,
 		apiFeatures.snapshot,
 		mw.respond,
@@ -355,7 +355,7 @@ module.exports = () => {
 	    * @apiVersion 1.0.0
 	    */
 
-	api.get('/extracts/generate',
+	api.get("/extracts/generate",
 		apiFeatures.collect,
 		apiFeatures.required,
 		validate.type,
@@ -379,4 +379,4 @@ module.exports = () => {
 	);
 
 	return api;
-}
+};
