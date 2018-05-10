@@ -1,11 +1,30 @@
 module.exports = {
 	insightsKey: {
-		hospital: {
-			"total": "Hospitals"
-		}
+		hospital: [
+			{
+				"label" : "Hospitals",
+				"value" : "total"
+			},
+			{
+				"label" : "Bed capacity",
+				"value" : "Bed Capacity"
+			},
+			{
+				"label" : "Employees",
+				"value" : "Personnel Count"
+			}
+		]
 	},
 	parameters: {
 		hospital: [{
+			 "label": "Select ward",
+			 "type": "single-select",
+			 "parameter_name": "ward",
+		},{
+			"label" : "Select bed capacity",
+			"type" : "range",
+			"parameter_name": "Bed Capacity",
+		},{
 			"label": "Select facilities",
 			"options": [
 				{
@@ -39,14 +58,6 @@ module.exports = {
 			],
 			"type": "multi-select",
 			"parameter_name": "hospital_facilities"
-		},{
-			"label" : "Select bed capacity",
-			"type" : "range",
-			"parameter_name": "Bed Capacity",
-		},{
-			 "label": "Select ward",
-			 "type": "single-select",
-			 "parameter_name": "ward",
 		}]
 	}
 };
