@@ -11,6 +11,7 @@ import statsCalculator from "../../../libs/statscalculator";
 import proc from "proc-utils";
 import capitalize from "capitalize";
 import fs from "fs";
+import _ from "underscore";
 
 let sanitize = googleCaja.sanitize;
 let overpassConfig = config.overpass;
@@ -366,7 +367,10 @@ export default {
 			success : 1,
 			message : req.cdata.message,
 			geometries : {
-				pois : req.cdata.geojson
+				pois : req.cdata.geojson,
+				boundary : !req.collects.ward || req.collects.ward === "*" ? require("../../../geojson-data/pokhara-geojson.json").features[0] : _.findWhere(require("../../../geojson-data/wards.json").features,{
+					id : req.collects.ward
+				})
 			},
 			parameters : parameters,
 			insights : insights

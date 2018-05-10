@@ -17,9 +17,9 @@ module.exports = {
 	},
 	parameters: {
 		hospital: [{
-			 "label": "Select ward",
-			 "type": "single-select",
-			 "parameter_name": "ward",
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
 		},{
 			"label" : "Select bed capacity",
 			"type" : "range",
