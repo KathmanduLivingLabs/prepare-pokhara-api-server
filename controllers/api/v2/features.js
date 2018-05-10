@@ -1,4 +1,5 @@
 import config from "../../../config";
+import configv2 from "../../../configv2";
 import request from "request";
 import queryBuilder from "../../../libs/overpass-query-builder";
 import xmljsonParser from "../../../libs/xmljson";
@@ -327,5 +328,53 @@ export default {
 		}else{
 			return next();
 		}
+	},
+
+	v2 : (req,res,next) => {
+
+		const insights = {};
+		let counter = 1;
+		for(let stat in req.cdata.stats.overall){
+			insights[counter] = {
+				max_value :  req.cdata.stats.overall[stat],
+				value :  req.cdata.stats.selection[stat],
+				insight_title : configv2.insightsKey[req.collects.type][stat] || stat
+			};
+			counter++;
+		}
+
+		const parameters = {};
+
+		 configv2.parameters[req.collects.type].forEach((parameter,index)=>{
+		 	parameters[index+1] = parameter;
+		 	if(parameter.type === "range"){
+		 		parameters[index+1].range = {
+					"step": 50,
+					"max": req.cdata.initialMetrics.slider[parameter.parameter_name],
+					"min": 0,
+					"high": req.cdata.initialMetrics.slider[parameter.parameter_name],
+					"low": 0
+		 		};
+		 	}else if(parameter.type === "single-select" && parameter.parameter_name === "ward") {
+		 		parameters[index+1].options = new geoJSONParser("wards-name").getFile().wards.map((ward)=>{
+		 			return {
+		 				value : ward.osmID,
+		 				label : `Ward ${ward.number}`
+		 			};
+		 		});
+		 	}
+		 });
+
+		req.cdata = {
+			success : 1,
+			message : req.cdata.message,
+			geometries : {
+				pois : req.cdata.geojson
+			},
+			parameters : parameters,
+			insights : insights
+		}
+
+		return next();
 	}
 };

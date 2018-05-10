@@ -259,6 +259,7 @@ module.exports = () => {
 		apiFeatures.applyPreservedTags,
 		apiFeatures.tagWards,
 		apiFeatures.log,
+		apiFeatures.v2,
 		mw.respond, mw.error);
 
 	// api.get('/api/v1/test',apis.test,mw.respond,mw.error);
