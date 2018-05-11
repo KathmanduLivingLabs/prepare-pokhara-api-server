@@ -27,6 +27,11 @@ export default {
 				req.collects[field] = JSON.parse(sanitize(JSON.stringify(req.body[field] || req.query[field])));
 			}
 		});
+
+		for (var parameter in req.collects) {
+			if (req.collects[parameter] == "*") delete req.collects[parameter];
+		}
+
 		next();
 	},
 
@@ -381,12 +386,16 @@ export default {
 					"low": 0
 				};
 			}else if(parameter.type === "single-select" && parameter.parameter_name === "ward") {
-				parameters[index+1].options = new geoJSONParser("wards-name").getFile().wards.map((ward)=>{
+				const wards= new geoJSONParser("wards-name").getFile().wards.map((ward)=>{
 					return {
 						value : ward.osmID,
 						label : `Ward ${ward.number}`
 					};
 				});
+				parameters[index+1].options = [{
+					"value": "*",
+					"label": "All Wards"
+				}].concat(wards);
 			}
 		});
 
