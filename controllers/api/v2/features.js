@@ -37,6 +37,33 @@ export default {
 		next();
 	},
 
+	v2parameters : (req,res,next) => {
+
+		configv2.parameters[req.collects.type].forEach((parameter)=>{
+			if (typeof req.body[parameter.parameter_name] !== "undefined" || typeof req.query[parameter.parameter_name] !== "undefined") {
+				let collectedParameter =  JSON.parse(sanitize(JSON.stringify(req.body[parameter.parameter_name] || req.query[parameter.parameter_name])));
+				if(parameter.type === "single-select"){
+					req.collects[parameter.parameter_name] = collectedParameter;
+				}else if(parameter.type === "range"){
+					collectedParameter = JSON.parse(collectedParameter);
+					req.collects.variables = {
+						[parameter.parameter_name] : (collectedParameter)
+					};
+				}else if(parameter.type === "multi-select"){
+					collectedParameter = JSON.parse(collectedParameter);
+					req.collects.filters = {};
+					parameter.options.forEach((option)=>{
+						if(collectedParameter[option.value] && collectedParameter[option.value] == true){
+							req.collects.filters[option.value] = "yes";
+						}
+					});
+				}
+			}
+		});
+		// console.log(">>",req.collects);
+		return next();
+	},
+
 	fetch: (req, res, next) => {
 
 		if (!config.useSnapshot) {

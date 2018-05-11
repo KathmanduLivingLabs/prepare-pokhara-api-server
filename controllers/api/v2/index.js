@@ -243,6 +243,7 @@ module.exports = () => {
 
 	api.get("/features",
 		apiFeatures.collect,
+		apiFeatures.v2parameters,
 		apiFeatures.required,
 		validate.type,
 		validate.filters,
