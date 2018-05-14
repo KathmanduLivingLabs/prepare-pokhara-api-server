@@ -85,10 +85,52 @@ module.exports = {
 		"place_of_worship" : {
 			value : "place_of_worship"
 		},
+		"hindu" : {
+			taggedon : {
+				"religion" : {
+					value : "hindu"
+				}
+			}
+		},
+		"muslim" : {
+			taggedon : {
+				"religion" : {
+					value : "muslim"
+				}
+			}
+		},
+		"buddhist" : {
+			taggedon : {
+				"religion" : {
+					value : "buddhist"
+				}
+			}
+		},
+		"christian" : {
+			taggedon : {
+				"religion" : {
+					value : "christian"
+				}
+			}
+		},
 		"energy" : {
 			taggedon : {
 				"amenity" : {
 					value : "fuel"
+				}
+			}
+		},
+		"fuel" : {
+			taggedon : {
+				"amenity" : {
+					value : "fuel"
+				}
+			}
+		},
+		"gas" : {
+			taggedon : {
+				"shop" : {
+					value : "gas"
 				}
 			}
 		},
@@ -168,6 +210,48 @@ module.exports = {
 				},
 				"office" : {
 					value : "newspaper"
+				}
+			}
+		},
+		"radio" : {
+			taggedon : {
+				"studio" : {
+					value : "radio"
+				}
+			}
+		},
+		"television" : {
+			taggedon : {
+				"studio" : {
+					value : "television"
+				}
+			}
+		},
+		"newspaper" : {
+			taggedon : {
+				"office" : {
+					value : "newspaper"
+				}
+			}
+		},
+		"storage_tank" : {
+			taggedon : {
+				"man_made" : {
+					value : "storage_tank"
+				}
+			}
+		},
+		"water_tap" : {
+			taggedon : {
+				"man_made" : {
+					value : "water_tap"
+				}
+			}
+		},
+		"water_well" : {
+			taggedon : {
+				"man_made" : {
+					value : "water_well"
 				}
 			}
 		}
@@ -258,6 +342,17 @@ module.exports = {
 				"type": "slider",
 				"osmtags": ["personnel:count"]
 			},
+		},
+
+		college : {
+			"Students": {
+				"type": "slider",
+				"osmtags": ["student:count","student:coount","count:students"]
+			},
+			"Personnel Count": {
+				"type": "slider",
+				"osmtags": ["personnel:count"]
+			}
 		},
 
 		bank : {

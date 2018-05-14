@@ -42,12 +42,28 @@ module.exports = {
 			{
 				"label" : "Schools",
 				"value" : "total"
+			},
+			{
+				"label" : "Students",
+				"value" : "Students"
+			},
+			{
+				"label" : "Employees",
+				"value" : "Personnel Count"
 			}
 		],
 		college: [
 			{
-				"label" : "Schools",
+				"label" : "Colleges",
 				"value" : "total"
+			},
+			{
+				"label" : "Students",
+				"value" : "Students"
+			},
+			{
+				"label" : "Employees",
+				"value" : "Personnel Count"
 			}
 		],
 		university: [
@@ -302,6 +318,10 @@ module.exports = {
 			"label": "Select ward",
 			"type": "single-select",
 			"parameter_name": "ward",
+		},{
+			"label" : "Select students",
+			"type" : "range",
+			"parameter_name": "Students",
 		}],
 		college: [{
 			"label": "Select ward",
