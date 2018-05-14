@@ -330,6 +330,29 @@ module.exports = {
 			"label" : "Select students",
 			"type" : "range",
 			"parameter_name": "Students",
+		},{
+			"label": "Select Operator",
+			"options": [
+				{
+					"value": "public",
+					"label": "Public"
+				},
+				{
+					"value": "private",
+					"label": "Private"
+				},
+				{
+					"value": "government",
+					"label": "Government"
+				},
+				{
+					"value": "community",
+					"label": "Community"
+				}
+			],
+			"on" : "Operator",
+			"type": "multi-select",
+			"parameter_name": "education_operator"
 		}],
 		college: [{
 			"label": "Select ward",
@@ -389,6 +412,38 @@ module.exports = {
 			"label": "Select ward",
 			"type": "single-select",
 			"parameter_name": "ward",
+		},{
+			"label": "Select Network",
+			"options": [
+				{
+					"value": "VISA",
+					"label": "VISA"
+				},
+				{
+					"value" : "VISA Electron",
+					"label" : "VISA Electron"
+				},
+				{
+					"value": "JCB",
+					"label": "JCB"
+				},
+				{
+					"value": "MasterCard",
+					"label": "Mastercard"
+				},
+				{
+					"value": "Discover",
+					"label": "Discover"
+				},
+				{
+					"value" : "Cirrus",
+					"label" : "Cirrus"
+				}
+
+			],
+			"on" : "Network",
+			"type": "multi-select",
+			"parameter_name": "atm_network"
 		}],
 		government: [{
 			"label": "Select ward",
