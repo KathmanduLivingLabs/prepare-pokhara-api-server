@@ -457,21 +457,81 @@ module.exports = {
 			"label": "Select ward",
 			"type": "single-select",
 			"parameter_name": "ward",
+		},{
+			"label": "Select facilities",
+			"options": [
+				{
+					"value": "Toilet",
+					"label": "Toilet"
+				},
+				{
+					"value": "Water",
+					"label": "Water"
+				}
+			],
+			"type": "multi-select",
+			"boolean" : true,
+			"parameter_name": "place_of_worship_facilities"
 		}],
 		muslim: [{
 			"label": "Select ward",
 			"type": "single-select",
 			"parameter_name": "ward",
+		},{
+			"label": "Select facilities",
+			"options": [
+				{
+					"value": "Toilet",
+					"label": "Toilet"
+				},
+				{
+					"value": "Water",
+					"label": "Water"
+				}
+			],
+			"type": "multi-select",
+			"boolean" : true,
+			"parameter_name": "place_of_worship_facilities"
 		}],
 		buddhist: [{
 			"label": "Select ward",
 			"type": "single-select",
 			"parameter_name": "ward",
+		},{
+			"label": "Select facilities",
+			"options": [
+				{
+					"value": "Toilet",
+					"label": "Toilet"
+				},
+				{
+					"value": "Water",
+					"label": "Water"
+				}
+			],
+			"type": "multi-select",
+			"boolean" : true,
+			"parameter_name": "place_of_worship_facilities"
 		}],
 		christian: [{
 			"label": "Select ward",
 			"type": "single-select",
 			"parameter_name": "ward",
+		},{
+			"label": "Select facilities",
+			"options": [
+				{
+					"value": "Toilet",
+					"label": "Toilet"
+				},
+				{
+					"value": "Water",
+					"label": "Water"
+				}
+			],
+			"type": "multi-select",
+			"boolean" : true,
+			"parameter_name": "place_of_worship_facilities"
 		}],
 		radio: [{
 			"label": "Select ward",
