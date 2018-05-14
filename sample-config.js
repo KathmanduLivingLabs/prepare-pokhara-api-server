@@ -369,6 +369,10 @@ module.exports = {
 				"others" : ["development","commercial","co-operative","finance companies","micro finance"],
 				"matchTagValueExactly" : true
 			},
+			"Class" : {
+				"type" : "filter",
+				"osmtags" : ["nrb_class"]
+			},
 			"Operator" : {
 				"type" : "filter",
 				"osmtags" : ["name"],
