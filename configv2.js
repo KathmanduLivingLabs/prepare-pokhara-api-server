@@ -342,6 +342,40 @@ module.exports = {
 			"label": "Select ward",
 			"type": "single-select",
 			"parameter_name": "ward",
+		},{
+			"label": "Select Bank class",
+			"options": [
+				{
+					"value": "commercial",
+					"label": "Commercial"
+				},
+				{
+					"value": "development",
+					"label": "Development"
+				},
+				{
+					"value": "finance_companies",
+					"label": "Finance Companies"
+				},
+				{
+					"value": "co-operative",
+					"label": "Co-operative"
+				}
+			],
+			"on" : "Class",
+			"type": "multi-select",
+			"parameter_name": "bank_class"
+		},{
+			"label": "Select bank facility",
+			"options": [
+				{
+					"value": "ATM",
+					"label": "ATM"
+				}
+			],
+			"type": "multi-select",
+			"boolean" : true,
+			"parameter_name": "bank_facility"
 		}],
 		atm: [{
 			"label": "Select ward",
