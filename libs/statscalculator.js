@@ -125,6 +125,17 @@ export default class statsCalculator {
 			return passFilter;
 		}
 
+		function doesTagExistsSomewhere(filters,filter,feature,tagPresent){
+			var valueArray = filters[filter].split(",");
+			var containsFlag = 0;
+			for(var i=0; i<valueArray.length; i++){
+				if(feature.properties.tags[tagPresent].toLowerCase().includes(valueArray[i].toLowerCase())){
+					containsFlag++;
+				}
+			}
+			return containsFlag == valueArray.length ? true : false;
+		}
+
 		var filtered = [];
 		this.features.forEach((feature) => {
 			var passFilter = true;
@@ -163,7 +174,7 @@ export default class statsCalculator {
 						}
 					} else {
 
-						if (!(this.insights[filter]['type'] === "value" ? feature.properties.tags[tagPresent].toLowerCase().includes(this.insights[filter]['on'].toLowerCase()) : this.insights[filter]['object'] ? this.includesTag(objectParsed, feature.properties.tags[tagPresent], this.insights[filter]["others"],this.insights[filter]["matchTagValueExactly"]) : this.insights[filter]['equalityCheck'] ? feature.properties.tags[tagPresent].toLowerCase() === (this.filters[filter].toLowerCase()) : feature.properties.tags[tagPresent].toLowerCase().includes(this.filters[filter].toLowerCase()))) {
+						if (!(this.insights[filter]['type'] === "value" ? feature.properties.tags[tagPresent].toLowerCase().includes(this.insights[filter]['on'].toLowerCase()) : this.insights[filter]['object'] ? this.includesTag(objectParsed, feature.properties.tags[tagPresent], this.insights[filter]["others"],this.insights[filter]["matchTagValueExactly"]) : this.insights[filter]['equalityCheck'] ? feature.properties.tags[tagPresent].toLowerCase() === (this.filters[filter].toLowerCase()) : doesTagExistsSomewhere(this.filters,filter,feature,tagPresent))) {
 							passFilter = isAnException(filter,this.filters);
 						}
 					}

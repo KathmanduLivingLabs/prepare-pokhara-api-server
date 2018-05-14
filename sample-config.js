@@ -1,14 +1,14 @@
 module.exports = {
 	versions: {
-		v1: '/api/v1',
-		v2 : '/api/v2'
+		v1: "/api/v1",
+		v2 : "/api/v2"
 	},
 
 	overpass: {
-		baseUrl: 'http://www.overpass-api.de/api/interpreter?data=',
+		baseUrl: "http://www.overpass-api.de/api/interpreter?data=",
 		timeout: 250,
-		dataType: 'json',
-		include: ['node', 'way'],
+		dataType: "json",
+		include: ["node", "way"],
 		metaOn : true
 	},
 
@@ -16,28 +16,28 @@ module.exports = {
 
 	osmapi : {
 
-		liveBaseUrl : 'https://www.openstreetmap.org',
-		devBaseUrl : 'https://api06.dev.openstreetmap.org'
+		liveBaseUrl : "https://www.openstreetmap.org",
+		devBaseUrl : "https://api06.dev.openstreetmap.org"
 
 	},
 
 	amenities: {
-		'hospital': {
-			value : 'hospital'
+		"hospital": {
+			value : "hospital"
 		},
-		'school': {
-			value : 'school'
+		"school": {
+			value : "school"
 		},
-		'bank' : {
-			value : 'bank',
+		"bank" : {
+			value : "bank",
 			constraints : [{
-				'constraint' : 'name',
-				'keyname' : 'operator',
-				'multiple' : false
+				"constraint" : "name",
+				"keyname" : "operator",
+				"multiple" : false
 			},{
-				'constraint' : 'nrb_class',
-				'keyname' : 'nrb_class',
-				'multiple' : false
+				"constraint" : "nrb_class",
+				"keyname" : "nrb_class",
+				"multiple" : false
 			}],
 			grades : {
 				"on" : "nrb_class",
@@ -53,12 +53,12 @@ module.exports = {
 				
 			
 		},
-		'atm' : {
-			value  : 'atm',
+		"atm" : {
+			value  : "atm",
 			constraints : [{
-				'constraint' : 'operator',
-				'keyname' : 'operator',
-				'multiple' : false
+				"constraint" : "operator",
+				"keyname" : "operator",
+				"multiple" : false
 			}]
 		},
 		"pharmacy" : {
@@ -129,36 +129,36 @@ module.exports = {
 
 		hospital: {
 			"Bed Capacity": {
-				"type": 'slider',
-				"osmtags": ['capacity:beds', 'capacity:bed']
+				"type": "slider",
+				"osmtags": ["capacity:beds", "capacity:bed"]
 			},
 			"ICU": {
-				"type": 'filter',
-				"osmtags": ['facility:icu'],
+				"type": "filter",
+				"osmtags": ["facility:icu"],
 			},
 			"NICU": {
-				"type": 'filter',
-				"osmtags": ['facility:nicu']
+				"type": "filter",
+				"osmtags": ["facility:nicu"]
 			},
 			"Ventilator": {
-				"type": 'filter',
-				"osmtags": ['facility:ventilator']
+				"type": "filter",
+				"osmtags": ["facility:ventilator"]
 			},
 			"Xray": {
-				"type": 'filter',
-				"osmtags": ['facility:x-ray']
+				"type": "filter",
+				"osmtags": ["facility:x-ray"]
 			},
 			"Emergency": {
-				"type": 'filter',
-				"osmtags": ['emergency']
+				"type": "filter",
+				"osmtags": ["emergency"]
 			},
 			"Operation Theatre": {
-				"type": 'filter',
-				"osmtags": ['facility:operating_theatre','facility:operation_theatre']
+				"type": "filter",
+				"osmtags": ["facility:operating_theatre","facility:operation_theatre"]
 			},
 			"Personnel Count": {
-				"type": 'slider',
-				"osmtags": ['personnel:count']
+				"type": "slider",
+				"osmtags": ["personnel:count"]
 			},
 			// "Ambulance": {
 			// 	"type": "value",
@@ -166,8 +166,8 @@ module.exports = {
 			// 	"osmtags": ["emergency:services", "emergency_service"]
 			// },
 			"Ambulance": {
-				"type": 'filter',
-				"osmtags": ['facility:ambulance']
+				"type": "filter",
+				"osmtags": ["facility:ambulance"]
 			},
 			"Emergency Service": {
 				"type": "value",
@@ -178,8 +178,8 @@ module.exports = {
 
 		school: {
 			"Students": {
-				"type": 'slider',
-				"osmtags": ['student:count','student:coount','count:students']
+				"type": "slider",
+				"osmtags": ["student:count","student:coount","count:students"]
 			},
 			"Operator Type": {
 				"type": "filter",
@@ -204,8 +204,8 @@ module.exports = {
 				"osmtags": ["operator:type", "operator"]
 			},
 			"Personnel Count": {
-				"type": 'slider',
-				"osmtags": ['personnel:count']
+				"type": "slider",
+				"osmtags": ["personnel:count"]
 			},
 		},
 
@@ -245,6 +245,18 @@ module.exports = {
 				"hidden":true,
 				"equalityCheck" : true
 			}
+		},
+		clinic : {
+			"Speciality": {
+				"type": "filter",
+				"osmtags": ["healthcare:speciality"]
+			}
+		},
+		health_post : {
+			"Operator": {
+				"type": "filter",
+				"osmtags": ["operator:type"]
+			}
 		}
 	}
-}
+};

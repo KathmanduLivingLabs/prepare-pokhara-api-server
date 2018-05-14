@@ -58,14 +58,24 @@ export default {
 					collectedParameter = JSON.parse(collectedParameter);
 					req.collects.filters = {};
 					parameter.options.forEach((option)=>{
-						if(collectedParameter[option.value] && collectedParameter[option.value] == true){
-							req.collects.filters[option.value] = "yes";
+						if(collectedParameter[option.value]){
+							if(parameter.boolean){
+								if(collectedParameter[option.value] == true){
+									req.collects.filters[option.value] = "yes";
+								}
+							}else{
+								if(!req.collects.filters[parameter.on]){
+									req.collects.filters[parameter.on] = option.value;
+								}else{
+									req.collects.filters[parameter.on] = req.collects.filters[parameter.on] + "," + option.value;
+								}
+							}
 						}
 					});
 				}
 			}
 		});
-		// console.log(">>",req.collects);
+		console.log(">>",req.collects);
 		return next();
 	},
 
