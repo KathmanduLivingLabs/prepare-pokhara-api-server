@@ -109,6 +109,78 @@ module.exports = {
 				"label" : "Parks",
 				"value" : "total"
 			}
+		],
+		storage_tank: [
+			{
+				"label" : "Public Water Tanks",
+				"value" : "total"
+			}
+		],
+		water_tap: [
+			{
+				"label" : "Public Taps",
+				"value" : "total"
+			}
+		],
+		water_well: [
+			{
+				"label" : "Wells",
+				"value" : "total"
+			}
+		],
+		fuel: [
+			{
+				"label" : "Petrol Stations",
+				"value" : "total"
+			}
+		],
+		gas: [
+			{
+				"label" : "LPG Shops",
+				"value" : "total"
+			}
+		],
+		hindu: [
+			{
+				"label" : "Temples",
+				"value" : "total"
+			}
+		],
+		muslim: [
+			{
+				"label" : "Masjids",
+				"value" : "total"
+			}
+		],
+		buddhist: [
+			{
+				"label" : "Monasteries",
+				"value" : "total"
+			}
+		],
+		christian: [
+			{
+				"label" : "Churches",
+				"value" : "total"
+			}
+		],
+		radio: [
+			{
+				"label" : "FM Stations",
+				"value" : "total"
+			}
+		],
+		television: [
+			{
+				"label" : "TV Stations",
+				"value" : "total"
+			}
+		],
+		newspaper: [
+			{
+				"label" : "Newspapers",
+				"value" : "total"
+			}
 		]
 	},
 	parameters: {
@@ -282,6 +354,66 @@ module.exports = {
 			"parameter_name": "ward",
 		}],
 		park: [{
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		}],
+		storage_tank: [{
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		}],
+		water_tap: [{
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		}],
+		water_well: [{
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		}],
+		fuel: [{
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		}],
+		gas: [{
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		}],
+		hindu: [{
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		}],
+		muslim: [{
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		}],
+		buddhist: [{
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		}],
+		christian: [{
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		}],
+		radio: [{
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		}],
+		television: [{
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		}],
+		newspaper: [{
 			"label": "Select ward",
 			"type": "single-select",
 			"parameter_name": "ward",
