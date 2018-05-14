@@ -37,6 +37,30 @@ module.exports = {
 				"label" : "Dentists",
 				"value" : "total"
 			}
+		],
+		school: [
+			{
+				"label" : "Schools",
+				"value" : "total"
+			}
+		],
+		college: [
+			{
+				"label" : "Schools",
+				"value" : "total"
+			}
+		],
+		university: [
+			{
+				"label" : "Schools",
+				"value" : "total"
+			}
+		],
+		kindergarten: [
+			{
+				"label" : "Schools",
+				"value" : "total"
+			}
 		]
 	},
 	parameters: {
@@ -150,6 +174,26 @@ module.exports = {
 			"parameter_name": "ward",
 		}],
 		dentist: [{
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		}],
+		school: [{
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		}],
+		college: [{
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		}],
+		university: [{
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		}],
+		kindergarten: [{
 			"label": "Select ward",
 			"type": "single-select",
 			"parameter_name": "ward",
