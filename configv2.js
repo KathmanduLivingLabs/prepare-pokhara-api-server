@@ -61,6 +61,54 @@ module.exports = {
 				"label" : "Schools",
 				"value" : "total"
 			}
+		],
+		bank: [
+			{
+				"label" : "Banks",
+				"value" : "total"
+			}
+		],
+		atm: [
+			{
+				"label" : "ATMs",
+				"value" : "total"
+			}
+		],
+		government: [
+			{
+				"label" : "Government Offices",
+				"value" : "total"
+			}
+		],
+		ngo: [
+			{
+				"label" : "NGOs",
+				"value" : "total"
+			}
+		],
+		hotel: [
+			{
+				"label" : "Hotels",
+				"value" : "total"
+			}
+		],
+		restaurant: [
+			{
+				"label" : "Restaurants",
+				"value" : "total"
+			}
+		],
+		museum: [
+			{
+				"label" : "Museums",
+				"value" : "total"
+			}
+		],
+		park: [
+			{
+				"label" : "Parks",
+				"value" : "total"
+			}
 		]
 	},
 	parameters: {
@@ -194,6 +242,46 @@ module.exports = {
 			"parameter_name": "ward",
 		}],
 		kindergarten: [{
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		}],
+		bank: [{
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		}],
+		atm: [{
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		}],
+		government: [{
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		}],
+		ngo: [{
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		}],
+		hotel: [{
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		}],
+		restaurant: [{
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		}],
+		museum: [{
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		}],
+		park: [{
 			"label": "Select ward",
 			"type": "single-select",
 			"parameter_name": "ward",

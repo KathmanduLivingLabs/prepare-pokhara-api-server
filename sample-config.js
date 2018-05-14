@@ -28,6 +28,15 @@ module.exports = {
 		"school": {
 			value : "school"
 		},
+		"college": {
+			value : "college"
+		},
+		"university": {
+			value : "university"
+		},
+		"kindergarten": {
+			value : "kindergarten"
+		},
 		"bank" : {
 			value : "bank",
 			constraints : [{
@@ -90,6 +99,20 @@ module.exports = {
 				}
 			}
 		},
+		"government" : {
+			taggedon : {
+				"office" : {
+					value : "government"
+				}
+			}
+		},
+		"ngo" : {
+			taggedon : {
+				"office" : {
+					value : "ngo"
+				}
+			}
+		},
 		"security" : {
 			taggedon : {
 				"amenity" : {
@@ -108,6 +131,34 @@ module.exports = {
 				"leisure" : {
 					value : "park"
 				},
+			}
+		},
+		"hotel" : {
+			taggedon : {
+				"tourism" : {
+					value : "hotel"
+				}
+			}
+		},
+		"restaurant" : {
+			taggedon : {
+				"tourism" : {
+					value : "restaurant"
+				}
+			}
+		},
+		"museum" : {
+			taggedon : {
+				"tourism" : {
+					value : "museum"
+				}
+			}
+		},
+		"park" : {
+			taggedon : {
+				"leisure" : {
+					value : "park"
+				}
 			}
 		},
 		"communication" : {
