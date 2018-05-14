@@ -119,6 +119,7 @@ export default {
 								feature.geometry = turf.centroid(feature).geometry;
 							}
 						});
+						
 						req.cdata = {
 							success: 1,
 							geojson: geojsonResponse,
@@ -126,6 +127,22 @@ export default {
 						};
 						req.unfilteredFeatures = geojsonResponse.features;
 						return next();
+
+						// geojsonResponse.createdOn = new Date().getTime();
+						// fs.writeFile(`./newsnapshots/${req.collects.type}.json`, JSON.stringify(geojsonResponse), "utf8", (err, response) => {
+						// 	if (err) return next({
+						// 		success : 0,
+						// 		message : err
+						// 	});
+						// 	req.cdata = {
+						// 		success: 1,
+						// 		geojson: geojsonResponse,
+						// 		message: "Features fetched successfully !"
+						// 	};
+						// 	req.unfilteredFeatures = geojsonResponse.features;
+						// 	return next();								
+						// });
+
 					}else{
 						return next({
 							success: 0,
@@ -142,7 +159,7 @@ export default {
 		} else {
 
 			try {
-				var geojsonResponse = JSON.parse(fs.readFileSync(`./snapshots/${req.collects.type}.json`, "utf8"));
+				var geojsonResponse = JSON.parse(fs.readFileSync(`./newsnapshots/${req.collects.type}.json`, "utf8"));
 				req.unfilteredFeatures = geojsonResponse.features;
 			} catch (e) {
 				req.cdata = {
