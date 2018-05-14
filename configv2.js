@@ -106,6 +106,14 @@ module.exports = {
 			{
 				"label" : "Hotels",
 				"value" : "total"
+			},
+			{
+				"label" : "Bed capacity",
+				"value" : "Bed Capacity"
+			},
+			{
+				"label" : "Room capacity",
+				"value" : "Room Capacity"
 			}
 		],
 		restaurant: [
@@ -396,6 +404,14 @@ module.exports = {
 			"label": "Select ward",
 			"type": "single-select",
 			"parameter_name": "ward",
+		},{
+			"label" : "Select bed capacity",
+			"type" : "range",
+			"parameter_name": "Bed Capacity",
+		},{
+			"label" : "Select room capacity",
+			"type" : "range",
+			"parameter_name": "Room Capacity",
 		}],
 		restaurant: [{
 			"label": "Select ward",
