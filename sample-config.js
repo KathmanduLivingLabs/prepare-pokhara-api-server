@@ -13,6 +13,7 @@ module.exports = {
 	},
 
 	useSnapshot : false,
+	useSnapshotv2 : true,
 
 	osmapi : {
 
@@ -323,6 +324,10 @@ module.exports = {
 				"object" : true,
 				"others" : ["private","government","community"]
 			},
+			"Operator" : {
+				"type" : "filter",
+				"osmtags" : ["operator:type"]
+			},
 			"Private" : {
 				"type": "value",
 				"on": "private",
@@ -388,12 +393,18 @@ module.exports = {
 			}
 		},
 
+		// atm : {
+		// 	"Operator" : {
+		// 		"type" : "filter",
+		// 		"osmtags" : ["operator","brand"],
+		// 		"hidden":true,
+		// 		"equalityCheck" : true
+		// 	}
+		// },
 		atm : {
-			"Operator" : {
+			"Network" : {
 				"type" : "filter",
-				"osmtags" : ["operator","brand"],
-				"hidden":true,
-				"equalityCheck" : true
+				"osmtags" : ["network"]
 			}
 		},
 		clinic : {
@@ -406,6 +417,56 @@ module.exports = {
 			"Operator": {
 				"type": "filter",
 				"osmtags": ["operator:type"]
+			}
+		},
+		hotel : {
+			"Bed Capacity": {
+				"type": "slider",
+				"osmtags": ["beds"]
+			},
+			"Room Capacity": {
+				"type": "slider",
+				"osmtags": ["rooms"]
+			},
+		},
+		hindu : {
+			"Toilet": {
+				"type": "filter",
+				"osmtags": ["facility:toilet","toilets"],
+			},
+			"Water": {
+				"type": "filter",
+				"osmtags": ["facility:drinking_water","drinking_water"],
+			}
+		},
+		muslim : {
+			"Toilet": {
+				"type": "filter",
+				"osmtags": ["facility:toilet","toilets"],
+			},
+			"Water": {
+				"type": "filter",
+				"osmtags": ["facility:drinking_water","drinking_water"],
+			}
+		},
+		buddhist : {
+			"Toilet": {
+				"type": "filter",
+				"osmtags": ["facility:toilet","toilets"],
+			},
+			"Water": {
+				"type": "filter",
+				"osmtags": ["facility:drinking_water","drinking_water"],
+			}
+		},
+		christian : {
+			"Toilet": {
+				"type": "filter",
+				"osmtags": ["facility:toilet","toilets"],
+			},
+			"Water": {
+				"type": "filter",
+				"osmtags": ["facility:drinking_water","drinking_water"],
 			}
 		}
 	}

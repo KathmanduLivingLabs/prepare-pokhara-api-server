@@ -81,7 +81,7 @@ export default {
 
 	fetch: (req, res, next) => {
 
-		if (!config.useSnapshot) {
+		if (!config.useSnapshotv2) {
 			var json = {
 				requestConfig: {
 					dataType: overpassConfig.dataType,
