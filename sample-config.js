@@ -185,7 +185,7 @@ module.exports = {
 		},
 		"restaurant" : {
 			taggedon : {
-				"tourism" : {
+				"amenity" : {
 					value : "restaurant"
 				}
 			}
@@ -428,6 +428,10 @@ module.exports = {
 				"type": "slider",
 				"osmtags": ["rooms"]
 			},
+			"Stars": {
+				"type": "slider",
+				"osmtags": ["stars"]
+			},
 		},
 		hindu : {
 			"Toilet": {
@@ -467,6 +471,24 @@ module.exports = {
 			"Water": {
 				"type": "filter",
 				"osmtags": ["facility:drinking_water","drinking_water"],
+			}
+		},
+		storage_tank : {
+			"drinking_water": {
+				"type": "filter",
+				"osmtags": ["drinking_water"],
+			}
+		},
+		water_tap : {
+			"drinking_water": {
+				"type": "filter",
+				"osmtags": ["drinking_water"],
+			}
+		},
+		water_well : {
+			"drinking_water": {
+				"type": "filter",
+				"osmtags": ["drinking_water"],
 			}
 		}
 	}

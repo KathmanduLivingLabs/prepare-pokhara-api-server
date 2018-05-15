@@ -406,7 +406,7 @@ export default {
 			parameters[index+1] = parameter;
 			if(parameter.type === "range"){
 				parameters[index+1].range = {
-					"step": 50,
+					"step": parameter.step || 50,
 					"max": req.cdata.initialMetrics.slider[parameter.parameter_name],
 					"min": 0,
 					"high": req.cdata.initialMetrics.slider[parameter.parameter_name],

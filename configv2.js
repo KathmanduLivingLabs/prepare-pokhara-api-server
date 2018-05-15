@@ -467,6 +467,11 @@ module.exports = {
 			"label" : "Select room capacity",
 			"type" : "range",
 			"parameter_name": "Room Capacity",
+		},{
+			"label" : "Select Number of Stars",
+			"type" : "range",
+			"step" : 1,
+			"parameter_name": "Stars",
 		}],
 		restaurant: [{
 			"label": "Select ward",
@@ -487,16 +492,49 @@ module.exports = {
 			"label": "Select ward",
 			"type": "single-select",
 			"parameter_name": "ward",
+		},{
+			"label": "Select attributes",
+			"options": [
+				{
+					"value": "drinking_water",
+					"label": "Drinking water tank?"
+				}
+			],
+			"type": "multi-select",
+			"boolean" : true,
+			"parameter_name": "storage_tank_attributes"
 		}],
 		water_tap: [{
 			"label": "Select ward",
 			"type": "single-select",
 			"parameter_name": "ward",
+		},{
+			"label": "Select attributes",
+			"options": [
+				{
+					"value": "drinking_water",
+					"label": "Drinking water tap?"
+				}
+			],
+			"type": "multi-select",
+			"boolean" : true,
+			"parameter_name": "water_tap_attributes"
 		}],
 		water_well: [{
 			"label": "Select ward",
 			"type": "single-select",
 			"parameter_name": "ward",
+		},{
+			"label": "Select attributes",
+			"options": [
+				{
+					"value": "drinking_water",
+					"label": "Drinking water well?"
+				}
+			],
+			"type": "multi-select",
+			"boolean" : true,
+			"parameter_name": "water_well_attributes"
 		}],
 		fuel: [{
 			"label": "Select ward",
