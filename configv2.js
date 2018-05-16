@@ -166,25 +166,49 @@ module.exports = {
 		],
 		hindu: [
 			{
-				"label" : "Temples",
+				"label" : "Hinduism",
 				"value" : "total"
 			}
 		],
 		muslim: [
 			{
-				"label" : "Masjids",
+				"label" : "Islam",
 				"value" : "total"
 			}
 		],
 		buddhist: [
 			{
-				"label" : "Monasteries",
+				"label" : "Buddhism",
 				"value" : "total"
 			}
 		],
 		christian: [
 			{
-				"label" : "Churches",
+				"label" : "Christianity",
+				"value" : "total"
+			}
+		],
+		kirat: [
+			{
+				"label" : "Kirat",
+				"value" : "total"
+			}
+		],
+		sikh: [
+			{
+				"label" : "Sikhism",
+				"value" : "total"
+			}
+		],
+		judaism: [
+			{
+				"label" : "Judaism",
+				"value" : "total"
+			}
+		],
+		"other-religion": [
+			{
+				"label" : "Other Religions",
 				"value" : "total"
 			}
 		],
@@ -203,6 +227,12 @@ module.exports = {
 		newspaper: [
 			{
 				"label" : "Newspapers",
+				"value" : "total"
+			}
+		],
+		police: [
+			{
+				"label" : "Police Stations",
 				"value" : "total"
 			}
 		]
@@ -626,6 +656,86 @@ module.exports = {
 			"boolean" : true,
 			"parameter_name": "place_of_worship_facilities"
 		}],
+		kirat: [{
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		},{
+			"label": "Select facilities",
+			"options": [
+				{
+					"value": "Toilet",
+					"label": "Toilet"
+				},
+				{
+					"value": "Water",
+					"label": "Water"
+				}
+			],
+			"type": "multi-select",
+			"boolean" : true,
+			"parameter_name": "place_of_worship_facilities"
+		}],
+		sikh: [{
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		},{
+			"label": "Select facilities",
+			"options": [
+				{
+					"value": "Toilet",
+					"label": "Toilet"
+				},
+				{
+					"value": "Water",
+					"label": "Water"
+				}
+			],
+			"type": "multi-select",
+			"boolean" : true,
+			"parameter_name": "place_of_worship_facilities"
+		}],
+		judaism: [{
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		},{
+			"label": "Select facilities",
+			"options": [
+				{
+					"value": "Toilet",
+					"label": "Toilet"
+				},
+				{
+					"value": "Water",
+					"label": "Water"
+				}
+			],
+			"type": "multi-select",
+			"boolean" : true,
+			"parameter_name": "place_of_worship_facilities"
+		}],
+		"other-religion": [{
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		},{
+			"label": "Select facilities",
+			"options": [
+				{
+					"value": "Toilet",
+					"label": "Toilet"
+				},
+				{
+					"value": "Water",
+					"label": "Water"
+				}
+			],
+			"type": "multi-select",
+			"boolean" : true,
+			"parameter_name": "place_of_worship_facilities"
+		}],
 		radio: [{
 			"label": "Select ward",
 			"type": "single-select",
@@ -637,6 +747,11 @@ module.exports = {
 			"parameter_name": "ward",
 		}],
 		newspaper: [{
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		}],
+		police: [{
 			"label": "Select ward",
 			"type": "single-select",
 			"parameter_name": "ward",
