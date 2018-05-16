@@ -34,7 +34,7 @@ module.exports = {
 		],
 		dentist: [
 			{
-				"label" : "Dentists",
+				"label" : "Dental Clinics",
 				"value" : "total"
 			}
 		],
@@ -68,13 +68,13 @@ module.exports = {
 		],
 		university: [
 			{
-				"label" : "Schools",
+				"label" : "Universities",
 				"value" : "total"
 			}
 		],
 		kindergarten: [
 			{
-				"label" : "Schools",
+				"label" : "Kindergartens",
 				"value" : "total"
 			}
 		],
@@ -166,49 +166,49 @@ module.exports = {
 		],
 		hindu: [
 			{
-				"label" : "Hinduism",
+				"label" : "Place of Worship (Hinduism)",
 				"value" : "total"
 			}
 		],
 		muslim: [
 			{
-				"label" : "Islam",
+				"label" : "Place of Worship (Islam)",
 				"value" : "total"
 			}
 		],
 		buddhist: [
 			{
-				"label" : "Buddhism",
+				"label" : "Place of Worship (Buddhism)",
 				"value" : "total"
 			}
 		],
 		christian: [
 			{
-				"label" : "Christianity",
+				"label" : "Place of Worship (Christianity)",
 				"value" : "total"
 			}
 		],
 		kirat: [
 			{
-				"label" : "Kirat",
+				"label" : "Place of Worship (Kirat)",
 				"value" : "total"
 			}
 		],
 		sikh: [
 			{
-				"label" : "Sikhism",
+				"label" : "Place of Worship (Sikhism)",
 				"value" : "total"
 			}
 		],
 		judaism: [
 			{
-				"label" : "Judaism",
+				"label" : "Place of Worship (Judaism)",
 				"value" : "total"
 			}
 		],
 		"other-religion": [
 			{
-				"label" : "Other Religions",
+				"label" : "Place of Worship (Other Religions)",
 				"value" : "total"
 			}
 		],
