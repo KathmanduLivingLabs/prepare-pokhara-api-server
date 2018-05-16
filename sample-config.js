@@ -114,6 +114,34 @@ module.exports = {
 				}
 			}
 		},
+		"kirat" : {
+			taggedon : {
+				"religion" : {
+					value : "kirat"
+				}
+			}
+		},
+		"sikh" : {
+			taggedon : {
+				"religion" : {
+					value : "sikh"
+				}
+			}
+		},
+		"judaism" : {
+			taggedon : {
+				"religion" : {
+					value : "judaism"
+				}
+			}
+		},
+		"other-religion" : {
+			taggedon : {
+				"religion" : {
+					value : "judaism"
+				}
+			}
+		},
 		"energy" : {
 			taggedon : {
 				"amenity" : {
@@ -156,7 +184,7 @@ module.exports = {
 				}
 			}
 		},
-		"security" : {
+		"police" : {
 			taggedon : {
 				"amenity" : {
 					value : "police"
@@ -464,6 +492,46 @@ module.exports = {
 			}
 		},
 		christian : {
+			"Toilet": {
+				"type": "filter",
+				"osmtags": ["facility:toilet","toilets"],
+			},
+			"Water": {
+				"type": "filter",
+				"osmtags": ["facility:drinking_water","drinking_water"],
+			}
+		},
+		kirat : {
+			"Toilet": {
+				"type": "filter",
+				"osmtags": ["facility:toilet","toilets"],
+			},
+			"Water": {
+				"type": "filter",
+				"osmtags": ["facility:drinking_water","drinking_water"],
+			}
+		},
+		sikh : {
+			"Toilet": {
+				"type": "filter",
+				"osmtags": ["facility:toilet","toilets"],
+			},
+			"Water": {
+				"type": "filter",
+				"osmtags": ["facility:drinking_water","drinking_water"],
+			}
+		},
+		judaism : {
+			"Toilet": {
+				"type": "filter",
+				"osmtags": ["facility:toilet","toilets"],
+			},
+			"Water": {
+				"type": "filter",
+				"osmtags": ["facility:drinking_water","drinking_water"],
+			}
+		},
+		"other-religion" : {
 			"Toilet": {
 				"type": "filter",
 				"osmtags": ["facility:toilet","toilets"],
