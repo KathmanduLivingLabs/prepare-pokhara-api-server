@@ -38,6 +38,12 @@ module.exports = {
 				"value" : "total"
 			}
 		],
+		veterinary: [
+			{
+				"label" : "Veterinaries",
+				"value" : "total"
+			}
+		],
 		school: [
 			{
 				"label" : "Schools",
@@ -437,6 +443,21 @@ module.exports = {
 			"on" : "Class",
 			"type": "multi-select",
 			"parameter_name": "bank_class"
+		},{
+			"label": "Select Operator",
+			"options": [
+				{
+					"value": "public",
+					"label": "Public"
+				},
+				{
+					"value": "private",
+					"label": "Private"
+				}
+			],
+			"on" : "Operator Type",
+			"type": "multi-select",
+			"parameter_name": "bank_operator"
 		},{
 			"label": "Select bank facility",
 			"options": [
