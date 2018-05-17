@@ -422,6 +422,10 @@ module.exports = {
 				"hidden":true,
 				"equalityCheck" : true
 			},
+			"Operator Type" : {
+				"type" : "filter",
+				"osmtags" : ["operator:type"]
+			},
 			"Network" : {
 				"type" : "filter",
 				"osmtags" : ["network"],
