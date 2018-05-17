@@ -24,6 +24,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/extracts",  express.static(__dirname + "/extracts"));
 app.use("/apidocs", express.static(path.join(__dirname, "/apidocs")));
+app.use("/apidocs/v2", express.static(path.join(__dirname, "/apidocsv2")));
 
 app.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");

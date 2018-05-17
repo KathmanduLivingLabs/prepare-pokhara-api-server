@@ -44,6 +44,8 @@ export default {
 
 	v2parameters : (req,res,next) => {
 
+		req.collects.filters = {};
+		req.collects.variables = {};
 		configv2.parameters[req.collects.type].forEach((parameter)=>{
 			if (typeof req.body[parameter.parameter_name] !== "undefined" || typeof req.query[parameter.parameter_name] !== "undefined") {
 				let collectedParameter =  JSON.parse(sanitize(JSON.stringify(req.body[parameter.parameter_name] || req.query[parameter.parameter_name])));
@@ -51,12 +53,9 @@ export default {
 					req.collects[parameter.parameter_name] = collectedParameter;
 				}else if(parameter.type === "range"){
 					collectedParameter = JSON.parse(collectedParameter);
-					req.collects.variables = {
-						[parameter.parameter_name] : (collectedParameter)
-					};
+					req.collects.variables[[parameter.parameter_name]] = collectedParameter;
 				}else if(parameter.type === "multi-select"){
 					collectedParameter = JSON.parse(collectedParameter);
-					req.collects.filters = {};
 					parameter.options.forEach((option)=>{
 						if(collectedParameter[option.value]){
 							if(parameter.boolean){
