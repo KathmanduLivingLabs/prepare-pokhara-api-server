@@ -235,6 +235,12 @@ module.exports = {
 				"label" : "Police Stations",
 				"value" : "total"
 			}
+		],
+		army_apf: [
+			{
+				"label" : "Army and Armed Police Force",
+				"value" : "total"
+			}
 		]
 	},
 	parameters: {
@@ -348,6 +354,11 @@ module.exports = {
 			"parameter_name": "ward",
 		}],
 		dentist: [{
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		}],
+		veterinary: [{
 			"label": "Select ward",
 			"type": "single-select",
 			"parameter_name": "ward",
@@ -752,6 +763,11 @@ module.exports = {
 			"parameter_name": "ward",
 		}],
 		police: [{
+			"label": "Select ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		}],
+		army_apf: [{
 			"label": "Select ward",
 			"type": "single-select",
 			"parameter_name": "ward",

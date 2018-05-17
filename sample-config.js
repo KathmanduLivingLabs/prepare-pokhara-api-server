@@ -83,6 +83,9 @@ module.exports = {
 		"health_post" : {
 			value : "health_post"
 		},
+		"veterinary" : {
+			value : "veterinary"
+		},
 		"place_of_worship" : {
 			value : "place_of_worship"
 		},
@@ -188,6 +191,13 @@ module.exports = {
 			taggedon : {
 				"amenity" : {
 					value : "police"
+				}
+			}
+		},
+		"army_apf" : {
+			taggedon : {
+				"landuse" : {
+					value : "military"
 				}
 			}
 		},
