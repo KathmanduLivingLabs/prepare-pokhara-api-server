@@ -111,7 +111,7 @@ export default class statsCalculator {
 
 		function isAnException(filter,filters){
 			var passFilter;
-			var exceptions = ['Bed Capacity','Students']; // EXCEPTIONS FOR showing all data when LOW for slider is 0
+			var exceptions = ['Bed Capacity','Students','Room Capacity','Stars']; // EXCEPTIONS FOR showing all data when LOW for slider is 0
 			if(exceptions.indexOf(filter) !== -1 ){
 				if(filters[filter].low && filters[filter].low == 0){
 					passFilter = true;
@@ -183,7 +183,7 @@ export default class statsCalculator {
 					if (this.insights[filter]["others"] && this.insights[filter]["others"].length && objectParsed.indexOf("others") !== -1) {
 
 					} else {
-						var exceptions = ['Bed Capacity','Students']; // EXCEPTIONS FOR showing all data when LOW for slider is 0
+						var exceptions = ['Bed Capacity','Students','Room Capacity','Stars']; // EXCEPTIONS FOR showing all data when LOW for slider is 0
 						if(exceptions.indexOf(filter) !== -1 ){
 							if(this.filters[filter].low == 0){
 							}else{
