@@ -113,7 +113,7 @@ export default class statsCalculator {
 			var passFilter;
 			var exceptions = ['Bed Capacity','Students','Room Capacity','Stars']; // EXCEPTIONS FOR showing all data when LOW for slider is 0
 			if(exceptions.indexOf(filter) !== -1 ){
-				if(filters[filter].low && filters[filter].low == 0){
+				if(filters[filter].low != undefined && filters[filter].low == 0){
 					passFilter = true;
 				}else{
 					passFilter = false;
@@ -183,17 +183,17 @@ export default class statsCalculator {
 					if (this.insights[filter]["others"] && this.insights[filter]["others"].length && objectParsed.indexOf("others") !== -1) {
 
 					} else {
-						var exceptions = ['Bed Capacity','Students','Room Capacity','Stars']; // EXCEPTIONS FOR showing all data when LOW for slider is 0
-						if(exceptions.indexOf(filter) !== -1 ){
-							if(this.filters[filter].low == 0){
-							}else{
-								passFilter = false;
-							}
-						}else{
-							passFilter = false;
+						// var exceptions = ['Bed Capacity','Students','Room Capacity','Stars']; // EXCEPTIONS FOR showing all data when LOW for slider is 0
+						// if(exceptions.indexOf(filter) !== -1 ){
+						// 	if(this.filters[filter].low == 0){
+						// 	}else{
+						// 		passFilter = false;
+						// 	}
+						// }else{
+						// 	passFilter = false;
 
-						}
-						// passFilter = isAnException(filter,this.filters);
+						// }
+						passFilter = isAnException(filter,this.filters);
 						
 					}
 				}
