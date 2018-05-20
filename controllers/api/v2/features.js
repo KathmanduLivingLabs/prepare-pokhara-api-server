@@ -75,6 +75,7 @@ export default {
 			}
 		});
 		console.log(">>",req.collects);
+		req.reqCollects = JSON.parse(JSON.stringify(req.collects));
 		return next();
 	},
 
@@ -211,13 +212,13 @@ export default {
 					}
 				});
 			}
-			filtered = new statsCalculator(features, type, insights, filters).applyFilter();
+			filtered = new statsCalculator(features, type, insights, filters).applyFilter(req.reqCollects);
 			req.preFiltered = filtered;
 			if(backupFeatures && Object.keys(backupFeatures).length){
 				for(var backupFeature in backupFeatures){
 					filters[backupFeature] = backupFeatures[backupFeature];
 				}
-				postFiltered = new statsCalculator(features, type, insights, filters).applyFilter();
+				postFiltered = new statsCalculator(features, type, insights, filters).applyFilter(req.reqCollects);
 				req.cdata.geojson.features = postFiltered;
 			}else{
 				req.cdata.geojson.features = filtered;

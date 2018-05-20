@@ -107,20 +107,27 @@ export default class statsCalculator {
 
 	}
 
-	applyFilter() {
+	applyFilter(reqCollects) {
 
 		function isAnException(filter,filters){
 			var passFilter;
 			var exceptions = ['Bed Capacity','Students','Room Capacity','Stars']; // EXCEPTIONS FOR showing all data when LOW for slider is 0
 			if(exceptions.indexOf(filter) !== -1 ){
 				if(filters[filter].low != undefined && filters[filter].low == 0){
-					passFilter = true;
+					if(reqCollects === undefined){
+						passFilter = true;
+					}else{
+						if(Object.keys(reqCollects.filters).length>=1){
+							passFilter = false;
+						}else{
+							passFilter = true;
+						}
+					}
 				}else{
 					passFilter = false;
 				}
 			}else{
 				passFilter = false;
-
 			}
 			return passFilter;
 		}
