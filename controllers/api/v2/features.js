@@ -27,18 +27,9 @@ export default {
 				req.collects[field] = JSON.parse(sanitize(JSON.stringify(req.body[field] || req.query[field])));
 			}
 		});
-
 		for (var parameter in req.collects) {
 			if (req.collects[parameter] == "*") delete req.collects[parameter];
 		}
-
-		next();
-	},
-
-	required: (req, res, next) => {
-
-		var err = proc.utils.required(req.collects, ["type"]);
-		if (err) return next(err);
 		next();
 	},
 
@@ -77,6 +68,13 @@ export default {
 		console.log(">>",req.collects);
 		req.reqCollects = JSON.parse(JSON.stringify(req.collects));
 		return next();
+	},
+
+	required: (req, res, next) => {
+
+		var err = proc.utils.required(req.collects, ["type"]);
+		if (err) return next(err);
+		next();
 	},
 
 	fetch: (req, res, next) => {
@@ -203,30 +201,31 @@ export default {
 		var insights = config.statsIndicator[type];
 
 		if (filters && Object.keys(filters).length) {
-			var backupFeatures = {} ;
-			if( config.amenities[req.collects.type].postFilter &&  config.amenities[req.collects.type].postFilter.length ){
-				config.amenities[req.collects.type].postFilter.forEach(function(postFilterParam){
-					if(filters[postFilterParam]){
-						backupFeatures[postFilterParam] = filters[postFilterParam];  
-						delete filters[postFilterParam];	
-					}
-				});
-			}
+			// var backupFeatures = {} ;
+			// if( config.amenities[req.collects.type].postFilter &&  config.amenities[req.collects.type].postFilter.length ){
+			// 	config.amenities[req.collects.type].postFilter.forEach(function(postFilterParam){
+			// 		if(filters[postFilterParam]){
+			// 			backupFeatures[postFilterParam] = filters[postFilterParam];  
+			// 			delete filters[postFilterParam];	
+			// 		}
+			// 	});
+			// }
 			filtered = new statsCalculator(features, type, insights, filters).applyFilter(req.reqCollects);
 			req.preFiltered = filtered;
-			if(backupFeatures && Object.keys(backupFeatures).length){
-				for(var backupFeature in backupFeatures){
-					filters[backupFeature] = backupFeatures[backupFeature];
-				}
-				postFiltered = new statsCalculator(features, type, insights, filters).applyFilter(req.reqCollects);
-				req.cdata.geojson.features = postFiltered;
-			}else{
-				req.cdata.geojson.features = filtered;
-			}
-			next();
+			// if(backupFeatures && Object.keys(backupFeatures).length){
+			// 	for(var backupFeature in backupFeatures){
+			// 		filters[backupFeature] = backupFeatures[backupFeature];
+			// 	}
+			// 	postFiltered = new statsCalculator(features, type, insights, filters).applyFilter(req.reqCollects);
+			// 	req.cdata.geojson.features = postFiltered;
+			// }else{
+			// 	req.cdata.geojson.features = filtered;
+			// }
+			req.cdata.geojson.features = filtered;
+			return next();
 		} else {
 			req.preFiltered = features;
-			next();
+			return next();
 		}
 
 	},
