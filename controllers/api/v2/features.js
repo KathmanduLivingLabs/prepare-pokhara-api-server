@@ -21,7 +21,7 @@ export default {
 	collect: (req, res, next) => {
 
 		req.collects = {};
-		var fields = ["type", "filters", "ward", "variables", "log"];
+		var fields = ["type", "filters", "ward", "variables", "log","takeSnapshot","snapshotKey"];
 		fields.forEach((field) => {
 			if (typeof req.body[field] !== "undefined" || typeof req.query[field] !== "undefined") {
 				req.collects[field] = JSON.parse(sanitize(JSON.stringify(req.body[field] || req.query[field])));
@@ -79,7 +79,7 @@ export default {
 
 	fetch: (req, res, next) => {
 
-		if (!config.useSnapshotv2) {
+		if ((req.collects.takeSnapshot && req.collects.snapshotKey === config.snapshotKey) || !config.useSnapshotv2) {
 			var json = {
 				requestConfig: {
 					dataType: overpassConfig.dataType,
@@ -117,30 +117,31 @@ export default {
 								feature.geometry = turf.centroid(feature).geometry;
 							}
 						});
-						
-						req.cdata = {
-							success: 1,
-							geojson: geojsonResponse,
-							message: "Features fetched successfully !"
-						};
-						req.unfilteredFeatures = geojsonResponse.features;
-						return next();
-
-						// geojsonResponse.createdOn = new Date().getTime();
-						// fs.writeFile(`./newsnapshots/${req.collects.type}.json`, JSON.stringify(geojsonResponse), "utf8", (err, response) => {
-						// 	if (err) return next({
-						// 		success : 0,
-						// 		message : err
-						// 	});
-						// 	req.cdata = {
-						// 		success: 1,
-						// 		geojson: geojsonResponse,
-						// 		message: "Features fetched successfully !"
-						// 	};
-						// 	req.unfilteredFeatures = geojsonResponse.features;
-						// 	return next();								
-						// });
-
+							
+						if(req.collects.takeSnapshot && req.collects.snapshotKey === config.snapshotKey){
+							geojsonResponse.createdOn = new Date().getTime();
+							fs.writeFile(`./newsnapshots/${req.collects.type}.json`, JSON.stringify(geojsonResponse), "utf8", (err, response) => {
+								if (err) return next({
+									success : 0,
+									message : err
+								});
+								req.cdata = {
+									success: 1,
+									geojson: geojsonResponse,
+									message: "Features fetched successfully !"
+								};
+								req.unfilteredFeatures = geojsonResponse.features;
+								return next();								
+							});
+						}else{
+							req.cdata = {
+								success: 1,
+								geojson: geojsonResponse,
+								message: "Features fetched successfully !"
+							};
+							req.unfilteredFeatures = geojsonResponse.features;
+							return next();
+						}
 					}else{
 						return next({
 							success: 0,

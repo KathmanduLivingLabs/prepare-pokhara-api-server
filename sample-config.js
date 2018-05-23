@@ -15,6 +15,8 @@ module.exports = {
 	useSnapshot : false,
 	useSnapshotv2 : true,
 
+	snapshotKey : "secret",
+
 	osmapi : {
 
 		liveBaseUrl : "https://www.openstreetmap.org",
