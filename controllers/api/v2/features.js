@@ -438,6 +438,11 @@ export default {
 			insights : insights
 		};
 
+		// req.cdata.filters = Object.keys(req.cdata.parameters).reduce((array,parameter)=>{
+		// 	array.push(req.cdata.parameters[parameter]);
+		// 	return array;
+		// },[]);
+
 		return next();
 	}
 };

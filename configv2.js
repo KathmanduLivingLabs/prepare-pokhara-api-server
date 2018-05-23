@@ -381,10 +381,6 @@ module.exports = {
 			"label": "Select Operator",
 			"options": [
 				{
-					"value": "public",
-					"label": "Public"
-				},
-				{
 					"value": "private",
 					"label": "Private"
 				},
