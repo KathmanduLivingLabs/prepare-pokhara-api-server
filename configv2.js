@@ -160,7 +160,7 @@ module.exports = {
 		],
 		fuel: [
 			{
-				"label" : "Petrol Stations",
+				"label" : "Fuel Stations",
 				"value" : "total"
 			}
 		],

@@ -120,7 +120,13 @@ export default class statsCalculator {
 					containsFlag++;
 				}
 			}
-			return containsFlag == valueArray.length ? true : false;
+			// For amenity type which have mutually exclusive filters do OR. Where they are not mutually exclusives do AND.
+			const mutuallyNonExclusiveFiltersAreFor = ["hospital","hindu","muslim","buddhist","christian","kirat","sikh","judaism","other-religion"];
+			if(mutuallyNonExclusiveFiltersAreFor.indexOf(reqCollects.type) !== -1){
+				return containsFlag == valueArray.length ? true : false;
+			}else{
+				return containsFlag>=1 ? true : false;
+			}
 		}
 
 		var filtered = [];
