@@ -434,6 +434,10 @@ module.exports = {
 				{
 					"value": "co-operative",
 					"label": "Co-operative"
+				},
+				{
+					"value" : "micro finance",
+					"label" : "Micro finance"
 				}
 			],
 			"on" : "Class",
