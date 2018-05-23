@@ -6,7 +6,7 @@ module.exports = {
 				"value" : "total"
 			},
 			{
-				"label" : "Bed capacity",
+				"label" : "Bed Capacity",
 				"value" : "Bed Capacity"
 			},
 			{
@@ -114,11 +114,11 @@ module.exports = {
 				"value" : "total"
 			},
 			{
-				"label" : "Bed capacity",
+				"label" : "Bed Capacity",
 				"value" : "Bed Capacity"
 			},
 			{
-				"label" : "Room capacity",
+				"label" : "Room Capacity",
 				"value" : "Room Capacity"
 			}
 		],
@@ -172,49 +172,49 @@ module.exports = {
 		],
 		hindu: [
 			{
-				"label" : "Place of Worship (Hinduism)",
+				"label" : "Place Of Worship (Hinduism)",
 				"value" : "total"
 			}
 		],
 		muslim: [
 			{
-				"label" : "Place of Worship (Islam)",
+				"label" : "Place Of Worship (Islam)",
 				"value" : "total"
 			}
 		],
 		buddhist: [
 			{
-				"label" : "Place of Worship (Buddhism)",
+				"label" : "Place Of Worship (Buddhism)",
 				"value" : "total"
 			}
 		],
 		christian: [
 			{
-				"label" : "Place of Worship (Christianity)",
+				"label" : "Place Of Worship (Christianity)",
 				"value" : "total"
 			}
 		],
 		kirat: [
 			{
-				"label" : "Place of Worship (Kirat)",
+				"label" : "Place Of Worship (Kirat)",
 				"value" : "total"
 			}
 		],
 		sikh: [
 			{
-				"label" : "Place of Worship (Sikhism)",
+				"label" : "Place Of Worship (Sikhism)",
 				"value" : "total"
 			}
 		],
 		judaism: [
 			{
-				"label" : "Place of Worship (Judaism)",
+				"label" : "Place Of Worship (Judaism)",
 				"value" : "total"
 			}
 		],
 		"other-religion": [
 			{
-				"label" : "Place of Worship (Other Religions)",
+				"label" : "Place Of Worship (Other Religions)",
 				"value" : "total"
 			}
 		],
@@ -244,22 +244,22 @@ module.exports = {
 		],
 		army_apf: [
 			{
-				"label" : "Army and Armed Police Force",
+				"label" : "Army And Armed Police Force",
 				"value" : "total"
 			}
 		]
 	},
 	parameters: {
 		hospital: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		},{
-			"label" : "Select bed capacity",
+			"label" : "Select Bed Capacity",
 			"type" : "range",
 			"parameter_name": "Bed Capacity",
 		},{
-			"label": "Select facilities",
+			"label": "Select Facilities",
 			"options": [
 				{
 					"value": "ICU",
@@ -295,7 +295,7 @@ module.exports = {
 			"parameter_name": "hospital_facilities"
 		}],
 		clinic: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		},{
@@ -335,7 +335,7 @@ module.exports = {
 			"parameter_name": "clinic_specialization"
 		}],
 		health_post: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		},{
@@ -355,26 +355,26 @@ module.exports = {
 			"parameter_name": "health_post_operator"
 		}],
 		pharmacy: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		}],
 		dentist: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		}],
 		veterinary: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		}],
 		school: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		},{
-			"label" : "Select students",
+			"label" : "Select Students",
 			"type" : "range",
 			"parameter_name": "Students",
 		},{
@@ -398,26 +398,26 @@ module.exports = {
 			"parameter_name": "education_operator"
 		}],
 		college: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		}],
 		university: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		}],
 		kindergarten: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		}],
 		bank: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		},{
-			"label": "Select Bank class",
+			"label": "Select Bank Class",
 			"options": [
 				{
 					"value": "commercial",
@@ -437,7 +437,7 @@ module.exports = {
 				},
 				{
 					"value" : "micro finance",
-					"label" : "Micro finance"
+					"label" : "Micro Finance"
 				}
 			],
 			"on" : "Class",
@@ -459,7 +459,7 @@ module.exports = {
 			"type": "multi-select",
 			"parameter_name": "bank_operator"
 		},{
-			"label": "Select bank facility",
+			"label": "Select Bank Facility",
 			"options": [
 				{
 					"value": "ATM",
@@ -471,7 +471,7 @@ module.exports = {
 			"parameter_name": "bank_facility"
 		}],
 		atm: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		},{
@@ -508,54 +508,54 @@ module.exports = {
 			"parameter_name": "atm_network"
 		}],
 		government: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		}],
 		ngo: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		}],
 		hotel: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		},{
-			"label" : "Select bed capacity",
+			"label" : "Select Bed Capacity",
 			"type" : "range",
 			"parameter_name": "Bed Capacity",
 		},{
-			"label" : "Select room capacity",
+			"label" : "Select Room Capacity",
 			"type" : "range",
 			"parameter_name": "Room Capacity",
 		},{
-			"label" : "Select Number of Stars",
+			"label" : "Select Number Of Stars",
 			"type" : "range",
 			"step" : 1,
 			"parameter_name": "Stars",
 		}],
 		restaurant: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		}],
 		museum: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		}],
 		park: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		}],
 		storage_tank: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		},{
-			"label": "Select attributes",
+			"label": "Select Attributes",
 			"options": [
 				{
 					"value": "drinking_water",
@@ -567,11 +567,11 @@ module.exports = {
 			"parameter_name": "storage_tank_attributes"
 		}],
 		water_tap: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		},{
-			"label": "Select attributes",
+			"label": "Select Attributes",
 			"options": [
 				{
 					"value": "drinking_water",
@@ -583,11 +583,11 @@ module.exports = {
 			"parameter_name": "water_tap_attributes"
 		}],
 		water_well: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		},{
-			"label": "Select attributes",
+			"label": "Select Attributes",
 			"options": [
 				{
 					"value": "drinking_water",
@@ -599,21 +599,21 @@ module.exports = {
 			"parameter_name": "water_well_attributes"
 		}],
 		fuel: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		}],
 		gas: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		}],
 		hindu: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		},{
-			"label": "Select facilities",
+			"label": "Select Facilities",
 			"options": [
 				{
 					"value": "Toilet",
@@ -629,11 +629,11 @@ module.exports = {
 			"parameter_name": "place_of_worship_facilities"
 		}],
 		muslim: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		},{
-			"label": "Select facilities",
+			"label": "Select Facilities",
 			"options": [
 				{
 					"value": "Toilet",
@@ -649,11 +649,11 @@ module.exports = {
 			"parameter_name": "place_of_worship_facilities"
 		}],
 		buddhist: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		},{
-			"label": "Select facilities",
+			"label": "Select Facilities",
 			"options": [
 				{
 					"value": "Toilet",
@@ -669,11 +669,11 @@ module.exports = {
 			"parameter_name": "place_of_worship_facilities"
 		}],
 		christian: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		},{
-			"label": "Select facilities",
+			"label": "Select Facilities",
 			"options": [
 				{
 					"value": "Toilet",
@@ -689,11 +689,11 @@ module.exports = {
 			"parameter_name": "place_of_worship_facilities"
 		}],
 		kirat: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		},{
-			"label": "Select facilities",
+			"label": "Select Facilities",
 			"options": [
 				{
 					"value": "Toilet",
@@ -709,11 +709,11 @@ module.exports = {
 			"parameter_name": "place_of_worship_facilities"
 		}],
 		sikh: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		},{
-			"label": "Select facilities",
+			"label": "Select Facilities",
 			"options": [
 				{
 					"value": "Toilet",
@@ -729,11 +729,11 @@ module.exports = {
 			"parameter_name": "place_of_worship_facilities"
 		}],
 		judaism: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		},{
-			"label": "Select facilities",
+			"label": "Select Facilities",
 			"options": [
 				{
 					"value": "Toilet",
@@ -749,11 +749,11 @@ module.exports = {
 			"parameter_name": "place_of_worship_facilities"
 		}],
 		"other-religion": [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		},{
-			"label": "Select facilities",
+			"label": "Select Facilities",
 			"options": [
 				{
 					"value": "Toilet",
@@ -769,27 +769,27 @@ module.exports = {
 			"parameter_name": "place_of_worship_facilities"
 		}],
 		radio: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		}],
 		television: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		}],
 		newspaper: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		}],
 		police: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		}],
 		army_apf: [{
-			"label": "Select ward",
+			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
 		}]
