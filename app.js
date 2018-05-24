@@ -11,6 +11,11 @@ import config from "./config";
 
 let app = express();
 
+// const cronJob = require("./snapshot");
+// if(!cronJob.running){
+// 	cronJob.start(); //start cron job
+// }
+
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");

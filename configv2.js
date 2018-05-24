@@ -339,7 +339,7 @@ module.exports = {
 			"type": "single-select",
 			"parameter_name": "ward",
 		},{
-			"label": "Select Operator",
+			"label": "Select Type Of Health Post",
 			"options": [
 				{
 					"value": "public",
@@ -378,7 +378,7 @@ module.exports = {
 			"type" : "range",
 			"parameter_name": "Students",
 		},{
-			"label": "Select Operator",
+			"label": "Select Type Of School",
 			"options": [
 				{
 					"value": "private",
@@ -444,7 +444,7 @@ module.exports = {
 			"type": "multi-select",
 			"parameter_name": "bank_class"
 		},{
-			"label": "Select Operator",
+			"label": "Select Type Of Bank",
 			"options": [
 				{
 					"value": "public",

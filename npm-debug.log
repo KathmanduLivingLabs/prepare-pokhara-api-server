@@ -17,7 +17,7 @@
 4 verbose stack     at tryToString (fs.js:456:3)
 4 verbose stack     at FSReqWrap.readFileAfterClose [as oncomplete] (fs.js:443:12)
 5 verbose cwd /home/drklrd/Desktop/KLL/prepare-pokhara
-6 error Linux 4.13.0-39-generic
+6 error Linux 4.13.0-41-generic
 7 error argv "/home/drklrd/.nvm/versions/node/v6.10.2/bin/node" "/home/drklrd/.nvm/versions/node/v6.10.2/bin/npm" "run" "dev"
 8 error node v6.10.2
 9 error npm  v3.10.10
