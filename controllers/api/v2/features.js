@@ -445,5 +445,27 @@ export default {
 		},[]);
 
 		return next();
+	},
+
+	tagsMapping : (req,res,next)=>{
+		const appRootPath = require("app-root-path");
+		const rawTagMappings = require(appRootPath + `/tagmappings`).tagMapper;
+		req.cdata = {
+			success : 1,
+			tags : Object.keys(rawTagMappings).map((type)=>{
+				return {
+					"amenity" : type,
+					"tags" : rawTagMappings[type].filter((tag)=>{
+						if(tag.isVisibleOnPopup === "TRUE") return tag;
+					}).map((tag)=>{
+						return {
+							"tag" : tag.keyName,
+							"label" : tag.keyLabel
+						};
+					})
+				};
+			})
+		};
+		return next();
 	}
 };

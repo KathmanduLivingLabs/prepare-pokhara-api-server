@@ -14,8 +14,8 @@ module.exports = () => {
 
 	/**
 	 * @api {get} /api/v2/features Features 
-	 * @apiName Features
-	 * @apiGroup Fetch
+	 * @apiName Get feature
+	 * @apiGroup Features
 	 *
 	 *
 	 * @apiParam {Varchar} type Type for feature to be fetched
@@ -118,6 +118,29 @@ module.exports = () => {
 		mw.respond,
 		mw.error
 	);
+
+	/**
+	    * @api {get} /api/v2/features/tags  Get all tags related to amenities
+	    * @apiName Get all tags
+	    * @apiGroup Features
+	   
+		* @apiSuccess {Integer} success Success status
+	    * @apiSuccess {tags[]} object Tags object
+	   
+
+	    * @apiSuccessExample {json} Success-Response:
+	    *
+	    *	{
+	    *	  "success": 1,
+	   	*	  "tags" : tagsObject
+	   	*	}
+		*	
+	    *
+	    * @apiDescription API to get all tags related to amenities
+	    * @apiVersion 1.0.0
+	    */
+
+	api.get("/features/tags",apiFeatures.tagsMapping,mw.respond,mw.error);
 
 	return api;
 };
