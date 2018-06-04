@@ -460,6 +460,7 @@ export default {
 					}).map((tag)=>{
 						return {
 							"tag" : tag.keyName,
+							"database_schema_key" : tag.keyName.replace(/:/g , "_"),
 							"label" : tag.keyLabel
 						};
 					})
