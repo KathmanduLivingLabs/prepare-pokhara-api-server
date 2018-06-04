@@ -428,7 +428,7 @@ module.exports = {
 					"label": "Development"
 				},
 				{
-					"value": "finance_companies",
+					"value": "finance companies",
 					"label": "Finance Companies"
 				},
 				{
