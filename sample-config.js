@@ -41,7 +41,15 @@ module.exports = {
 			value : "kindergarten"
 		},
 		"bank" : {
-			value : "bank",
+			taggedon : {
+				"amenity" : {
+					value : "bank"
+				},
+				"nrb_class" : {
+					value : "co-operative",
+					negative : true
+				}
+			},
 			constraints : [{
 				"constraint" : "name",
 				"keyname" : "operator",
@@ -65,14 +73,13 @@ module.exports = {
 				
 			
 		},
-		cooperatives : {
+		"cooperative" : {
 			taggedon : {
 				"amenity" : {
 					value : "bank"
 				},
 				"nrb_class" : {
 					value : "co-operative",
-					negative : true
 				}
 			}
 		},
@@ -445,6 +452,13 @@ module.exports = {
 				"hidden" : true,
 				"object" : true,
 				"others" : []
+			}
+		},
+
+		cooperative : {
+			"Operator Type" : {
+				"type" : "filter",
+				"osmtags" : ["operator:type"]
 			}
 		},
 

@@ -12,7 +12,8 @@ import config from "./config";
 let app = express();
 
 const cronJob = require("./snapshot");
-if(!cronJob.running){
+const useCronJob = true;
+if(!cronJob.running && useCronJob){
 	cronJob.start(); //start cron job
 }
 

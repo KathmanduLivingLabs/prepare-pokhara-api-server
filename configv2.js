@@ -90,6 +90,12 @@ module.exports = {
 				"value" : "total"
 			}
 		],
+		cooperative: [
+			{
+				"label" : "Cooperatives",
+				"value" : "total"
+			}
+		],
 		atm: [
 			{
 				"label" : "ATMs",
@@ -338,21 +344,6 @@ module.exports = {
 			"label": "Select Ward",
 			"type": "single-select",
 			"parameter_name": "ward",
-		},{
-			"label": "Select type of Health Post",
-			"options": [
-				{
-					"value": "public",
-					"label": "Public"
-				},
-				{
-					"value": "private",
-					"label": "Private"
-				}
-			],
-			"on" : "Operator",
-			"type": "multi-select",
-			"parameter_name": "health_post_operator"
 		}],
 		pharmacy: [{
 			"label": "Select Ward",
@@ -432,10 +423,6 @@ module.exports = {
 					"label": "Finance Companies"
 				},
 				{
-					"value": "co-operative",
-					"label": "Co-operative"
-				},
-				{
 					"value" : "micro finance",
 					"label" : "Micro Finance"
 				}
@@ -469,6 +456,26 @@ module.exports = {
 			"type": "multi-select",
 			"boolean" : true,
 			"parameter_name": "bank_facility"
+		}],
+		cooperative: [{
+			"label": "Select Ward",
+			"type": "single-select",
+			"parameter_name": "ward",
+		},{
+			"label": "Type of Operator",
+			"options": [
+				{
+					"value": "public",
+					"label": "Government"
+				},
+				{
+					"value": "private",
+					"label": "Private"
+				}
+			],
+			"on" : "Operator Type",
+			"type": "multi-select",
+			"parameter_name": "cooperative_operator"
 		}],
 		atm: [{
 			"label": "Select Ward",
