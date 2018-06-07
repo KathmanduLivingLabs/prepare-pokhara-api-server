@@ -18,7 +18,7 @@ export default class queryBuilder {
 			for (let releveanttag in releveanttags){
 				const multipleAmenites = !config.amenities[this.json.type].taggedon ? amenities[this.json.type].value.split(",") : config.amenities[this.json.type].taggedon[releveanttag].value.split(",") ;
 				multipleAmenites.forEach((eachamenity) => {
-					filters = `${filters}["${releveanttag}"="${eachamenity}"] `;		
+					filters = `${filters}["${releveanttag}" ${config.amenities[this.json.type].taggedon && config.amenities[this.json.type].taggedon[releveanttag].negative ? "!=" : "=" } "${eachamenity}"] `;		
 				});
 			}
 			// for (var tag in tags) {
@@ -39,9 +39,10 @@ export default class queryBuilder {
 			let poly = this.json.ward !== undefined ? geojsonparser.parseWards(this.json.ward) : geojsonparser.boundingBox() ;
 			query = query + "(";
 			this.json.featureTypes.forEach(function(featureType) {
-				filters.split(" ").filter(Boolean).forEach((filter)=>{
-					query = query + featureType + filter + poly + ";";
-				});
+				// filters.split(" ").filter(Boolean).forEach((filter)=>{
+				// 	query = query + featureType + filter + poly + ";";
+				// });
+				query = query + featureType + filters + poly + ";";
 			});
 			query = query + "); ";
 			return query;
