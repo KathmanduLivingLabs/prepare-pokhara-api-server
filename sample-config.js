@@ -65,6 +65,17 @@ module.exports = {
 				
 			
 		},
+		cooperatives : {
+			taggedon : {
+				"amenity" : {
+					value : "bank"
+				},
+				"nrb_class" : {
+					value : "co-operative",
+					negative : true
+				}
+			}
+		},
 		"atm" : {
 			value  : "atm",
 			constraints : [{

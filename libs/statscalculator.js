@@ -89,7 +89,31 @@ export default class statsCalculator {
 
 	applyFilter(reqCollects) {
 
-		function isAnException(filter,filters){
+		function applyFilterForTagsMissing(reqCollectsFilters,featureTags,applicableFilters){
+			var containsFlag = 0;
+			for(var filter in reqCollectsFilters){
+				var osmtags = applicableFilters[filter].osmtags;
+				var innerFlag = 0;
+				for(var i=0; i<osmtags.length; i++){
+					if(featureTags[osmtags[i]] && featureTags[osmtags[i]].toLowerCase().includes(reqCollectsFilters[filter].toLowerCase())){
+						innerFlag++;
+					}
+				}
+				if(innerFlag > 0){
+					containsFlag++;
+				}
+				
+			}
+			// For amenity type which have mutually exclusive filters do OR. Where they are not mutually exclusives do AND.
+			var mutuallyNonExclusiveFiltersAreFor = ["hospital","hindu","muslim","buddhist","christian","kirat","sikh","judaism","other-religion"];
+			if(mutuallyNonExclusiveFiltersAreFor.indexOf(reqCollects.type) !== -1){
+				return containsFlag == Object.keys(reqCollectsFilters).length ? true : false;
+			}else{
+				return containsFlag>=1 ? true : false;
+			}
+		}
+
+		function isAnException(filter,filters,feature,applicableFilters){
 			var passFilter;
 			var exceptions = ["Bed Capacity","Students","Room Capacity","Stars"]; // EXCEPTIONS FOR showing all data when LOW for slider is 0
 			if(exceptions.indexOf(filter) !== -1 ){
@@ -98,7 +122,11 @@ export default class statsCalculator {
 						passFilter = true;
 					}else{
 						if(Object.keys(reqCollects.filters).length>=1){
-							passFilter = false;
+							if(filters[filter].low != undefined && filters[filter].low == 0){
+								passFilter = applyFilterForTagsMissing(reqCollects.filters,feature.properties.tags,applicableFilters);
+							}else{
+								passFilter = false;	
+							}
 						}else{
 							passFilter = true;
 						}
@@ -185,7 +213,7 @@ export default class statsCalculator {
 						// 	passFilter = false;
 
 						// }
-						passFilter = isAnException(filter,this.filters);
+						passFilter = isAnException(filter,this.filters,feature,this.insights);
 					}
 				}
 			}

@@ -5,7 +5,7 @@ const config = require("./config");
 
 const baseUrl = "http://localhost:4040/api/v2/features";
 const amenities = Object.keys(require("./configv2").insightsKey);
-const callRate = 10000; // in seconds
+const callRate = 10000; // delay consecutive request by this much seconds. Just to ensure that there is certain time gap between consecutive API request
 
 const cronScheduledAt = "0 */59 * * * *"; // Run cron at every 59 minutes
 
