@@ -172,49 +172,49 @@ module.exports = {
 		],
 		hindu: [
 			{
-				"label" : "Place Of Worship (Hinduism)",
+				"label" : "Place of Worship (Hinduism)",
 				"value" : "total"
 			}
 		],
 		muslim: [
 			{
-				"label" : "Place Of Worship (Islam)",
+				"label" : "Place of Worship (Islam)",
 				"value" : "total"
 			}
 		],
 		buddhist: [
 			{
-				"label" : "Place Of Worship (Buddhism)",
+				"label" : "Place of Worship (Buddhism)",
 				"value" : "total"
 			}
 		],
 		christian: [
 			{
-				"label" : "Place Of Worship (Christianity)",
+				"label" : "Place of Worship (Christianity)",
 				"value" : "total"
 			}
 		],
 		kirat: [
 			{
-				"label" : "Place Of Worship (Kirat)",
+				"label" : "Place of Worship (Kirat)",
 				"value" : "total"
 			}
 		],
 		sikh: [
 			{
-				"label" : "Place Of Worship (Sikhism)",
+				"label" : "Place of Worship (Sikhism)",
 				"value" : "total"
 			}
 		],
 		judaism: [
 			{
-				"label" : "Place Of Worship (Judaism)",
+				"label" : "Place of Worship (Judaism)",
 				"value" : "total"
 			}
 		],
 		"other-religion": [
 			{
-				"label" : "Place Of Worship (Other Religions)",
+				"label" : "Place of Worship (Other Religions)",
 				"value" : "total"
 			}
 		],
@@ -244,7 +244,7 @@ module.exports = {
 		],
 		army_apf: [
 			{
-				"label" : "Army And Armed Police Force",
+				"label" : "Army and Armed Police Force",
 				"value" : "total"
 			}
 		]
@@ -339,7 +339,7 @@ module.exports = {
 			"type": "single-select",
 			"parameter_name": "ward",
 		},{
-			"label": "Select Type Of Health Post",
+			"label": "Select type of Health Post",
 			"options": [
 				{
 					"value": "public",
@@ -378,7 +378,7 @@ module.exports = {
 			"type" : "range",
 			"parameter_name": "Students",
 		},{
-			"label": "Select Type Of School",
+			"label": "Select Type of School",
 			"options": [
 				{
 					"value": "private",
@@ -444,11 +444,11 @@ module.exports = {
 			"type": "multi-select",
 			"parameter_name": "bank_class"
 		},{
-			"label": "Select Type Of Bank",
+			"label": "Type of Operator",
 			"options": [
 				{
 					"value": "public",
-					"label": "Public"
+					"label": "Government"
 				},
 				{
 					"value": "private",
@@ -530,7 +530,7 @@ module.exports = {
 			"type" : "range",
 			"parameter_name": "Room Capacity",
 		},{
-			"label" : "Select Number Of Stars",
+			"label" : "Select Number of Stars",
 			"type" : "range",
 			"step" : 1,
 			"parameter_name": "Stars",
