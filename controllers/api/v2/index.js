@@ -142,6 +142,29 @@ module.exports = () => {
 
 	api.get("/features/tags",apiFeatures.tagsMapping,mw.respond,mw.error);
 
+	/**
+	    * @api {get} /api/v2/features/attractions  Get all tourist attraction places
+	    * @apiName Get all tourist attraction places
+	    * @apiGroup Features
+	   
+		* @apiSuccess {Integer} success Success status
+	    * @apiSuccess {tags[]} object attractions object
+	   
+
+	    * @apiSuccessExample {json} Success-Response:
+	    *
+	    *	{
+	    *	  "success": 1,
+	   	*	  "attractions" : attractionsObject (View in REST Client)
+	   	*	}
+		*	
+	    *
+	    * @apiDescription API to get all tourist attraction places
+	    * @apiVersion 1.0.0
+	    */
+
+	api.get("/features/attractions",apiFeatures.attractions,mw.respond,mw.error);
+
 	return api;
 };
 

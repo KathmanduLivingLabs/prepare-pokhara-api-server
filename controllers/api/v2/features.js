@@ -1,3 +1,4 @@
+import appRootPath from "app-root-path";
 import config from "../../../config";
 import configv2 from "../../../configv2";
 import request from "request";
@@ -448,7 +449,6 @@ export default {
 	},
 
 	tagsMapping : (req,res,next)=>{
-		const appRootPath = require("app-root-path");
 		const rawTagMappings = require(appRootPath + `/tagmappings`).tagMapper;
 		req.cdata = {
 			success : 1,
@@ -468,5 +468,78 @@ export default {
 			})
 		};
 		return next();
+	},
+
+	attractions : (req,res,next)=>{
+
+		let placesOfAttractionsConfig = require(appRootPath + "/config-tourist-attractions").placesOfAttractionsConfig;
+		placesOfAttractionsConfig = JSON.parse(JSON.stringify(placesOfAttractionsConfig));
+		
+		const bboxCoords = turf.bbox(require("../../../geojson-data/pokhara-geojson.json").features[0]);
+		const bboxString = `(${bboxCoords[1]},${bboxCoords[0]},${bboxCoords[3]},${bboxCoords[2]})`;
+
+		let queryString = `
+			[out:json][timeout:25];
+			(
+		`;
+
+		placesOfAttractionsConfig.forEach((places)=>{
+			places.pois.forEach((poi)=>{
+				queryString = queryString + `${poi.reference.type}(${poi.reference.id})${bboxString};`;
+			});
+		});
+
+		queryString = queryString + `
+			);
+			out body;
+			>;
+			out skel qt;
+		`;
+
+		request(overpassConfig.baseUrl + queryString, null, (err, response) => {
+			if (err) return next(err);
+			if (response && response.statusCode && response.body) {
+				let geojsonResponse;
+				try {
+					geojsonResponse = osmToGeojson(JSON.parse(response.body));
+				} catch (e) {
+					req.cdata = {
+						success: 0,
+						message: response.body
+					};
+					return next();
+				}
+				if(geojsonResponse && geojsonResponse.features){
+					geojsonResponse.features.forEach((feature) => {
+						if (feature.geometry.type === "Polygon") {
+							feature.geometry = turf.centroid(feature).geometry;
+						}
+					});
+					placesOfAttractionsConfig.forEach((placesOfAttraction)=>{
+						placesOfAttraction.pois = {
+							"type": "FeatureCollection",
+							"features": placesOfAttraction.pois.map((poi)=>{
+								return _.findWhere(geojsonResponse.features,{id : `${poi.reference.type}/${poi.reference.id}`});
+							})
+						};
+					});
+					req.cdata = {
+						success : 1,
+						attractions : placesOfAttractionsConfig
+					};
+					return next();
+				}else{
+					return next({
+						success: 0,
+						message: "Something went wrong !"
+					});
+				}
+			}else{
+				return next({
+					success: 0,
+					message: "Something went wrong !"
+				});
+			}
+		});
 	}
 };
