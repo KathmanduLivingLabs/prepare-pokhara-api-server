@@ -434,6 +434,9 @@ export default {
 				pois : req.cdata.geojson,
 				boundary : !req.collects.ward || req.collects.ward === "*" ? require("../../../geojson-data/pokhara-geojson.json").features[0] : _.findWhere(require("../../../geojson-data/wards.json").features,{
 					id : req.collects.ward
+				}),
+				boundaryWithWards : !req.collects.ward || req.collects.ward === "*" ? require("../../../geojson-data/wards.json") : _.findWhere(require("../../../geojson-data/wards.json").features,{
+					id : req.collects.ward
 				})
 			},
 			parameters : parameters,
