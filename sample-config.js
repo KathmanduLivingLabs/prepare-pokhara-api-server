@@ -8,7 +8,7 @@ module.exports = {
 		baseUrl: "http://www.overpass-api.de/api/interpreter?data=",
 		timeout: 250,
 		dataType: "json",
-		include: ["node", "way"],
+		include: ["node", "way","relation"],
 		metaOn : true
 	},
 
