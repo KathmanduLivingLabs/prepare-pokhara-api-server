@@ -114,7 +114,7 @@ export default {
 					}
 					if(geojsonResponse && geojsonResponse.features){
 						geojsonResponse.features.forEach((feature) => {
-							if (feature.geometry.type === "Polygon") {
+							if (feature.geometry.type === "Polygon" || feature.geometry.type === "MultiPolygon") {
 								feature.geometry = turf.centroid(feature).geometry;
 							}
 						});
