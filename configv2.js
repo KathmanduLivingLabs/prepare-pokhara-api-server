@@ -604,7 +604,8 @@ module.exports = {
 			"options": [
 				{
 					"value": "drinking_water",
-					"label": "Drinking water tank?"
+					"label": "Drinking water tank?",
+					"database_schema_key" : "drinking_water"
 				}
 			],
 			"type": "multi-select",
@@ -620,7 +621,8 @@ module.exports = {
 			"options": [
 				{
 					"value": "drinking_water",
-					"label": "Drinking water tap?"
+					"label": "Drinking water tap?",
+					"database_schema_key" : "drinking_water"
 				}
 			],
 			"type": "multi-select",
@@ -636,7 +638,8 @@ module.exports = {
 			"options": [
 				{
 					"value": "drinking_water",
-					"label": "Drinking water well?"
+					"label": "Drinking water well?",
+					"database_schema_key" : "drinking_water"
 				}
 			],
 			"type": "multi-select",

@@ -231,6 +231,12 @@ export const tagMapper = {
 		isVisibleOnPopup: "TRUE",
 		keyLabel: "Operator Type",
 		isEditable: "TRUE",
+	},{
+		section: "storage_tank",
+		keyName: "drinking_water",
+		isVisibleOnPopup: "TRUE",
+		keyLabel: "Drinking Water",
+		isEditable: "TRUE",
 	}],
 	water_tap: [{
 		section: "water_tap",
@@ -262,6 +268,12 @@ export const tagMapper = {
 		isVisibleOnPopup: "TRUE",
 		keyLabel: "Operator Type",
 		isEditable: "TRUE",
+	},{
+		section: "water_tap",
+		keyName: "drinking_water",
+		isVisibleOnPopup: "TRUE",
+		keyLabel: "Drinking Water",
+		isEditable: "TRUE",
 	}],
 	water_well: [{
 		section: "water_well",
@@ -292,6 +304,12 @@ export const tagMapper = {
 		keyName: "operator:type",
 		isVisibleOnPopup: "TRUE",
 		keyLabel: "Operator Type",
+		isEditable: "TRUE",
+	},{
+		section: "water_well",
+		keyName: "drinking_water",
+		isVisibleOnPopup: "TRUE",
+		keyLabel: "Drinking Water",
 		isEditable: "TRUE",
 	}],
 	police: [{
