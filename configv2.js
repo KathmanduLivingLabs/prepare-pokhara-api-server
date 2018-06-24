@@ -264,36 +264,44 @@ module.exports = {
 			"label" : "Select Bed Capacity",
 			"type" : "range",
 			"parameter_name": "Bed Capacity",
+			"database_schema_key" : "capacity_beds"
 		},{
 			"label": "Select Facilities",
 			"options": [
 				{
 					"value": "ICU",
-					"label": "ICU"
+					"label": "ICU",
+					"database_schema_key" : "facility_icu"
 				},
 				{
 					"value": "NICU",
-					"label": "NICU"
+					"label": "NICU",
+					"database_schema_key" : "facility_nicu"
 				},
 				{
 					"value": "Ventilator",
-					"label": "Ventilator"
+					"label": "Ventilator",
+					"database_schema_key" : "facility_ventilator"
 				},
 				{
 					"value": "Xray",
-					"label": "Xray"
+					"label": "Xray",
+					"database_schema_key" : "facility_xray"
 				},
 				{
 					"value": "Emergency",
-					"label": "Emergency"
+					"label": "Emergency",
+					"database_schema_key" : "emergency"
 				},
 				{
 					"value": "Operation Theatre",
-					"label": "Operation Theatre"
+					"label": "Operation Theatre",
+					"database_schema_key" : "facility_operating_theatre"
 				},
 				{
 					"value": "Ambulance",
-					"label": "Ambulance"
+					"label": "Ambulance",
+					"database_schema_key" : "facility_ambulance"
 				}
 			],
 			"type": "multi-select",
@@ -309,31 +317,38 @@ module.exports = {
 			"options": [
 				{
 					"value": "dental",
-					"label": "Dental"
+					"label": "Dental",
+					"database_schema_key" : "healthcare_speciality"
 				},
 				{
 					"value": "dermatology",
-					"label": "Dermatology"
+					"label": "Dermatology",
+					"database_schema_key" : "healthcare_speciality"
 				},
 				{
 					"value": "general",
-					"label": "General"
+					"label": "General",
+					"database_schema_key" : "healthcare_speciality"
 				},
 				{
 					"value": "oncology",
-					"label": "Oncology"
+					"label": "Oncology",
+					"database_schema_key" : "healthcare_speciality"
 				},
 				{
 					"value": "opthalmology",
-					"label": "Opthalmology"
+					"label": "Opthalmology",
+					"database_schema_key" : "healthcare_speciality"
 				},
 				{
 					"value": "orthopedics",
-					"label": "Orthopedics"
+					"label": "Orthopedics",
+					"database_schema_key" : "healthcare_speciality"
 				},
 				{
 					"value": "psychiatry",
-					"label": "Psychiatry"
+					"label": "Psychiatry",
+					"database_schema_key" : "healthcare_speciality"
 				}
 			],
 			"on" : "Speciality",
@@ -368,20 +383,24 @@ module.exports = {
 			"label" : "Select Students",
 			"type" : "range",
 			"parameter_name": "Students",
+			"database_schema_key" : "student_count"
 		},{
 			"label": "Select Type of School",
 			"options": [
 				{
 					"value": "private",
-					"label": "Private"
+					"label": "Private",
+					"database_schema_key" : "operator_type"
 				},
 				{
 					"value": "government",
-					"label": "Government"
+					"label": "Government",
+					"database_schema_key" : "operator_type"
 				},
 				{
 					"value": "community",
-					"label": "Community"
+					"label": "Community",
+					"database_schema_key" : "operator_type"
 				}
 			],
 			"on" : "Operator",
@@ -412,19 +431,24 @@ module.exports = {
 			"options": [
 				{
 					"value": "commercial",
-					"label": "Commercial"
+					"label": "Commercial",
+					"database_schema_key" : "nrb_class"
+
 				},
 				{
 					"value": "development",
-					"label": "Development"
+					"label": "Development",
+					"database_schema_key" : "nrb_class"
 				},
 				{
 					"value": "finance companies",
-					"label": "Finance Companies"
+					"label": "Finance Companies",
+					"database_schema_key" : "nrb_class"
 				},
 				{
 					"value" : "micro finance",
-					"label" : "Micro Finance"
+					"label" : "Micro Finance",
+					"database_schema_key" : "nrb_class"
 				}
 			],
 			"on" : "Class",
@@ -435,11 +459,13 @@ module.exports = {
 			"options": [
 				{
 					"value": "public",
-					"label": "Government"
+					"label": "Government",
+					"database_schema_key" : "operator_type"
 				},
 				{
 					"value": "private",
-					"label": "Private"
+					"label": "Private",
+					"database_schema_key" : "operator_type"
 				}
 			],
 			"on" : "Operator Type",
@@ -450,7 +476,8 @@ module.exports = {
 			"options": [
 				{
 					"value": "ATM",
-					"label": "ATM"
+					"label": "ATM",
+					"database_schema_key" : "atm"
 				}
 			],
 			"type": "multi-select",
@@ -466,11 +493,13 @@ module.exports = {
 			"options": [
 				{
 					"value": "public",
-					"label": "Government"
+					"label": "Government",
+					"database_schema_key" : "operator_type"
 				},
 				{
 					"value": "private",
-					"label": "Private"
+					"label": "Private",
+					"database_schema_key" : "operator_type"
 				}
 			],
 			"on" : "Operator Type",
@@ -486,27 +515,33 @@ module.exports = {
 			"options": [
 				{
 					"value": "VISA",
-					"label": "VISA"
+					"label": "VISA",
+					"database_schema_key" : "network"
 				},
 				{
 					"value" : "VISA Electron",
-					"label" : "VISA Electron"
+					"label" : "VISA Electron",
+					"database_schema_key" : "network"
 				},
 				{
 					"value": "JCB",
-					"label": "JCB"
+					"label": "JCB",
+					"database_schema_key" : "network"
 				},
 				{
 					"value": "MasterCard",
-					"label": "Mastercard"
+					"label": "Mastercard",
+					"database_schema_key" : "network"
 				},
 				{
 					"value": "Discover",
-					"label": "Discover"
+					"label": "Discover",
+					"database_schema_key" : "network"
 				},
 				{
 					"value" : "Cirrus",
-					"label" : "Cirrus"
+					"label" : "Cirrus",
+					"database_schema_key" : "network"
 				}
 
 			],
@@ -532,15 +567,18 @@ module.exports = {
 			"label" : "Select Bed Capacity",
 			"type" : "range",
 			"parameter_name": "Bed Capacity",
+			"database_schema_key" : "beds"
 		},{
 			"label" : "Select Room Capacity",
 			"type" : "range",
 			"parameter_name": "Room Capacity",
+			"database_schema_key" : "rooms"
 		},{
 			"label" : "Select Number of Stars",
 			"type" : "range",
 			"step" : 1,
 			"parameter_name": "Stars",
+			"database_schema_key" : "stars"
 		}],
 		restaurant: [{
 			"label": "Select Ward",
@@ -624,11 +662,13 @@ module.exports = {
 			"options": [
 				{
 					"value": "Toilet",
-					"label": "Toilet"
+					"label": "Toilet",
+					"database_schema_key" : "facility_toilet"
 				},
 				{
 					"value": "Water",
-					"label": "Water"
+					"label": "Water",
+					"database_schema_key" : "facility_drinking_water"
 				}
 			],
 			"type": "multi-select",
@@ -644,11 +684,13 @@ module.exports = {
 			"options": [
 				{
 					"value": "Toilet",
-					"label": "Toilet"
+					"label": "Toilet",
+					"database_schema_key" : "facility_toilet"
 				},
 				{
 					"value": "Water",
-					"label": "Water"
+					"label": "Water",
+					"database_schema_key" : "facility_drinking_water"
 				}
 			],
 			"type": "multi-select",
@@ -664,11 +706,13 @@ module.exports = {
 			"options": [
 				{
 					"value": "Toilet",
-					"label": "Toilet"
+					"label": "Toilet",
+					"database_schema_key" : "facility_toilet"
 				},
 				{
 					"value": "Water",
-					"label": "Water"
+					"label": "Water",
+					"database_schema_key" : "facility_drinking_water"
 				}
 			],
 			"type": "multi-select",
@@ -684,11 +728,13 @@ module.exports = {
 			"options": [
 				{
 					"value": "Toilet",
-					"label": "Toilet"
+					"label": "Toilet",
+					"database_schema_key" : "facility_toilet"
 				},
 				{
 					"value": "Water",
-					"label": "Water"
+					"label": "Water",
+					"database_schema_key" : "facility_drinking_water"
 				}
 			],
 			"type": "multi-select",
@@ -704,11 +750,13 @@ module.exports = {
 			"options": [
 				{
 					"value": "Toilet",
-					"label": "Toilet"
+					"label": "Toilet",
+					"database_schema_key" : "facility_toilet"
 				},
 				{
 					"value": "Water",
-					"label": "Water"
+					"label": "Water",
+					"database_schema_key" : "facility_drinking_water"
 				}
 			],
 			"type": "multi-select",
@@ -724,11 +772,13 @@ module.exports = {
 			"options": [
 				{
 					"value": "Toilet",
-					"label": "Toilet"
+					"label": "Toilet",
+					"database_schema_key" : "facility_toilet"
 				},
 				{
 					"value": "Water",
-					"label": "Water"
+					"label": "Water",
+					"database_schema_key" : "facility_drinking_water"
 				}
 			],
 			"type": "multi-select",
@@ -744,11 +794,13 @@ module.exports = {
 			"options": [
 				{
 					"value": "Toilet",
-					"label": "Toilet"
+					"label": "Toilet",
+					"database_schema_key" : "facility_toilet"
 				},
 				{
 					"value": "Water",
-					"label": "Water"
+					"label": "Water",
+					"database_schema_key" : "facility_drinking_water"
 				}
 			],
 			"type": "multi-select",
@@ -764,11 +816,13 @@ module.exports = {
 			"options": [
 				{
 					"value": "Toilet",
-					"label": "Toilet"
+					"label": "Toilet",
+					"database_schema_key" : "facility_toilet"
 				},
 				{
 					"value": "Water",
-					"label": "Water"
+					"label": "Water",
+					"database_schema_key" : "facility_drinking_water"
 				}
 			],
 			"type": "multi-select",
