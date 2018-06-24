@@ -160,6 +160,11 @@ export default {
 
 			try {
 				var geojsonResponse = JSON.parse(fs.readFileSync(`./newsnapshots/${req.collects.type}.json`, "utf8"));
+				geojsonResponse.features.forEach((feature) => {
+					if (feature.geometry.type === "Polygon" || feature.geometry.type === "MultiPolygon") {
+						feature.geometry = turf.centroid(feature).geometry;
+					}
+				});
 				req.unfilteredFeatures = geojsonResponse.features;
 			} catch (e) {
 				req.cdata = {
