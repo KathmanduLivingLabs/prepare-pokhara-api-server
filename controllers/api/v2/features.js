@@ -527,8 +527,10 @@ export default {
 						placesOfAttraction.pois = {
 							"type": "FeatureCollection",
 							"features": placesOfAttraction.pois.map((poi)=>{
-								return _.findWhere(geojsonResponse.features,{id : `${poi.reference.type}/${poi.reference.id}`});
-							})
+								const amenity = _.findWhere(geojsonResponse.features,{id : `${poi.reference.type}/${poi.reference.id}`});
+								if(amenity) return Object.assign(amenity,{detail : poi.detail});
+								return amenity;
+							}).filter(Boolean)
 						};
 					});
 					req.cdata = {
