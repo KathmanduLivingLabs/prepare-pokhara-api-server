@@ -458,7 +458,7 @@ module.exports = {
 			"label": "Type of Operator",
 			"options": [
 				{
-					"value": "public",
+					"value": "government",
 					"label": "Government",
 					"database_schema_key" : "operator_type"
 				},
