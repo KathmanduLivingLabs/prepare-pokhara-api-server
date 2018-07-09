@@ -165,6 +165,8 @@ module.exports = () => {
 
 	api.get("/features/attractions",apiFeatures.attractions,mw.respond,mw.error);
 
+	api.get("/features/bulk",apiFeatures.bulk,mw.respond,mw.error);
+
 	return api;
 };
 

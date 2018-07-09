@@ -448,6 +448,12 @@ export default {
 			insights : insights
 		};
 
+		//calculate centroid for boundary with wards
+
+		req.cdata.geometries.boundaryWithWards.features.forEach((feature)=>{
+			feature.centroid = turf.centroid(feature.geometry).geometry;
+		});
+
 		req.cdata.filters = Object.keys(req.cdata.parameters).reduce((array,parameter)=>{
 			array.push(req.cdata.parameters[parameter]);
 			return array;
@@ -551,5 +557,26 @@ export default {
 				});
 			}
 		});
+	},
+
+	bulk : (req,res,next) => {
+
+		const amenities = Object.keys(configv2.insightsKey);
+		const bulkResponse = [];
+		
+		amenities.forEach((amenity)=>{
+			bulkResponse.push({
+				amenity,
+				pois : require(appRootPath + `/newsnapshots/${amenity}.json`)
+			})
+		});
+
+		req.cdata = {
+			success : 1,
+			bulkResponse
+		};
+
+		return next();
+
 	}
 };
