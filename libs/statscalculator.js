@@ -122,7 +122,7 @@ export default class statsCalculator {
 						passFilter = true;
 					}else{
 						if(Object.keys(reqCollects.filters).length>=1){
-							if(filters[filter].low != undefined && filters[filter].low == 0){
+							if(filters[filter].low != undefined && filters[filter].low == 0 && feature && feature.properties.tags){
 								passFilter = applyFilterForTagsMissing(reqCollects.filters,feature.properties.tags,applicableFilters);
 							}else{
 								passFilter = false;	
