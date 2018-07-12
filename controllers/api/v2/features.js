@@ -449,10 +449,11 @@ export default {
 		};
 
 		//calculate centroid for boundary with wards
-
-		req.cdata.geometries.boundaryWithWards.features.forEach((feature)=>{
-			feature.centroid = turf.centroid(feature.geometry).geometry;
-		});
+		if(req.cdata.geometries.boundaryWithWards && req.cdata.geometries.boundaryWithWards.features){
+			req.cdata.geometries.boundaryWithWards.features.forEach((feature)=>{
+				feature.centroid = turf.centroid(feature.geometry).geometry;
+			});
+		}
 
 		req.cdata.filters = Object.keys(req.cdata.parameters).reduce((array,parameter)=>{
 			array.push(req.cdata.parameters[parameter]);
