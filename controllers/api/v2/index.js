@@ -165,7 +165,28 @@ module.exports = () => {
 
 	api.get("/features/attractions",apiFeatures.attractions,mw.respond,mw.error);
 
-	api.get("/features/bulk",apiFeatures.bulk,mw.respond,mw.error);
+	/**
+	    * @api {get} /api/v2/features/bulkdownload  Download all features data in bulk
+	    * @apiName Download all features data in bulk
+	    * @apiGroup Features
+	   
+		* @apiSuccess {Integer} success Success status
+	    * @apiSuccess {tags[]} object attractions object
+	   
+
+	    * @apiSuccessExample {json} Success-Response:
+	    *
+	    *	{
+	    *	  "success": 1,
+	   	*	  "bulkResponse" : bulkResponse (View in REST Client)
+	   	*	}
+		*	
+	    *
+	    * @apiDescription API to download all features data in bulk
+	    * @apiVersion 1.0.0
+	    */
+
+	api.get("/features/bulkdownload",apiFeatures.bulk,mw.respond,mw.error);
 
 	return api;
 };
